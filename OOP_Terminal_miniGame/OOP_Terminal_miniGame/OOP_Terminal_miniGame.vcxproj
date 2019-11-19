@@ -22,13 +22,13 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{C42B01A3-6D70-4615-A0B5-5B31C6145EB9}</ProjectGuid>
     <RootNamespace>OOPTerminalminiGame</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -74,7 +74,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -118,10 +118,19 @@
     <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="Attributes_range.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Map_object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Attributes.h" />
     <ClInclude Include="Attributes_range.h" />
+    <ClInclude Include="Draw.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Map_object.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="account.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

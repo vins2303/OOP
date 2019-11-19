@@ -24,6 +24,15 @@
     <ClCompile Include="Main.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Map_object.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Draw.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Attributes.h">
@@ -32,5 +41,19 @@
     <ClInclude Include="Attributes_range.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Map_object.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Draw.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="account.ini">
+      <Filter>資源檔</Filter>
+    </None>
   </ItemGroup>
 </Project>

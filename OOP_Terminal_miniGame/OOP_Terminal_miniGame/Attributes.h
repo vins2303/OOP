@@ -16,25 +16,30 @@ public:
 	~Attributes();
 
 	int getHP();
-	void setHP(int _HP);
-	void AddHP(int _AddHP, bool percent = false, bool setZero = true);
-	void setMaxHP(int _HP);
-	void AddMaxHP(int _AddMaxHP, bool percent = false, bool setZero = true);
-	void showHP(bool show = false, bool LF = true);
+	Attributes setHP(int _HP);
+	Attributes AddHP(int _AddHP, bool percent = false, bool setZero = true);
+	Attributes setMaxHP(int _HP);
+	Attributes AddMaxHP(int _AddMaxHP, bool percent = false, bool setZero = true);
+	Attributes showHP(bool show = false, bool LF = true);
 
 	int getMP();
-	void setMP(int _MP);
-	void AddMP(int _AddMP, bool percent = false, bool setZero = true);
-	void setMaxMP(int _MP);
-	void AddMaxMP(int _AddMaxMP, bool percent = false, bool setZero = true);
-	void showMP(bool show = false, bool LF = true);
+	Attributes setMP(int _MP);
+	Attributes AddMP(int _AddMP, bool percent = false, bool setZero = true);
+	Attributes setMaxMP(int _MP);
+	Attributes AddMaxMP(int _AddMaxMP, bool percent = false, bool setZero = true);
+	Attributes showMP(bool show = false, bool LF = true);
 
 	int getAttack();
-	void setAttack(int _Attack);
-	void AddAttack(int _AddAttack, bool percent = false, bool setZero = true);
-	void setMaxAttack(int _Attack);
-	void AddMaxAttack(int _AddMaxAttack, bool percent = false, bool setZero = true);
+	Attributes setAttack(int _Attack);
+	Attributes AddAttack(int _AddAttack, bool percent = false, bool setZero = true);
+	Attributes setMaxAttack(int _Attack);
+	Attributes AddMaxAttack(int _AddMaxAttack, bool percent = false, bool setZero = true);
 	//void showAttack();
+
+	int getLeve();
+	Attributes setLeve(int _leve);
+	Attributes AddLeve(int _leve);
+	
 	
 private:
 	//int ADD_FUN(int _now, int _add, bool percent = false);

@@ -9,7 +9,8 @@ private :
 	int now;
 public:
 	Attributes_range(int _top, int _buff = 0);
-	int getTop();
+
+	int getTop();	
 	int getNow();
 	//int getbuff();
 	void setTop(int set = 0);
