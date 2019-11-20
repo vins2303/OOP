@@ -15,7 +15,14 @@ public:
 		for (int i = 0; i < _row; i++)
 			list[i] = new int[_col];
 	}
-		
+	
+	~Matrix() {
+		for (int i = 0; i < row; i++)
+			delete[] list[i];
+		delete[] list;
+	}
+	//Matrix XXX;
+	//cout << XXX;
 	friend ostream& operator<<(ostream& output, const Matrix& matrix) {
 		for (int i = 0; i < matrix.row; i++) {
 			for (int j = 0; j < matrix.col; j++) {
@@ -25,7 +32,7 @@ public:
 		}
 		return output;
 	}
-
+	//cin >> XXX
 	friend istream& operator>>(istream & input, Matrix & number) {
 		
 		if (number.count < number.row * number.col) {
