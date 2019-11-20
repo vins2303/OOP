@@ -1,7 +1,10 @@
+#pragma execution_character_set("utf-8")
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<cstring>
 #include <conio.h>
+#include <atlstr.h>
 #include "Attributes.h"
 #include "Draw.h"
 #include "keyboard.h"
@@ -12,7 +15,7 @@ using namespace std;
 Map Now_Map;
 
 COORD point;
-
+#define MAX_LENGTH 500
 void Game_initial() {
 	
 
@@ -20,35 +23,36 @@ void Game_initial() {
 
 
 void Key() {
-	switch (getch())
-	{
-	case 'W':
-	case 'w':
-		Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-		Draw::showWarrior(point.X, --point.Y);
-		break;
-	case 'A':
-	case 'a':
-		Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-		Draw::showWarrior(--point.X, point.Y);
-		break;
-	case 'S':
-	case 's':
-		Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-		Draw::showWarrior(point.X, ++point.Y);
-		break;
+	if (_kbhit()) {
+		switch (_getch())
+		{
+		case 'W':
+		case 'w':
+			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
+			Draw::showObject(point.X, --point.Y, "./Image/object.txt", "Warrior");
+			break;
+		case 'A':
+		case 'a':
+			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
+			Draw::showObject(--point.X, point.Y, "./Image/object.txt", "Warrior");
+			break;
+		case 'S':
+		case 's':
+			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
+			Draw::showObject(point.X, ++point.Y, "./Image/object.txt", "Warrior");
+			break;
 
-	case 'D':
-	case 'd':
-		Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-		Draw::showWarrior(++point.X, point.Y);
+		case 'D':
+		case 'd':
+			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
+			Draw::showObject(++point.X, point.Y, "./Image/object.txt", "Warrior");
 
-		break;
-	default:
-		break;
+			break;
+		default:
+			break;
+		}
+
 	}
-
-
 }
 
 
@@ -57,18 +61,15 @@ int main() {
 	Game_initial();
 	point.X = 2;
 	point.Y = 1;
-	Draw::showMap_wall(Now_Map);
-	Draw::showHoust(60, 20);
-	Draw::showWarrior(point.X, point.Y);
+	//Draw::showMap_wall();
+
+	Draw::showObject(60, 20, "./Image/Monster.txt", "Rabbit");
 	//Map::setXY(50, 50);
 	while (1)
 	{
 		Key();
-		Draw::setXY(0,0);
-		cout << point.X << " " << point.Y;
+		
 	}
 
-	
-	//system("pause");
 	return 0;
 }

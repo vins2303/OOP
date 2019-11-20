@@ -1,24 +1,26 @@
 #ifndef MAP_OBHECT_H
 #define MAP_OBHECT_H
 
-enum M_object {
+enum objectType {
 	null,    //無
 	Warrior, //人
 	Houst,   //房子
 	Wall,    //牆壁
-	Portal   //傳送門
+	Portal,  //傳送門
+	Monster  //怪物
 };
 
 class Map_object {
 private:
-	M_object object;
+	objectType object;
+	int X, Y, width, heigh;
 
 public:
-	Map_object(M_object _object = M_object::null);
+	Map_object(objectType _object = objectType::null);
 
-	M_object getObject();
+	objectType getObject();
 
-	Map_object setObject(M_object _M);
+	Map_object setObject(objectType _M);
 };
 
 #endif

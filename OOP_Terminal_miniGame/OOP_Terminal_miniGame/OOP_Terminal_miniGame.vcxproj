@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="Attributes_range.cpp" />
+    <ClCompile Include="Figure_Rect.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -126,11 +127,17 @@
     <ClInclude Include="Attributes.h" />
     <ClInclude Include="Attributes_range.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="Figure_Rect.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Map_object.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="account.ini" />
+    <ResourceCompile Include="OOP_Terminal_miniGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Image\Monster.txt" />
+    <Text Include="Image\object.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

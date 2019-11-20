@@ -5,22 +5,26 @@
 #include<string>
 #include<windows.h>
 #include"Map.h"
+#include <atlstr.h>
+#include<fstream>
 using namespace std;
 
 #define Warrior_width 3
 #define Warrior_high  4
-
+#define Houst_width   14
+#define Houst_high    6
 
 class Draw {
 private:
-
+	
 
 public:
 	static void setXY(int _x, int _y);
-	static void showMap_wall(Map &_map);
-	static void showHoust(int _x, int _y);
-	static void showWarrior(int _x, int _y);
+	//static void showMap_wall();
+	static void showObject(int _x, int _y, string path, string _image);
 	static void clearMap(int _x, int _y, int _width, int _heigh);
+	static string getImage(string path, string _image, string end = "[END]");
+	static void show(int _x, int _y, string _image);
 };
 
 #endif

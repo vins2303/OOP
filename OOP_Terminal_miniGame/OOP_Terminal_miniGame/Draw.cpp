@@ -1,10 +1,34 @@
 ﻿#include "Draw.h"
 
+
+void SplitString(const string input_string, vector<string>& v, const string c) {
+	string::size_type pos1, pos2;
+	pos2 = input_string.find(c);
+	pos1 = 0;
+	while (string::npos != pos2) {
+		v.push_back(input_string.substr(pos1, pos2 - pos1));//2019/01/01 7 - 5
+		pos1 = pos2 + c.size();
+		pos2 = input_string.find(c, pos1);
+	}
+	if (pos1 != input_string.length())
+		v.push_back(input_string.substr(pos1));
+}
+
 void Draw::setXY(int _x, int _y) {
 	COORD XY;
 	XY.X = _x;
 	XY.Y = _y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), XY);
+}
+
+void Draw::show(int _x, int _y, string _image) {
+	vector<string> list;
+	SplitString(_image, list, "\n");
+	for (vector<string>::iterator it = list.begin(); it != list.end(); it++) {
+		setXY(_x, _y++);
+		cout << *it;
+	}
+	list.clear();
 }
 
 void Draw::clearMap(int _x, int _y, int _width, int _heigh) {
@@ -13,53 +37,29 @@ void Draw::clearMap(int _x, int _y, int _width, int _heigh) {
 			setXY(i,j);
 			cout << " ";
 		}
-
 }
 
-
-void Draw::showHoust(int _x, int _y) {
-	setXY(_x,_y);
-	cout << " /‵‵‵‵/\\";
-	setXY(_x, _y + 1);
-	cout << "/......../..\\";
-	setXY(_x, _y + 2);
-	cout << "▎_____  ▎  ▎";
-	setXY(_x, _y + 3);
-	cout << "▎▎ | ▎▎  ▎";
-	setXY(_x, _y + 4);
-	cout << "▎▎'|'▎▎  ▎";
-	setXY(_x, _y + 5);
-	cout << "▔▔▔▔▔▔▔";
-	//cout << "|  |  | ||"<<endl;
-	
-}
-
-void Draw::showWarrior(int _x, int _y) {
-	setXY(_x, _y);
-	cout << " X";
-	setXY(_x, _y+1);
-	cout << "\\|/";
-	setXY(_x, _y + 2);
-	cout << " |";
-	setXY(_x, _y + 3);
-	cout << "/ \\";
-
-}
-
-void Draw::showMap_wall(Map& _map) {
-	setXY(0, 0);
-	//cout << "『";
-	for (int i = 0; i < _map.getWidth()/2 + 1; i++)
-		cout << "＝";
-	//cout << "﹃";
-	setXY(0, 42);
-	for (int i = 0; i < _map.getWidth() / 2 + 1; i++)
-		cout << "＝";
-
-	for (int i = 1; i < _map.getHigh(); i++) {
-		setXY(0, i);
-		cout << "∥";
-		setXY(102, i);
-		cout << "∥";
+string Draw::getImage(string path,string _image, string end) {
+	string buff;
+	string out = "";
+	ifstream st(path);
+	if (!st.is_open()) return "NULL";
+	bool isfind = false;
+	while (!st.eof()&& !isfind) {
+		getline(st, buff);
+		if (buff == "["+_image+"]") {
+			getline(st, buff);
+			while (buff != "["+end+"]"){
+				out += buff+"\n";
+				getline(st, buff);
+			}
+			out =  out.substr(0, out.rfind("\n"));
+		}
 	}
+	st.close();
+	return out;
+}
+
+void Draw::showObject(int _x, int _y, string path, string _image) {
+	show(_x, _y,getImage(path, _image));
 }
