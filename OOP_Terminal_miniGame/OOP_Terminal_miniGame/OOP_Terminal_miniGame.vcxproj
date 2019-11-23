@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Error\Error.h" />
+    <ClInclude Include="include\LifeEntity\Attributes.h" />
+    <ClInclude Include="include\LifeEntity\Attributes_range.h" />
+    <ClInclude Include="include\LifeEntity\Equipment.h" />
+    <ClInclude Include="include\LifeEntity\FootColor.h" />
     <ClInclude Include="include\Map\Draw.h" />
     <ClInclude Include="include\Map\Figure_Rect.h" />
     <ClInclude Include="include\Map\Map.h" />
@@ -26,6 +31,11 @@
     <ClInclude Include="include\Map\objectType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\Error\Error.cpp" />
+    <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
+    <ClCompile Include="lib\LifeEntity\Attributes_range.cpp" />
+    <ClCompile Include="lib\LifeEntity\Equipment.cpp" />
+    <ClCompile Include="lib\LifeEntity\FootColor.cpp" />
     <ClCompile Include="lib\Map\Draw.cpp" />
     <ClCompile Include="lib\Map\Figure_Rect.cpp" />
     <ClCompile Include="lib\Map\Map.cpp" />

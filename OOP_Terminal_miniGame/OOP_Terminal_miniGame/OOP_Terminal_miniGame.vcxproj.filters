@@ -9,21 +9,33 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="資源檔">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="標頭檔\Map">
       <UniqueIdentifier>{24b8fd83-4978-4400-8021-fda6898d13b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Map">
       <UniqueIdentifier>{d9cc64ff-fcec-4971-a285-5b5953e2489c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\LifeEntity">
+      <UniqueIdentifier>{325081ec-442a-4d43-9652-4ec06705c64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\LifeEntity">
+      <UniqueIdentifier>{87fc9054-29ed-4830-b70f-7bfc291a8b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="資源檔">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="資源檔\Image">
       <UniqueIdentifier>{0b2d265b-8e26-4e28-9992-477338abca70}</UniqueIdentifier>
     </Filter>
     <Filter Include="資源檔\Image\Map_object">
       <UniqueIdentifier>{31a2aedb-3864-4c2b-82d8-fab3351cc8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Error">
+      <UniqueIdentifier>{23394679-85d5-4414-ae42-5fd8bfb4f9a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Error">
+      <UniqueIdentifier>{8de60b3d-c21a-4046-b215-2aa550314d81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,21 @@
     <ClInclude Include="include\Map\objectType.h">
       <Filter>標頭檔\Map</Filter>
     </ClInclude>
+    <ClInclude Include="include\LifeEntity\Attributes.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Attributes_range.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\FootColor.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Error\Error.h">
+      <Filter>標頭檔\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Equipment.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map.cpp">
@@ -59,16 +86,31 @@
     <ClCompile Include="main.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Attributes_range.cpp">
+      <Filter>來源檔案\LifeEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Attributes.cpp">
+      <Filter>來源檔案\LifeEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\FootColor.cpp">
+      <Filter>來源檔案\LifeEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Error\Error.cpp">
+      <Filter>來源檔案\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Equipment.cpp">
+      <Filter>來源檔案\LifeEntity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Image\object.txt">
       <Filter>資源檔\Image</Filter>
     </Text>
-    <Text Include="Image\Map_object\Market.txt">
-      <Filter>資源檔\Image\Map_object</Filter>
-    </Text>
     <Text Include="Image\Monster.txt">
       <Filter>資源檔\Image</Filter>
+    </Text>
+    <Text Include="Image\Map_object\Market.txt">
+      <Filter>資源檔\Image\Map_object</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -25,28 +25,26 @@ void Game_initial() {
 
 
 void Key() {
+
+	static int k;
 	if (_kbhit()) {
 		switch (_getch())
 		{
-		case 'W':
-		case 'w':
-
+		case 72:
+            
 			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
 			Draw::showObject(point.X, --point.Y, "./Image/object.txt", "Warrior");
 			break;
-		case 'A':
-		case 'a':
+		case 75:
 			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
 			Draw::showObject(--point.X, point.Y, "./Image/object.txt", "Warrior");
 			break;
-		case 'S':
-		case 's':
+		case 80:
 			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
 			Draw::showObject(point.X, ++point.Y, "./Image/object.txt", "Warrior");
 			break;
 
-		case 'D':
-		case 'd':
+		case 77:
 			Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
 			Draw::showObject(++point.X, point.Y, "./Image/object.txt", "Warrior");
 
@@ -67,8 +65,10 @@ int main() {
 	Draw::showObject(20,20,"Image\\Monster.txt", "Rabbit");
 	while (1)
 	{
-		// _getch();
+		//Draw::setXY(0,0);
+		//cout<< _getch();
 		Key();
+		
 
 	}
 

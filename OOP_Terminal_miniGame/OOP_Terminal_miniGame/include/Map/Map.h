@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include "Map_object.h"
-// #include<iostream>
+#include "..\\Error\\Error.h"
 using std::vector;
 using std::string;
 #define MAP_WIDTH_DEF 102

@@ -1,19 +1,26 @@
 #include "../../include/Map/Map.h"
 
-
+//Åª¨úª«¥ó
 void Map::getObject(string _Map_name) {
-	ifstream file("Image\\Map_object\\" + _Map_name + ".txt");
+	ifstream Read(_Map_name);
 	Map_object* obj;
 	string name;
+    string file_path;
 	int type;
 	int x, y, width, heigh;
-	while (!file.eof()) {
-		file >> name >> type >> x >> y >> width >> heigh;
+
+    if (!Read.is_open()) {
+        Error::showOpenError("Map.cpp", "getObject()", _Map_name);
+        return;
+    }
+
+	while (!Read.eof()) {
+		Read >> file_path >> name >> type >> x >> y >> width >> heigh;
 		setMapType(x, y, width, heigh, objectType(type));
-		obj = new Map_object(name, objectType(type), x, y, width, heigh);
+		obj = new Map_object(file_path, name, objectType(type), x, y, width, heigh);
 		object.push_back(obj);
 	}
-	file.close();
+	Read.close();
 }
 
 
@@ -22,7 +29,7 @@ Map::Map(string _Map_name, int _width, int _high) :width(_width), high(_high), M
 	for (int i = 0; i < _high; i++)
 		MapType[i] = new objectType[_width];
 
-	getObject(_Map_name);
+	getObject("Image\\Map_object\\" + _Map_name + ".txt");
 }
 
 Map::~Map() {

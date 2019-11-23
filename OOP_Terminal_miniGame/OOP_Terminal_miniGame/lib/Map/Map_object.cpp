@@ -1,13 +1,12 @@
 #include "../../include/Map/Map_object.h"
 
-Map_object::Map_object(string _object_name, objectType _object, int _x, int _y, int _width, int _heigh)
+Map_object::Map_object(string _objectPath, string _object_name, objectType _object, int _x, int _y, int _width, int _heigh)
 	:object(_object),
 	object_name(_object_name),
 	X(_x), Y(_y),
 	width(_width),
 	heigh(_heigh),
-	image(Draw::getImage("Image/object.txt", _object_name)) {
-
+	image(Draw::getImage(_objectPath, _object_name)) {
 }
 
 objectType Map_object::getObject() {
@@ -17,6 +16,7 @@ objectType Map_object::getObject() {
 Map_object Map_object::setObject(objectType _M) {
 	object = _M;
 	return *this;
+
 }
 
 int Map_object::getX() { return X; }

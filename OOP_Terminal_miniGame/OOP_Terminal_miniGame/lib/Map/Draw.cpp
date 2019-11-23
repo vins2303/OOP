@@ -1,5 +1,4 @@
 #include "../../include/Map/Draw.h"
-using namespace Draw;
 
 void SplitString(const string input_string, vector<string>& v, const string c) {
 	string::size_type pos1, pos2;
@@ -42,22 +41,29 @@ void Draw::clearMap(int _x, int _y, int _width, int _heigh) {
 string Draw::getImage(string path, string _image, string end) {
 	string buff;
 	string out = "";
-	ifstream st(path);
-	if (!st.is_open()) return "NULL";
+	ifstream ReadFile(path);
+
+    //if(ReadFile == NULL) return "openError"
+    if (!ReadFile.is_open()) {
+        Error::showOpenError("Draw.cpp", "getImage()", path);
+        return "NULL";
+    }
+    
 	bool isfind = false;
-	while (!st.eof() && !isfind) {
-		getline(st, buff);
+	while (!ReadFile.eof() && !isfind) {
+		getline(ReadFile, buff);
 		if (buff == "[" + _image + "]") {
-			getline(st, buff);
+			getline(ReadFile, buff);
 			while (buff != "[" + end + "]") {
 				out += buff + "\n";
-				getline(st, buff);
+				getline(ReadFile, buff);
 			}
 			out = out.substr(0, out.rfind("\n"));
+            isfind = true;
 		}
 	}
-	st.close();
-	return out;
+	ReadFile.close();
+	return isfind ? out :"NULL";
 }
 
 void Draw::showObject(int _x, int _y, string path, string _image) {

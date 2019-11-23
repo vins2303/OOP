@@ -7,9 +7,6 @@
 
 using std::string;
 
-
-
-
 class Map_object {
 private:
 	objectType object;
@@ -17,7 +14,7 @@ private:
 	string image;
 	string object_name;
 public:
-	Map_object(string _object_name, objectType _object, int _x, int _y, int _width, int _heigh);
+	Map_object(string _objectPath, string _object_name, objectType _objectType, int _x, int _y, int _width, int _heigh);
 
 	objectType getObject();
 

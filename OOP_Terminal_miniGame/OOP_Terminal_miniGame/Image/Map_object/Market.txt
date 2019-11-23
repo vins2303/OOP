@@ -1,6 +1,6 @@
-Weapon_shop  2 87 1 15 7
-Armor_shop   2 70 1 15 7
-Potion_shop  2 53 1 15 7
-Grocery_shop 2 36 1 15 7
-Skill_shop   2 19 1 15 7
-Capsule_shop 2 2  1 15 7
+Image/object.txt Weapon_shop  2 87 1 15 7
+Image/object.txt Armor_shop   2 70 1 15 7
+Image/object.txt Potion_shop  2 53 1 15 7
+Image/object.txt Grocery_shop 2 36 1 15 7
+Image/object.txt Skill_shop   2 19 1 15 7
+Image/object.txt Capsule_shop 2 2  1 15 7
