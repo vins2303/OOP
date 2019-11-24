@@ -8,7 +8,7 @@ private:
 	int Max;
 	int Now;
 public:
-	Attributes_range(int _top, int _buff = 0);
+    Attributes_range(int _now, int _max);
 	~Attributes_range();
 
 	int setMax(int _num);

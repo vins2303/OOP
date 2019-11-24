@@ -37,6 +37,12 @@
     <Filter Include="來源檔案\Error">
       <UniqueIdentifier>{8de60b3d-c21a-4046-b215-2aa550314d81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Account">
+      <UniqueIdentifier>{ddd42ce6-26aa-4769-aa8d-990d4351a191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Account">
+      <UniqueIdentifier>{88939216-f00b-4e26-b496-222f28e259f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Map\Map.h">
@@ -68,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="include\LifeEntity\Equipment.h">
       <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Account\Account.h">
+      <Filter>標頭檔\Account</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,16 +110,22 @@
     <ClCompile Include="lib\LifeEntity\Equipment.cpp">
       <Filter>來源檔案\LifeEntity</Filter>
     </ClCompile>
+    <ClCompile Include="lib\Account\Account.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Image\object.txt">
-      <Filter>資源檔\Image</Filter>
-    </Text>
-    <Text Include="Image\Monster.txt">
-      <Filter>資源檔\Image</Filter>
-    </Text>
-    <Text Include="Image\Map_object\Market.txt">
+    <Text Include="Data\Image\Map_object\Market.txt">
       <Filter>資源檔\Image\Map_object</Filter>
     </Text>
+    <Text Include="Data\Image\Monster.txt">
+      <Filter>資源檔\Image</Filter>
+    </Text>
+    <Text Include="Data\Image\object.txt">
+      <Filter>資源檔\Image</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Account.ini" />
   </ItemGroup>
 </Project>

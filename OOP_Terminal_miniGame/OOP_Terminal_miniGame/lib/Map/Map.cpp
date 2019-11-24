@@ -1,3 +1,4 @@
+
 #include "../../include/Map/Map.h"
 
 //Åª¨úª«¥ó
@@ -29,7 +30,7 @@ Map::Map(string _Map_name, int _width, int _high) :width(_width), high(_high), M
 	for (int i = 0; i < _high; i++)
 		MapType[i] = new objectType[_width];
 
-	getObject("Image\\Map_object\\" + _Map_name + ".txt");
+	getObject("Data\\Image\\Map_object\\" + _Map_name + ".txt");
 }
 
 Map::~Map() {

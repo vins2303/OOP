@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Account\Account.h" />
     <ClInclude Include="include\Error\Error.h" />
     <ClInclude Include="include\LifeEntity\Attributes.h" />
     <ClInclude Include="include\LifeEntity\Attributes_range.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="include\Map\objectType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\Account\Account.cpp" />
     <ClCompile Include="lib\Error\Error.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes_range.cpp" />
@@ -43,9 +45,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Image\Map_object\Market.txt" />
-    <Text Include="Image\Monster.txt" />
-    <Text Include="Image\object.txt" />
+    <Text Include="Data\Image\Map_object\Market.txt" />
+    <Text Include="Data\Image\Monster.txt" />
+    <Text Include="Data\Image\object.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Account.ini" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -5,9 +5,10 @@
 #include<cstring>
 #include <conio.h>
 
-#include "./include/Map/Draw.h" 
-#include "./include/Map/Map.h" 
-#include "./include/Map/Figure_Rect.h" 
+#include "include/Map/Draw.h" 
+#include "include/Map/Map.h" 
+#include "include/Map/Figure_Rect.h" 
+#include "include/Account/Account.h"
 
 using namespace std;
 
@@ -15,7 +16,13 @@ Map* map;
 
 COORD point;
 #define MAX_LENGTH 500
+Account* account;
+
 void Game_initial() {
+    account = new Account();
+    account->Menu();
+
+
 	map = new Map("Market");
 	system("pause");
 	system("cls");
@@ -62,7 +69,6 @@ int main() {
 	Game_initial();
 	point.X = 2;
 	point.Y = 1;
-	Draw::showObject(20,20,"Image\\Monster.txt", "Rabbit");
 	while (1)
 	{
 		//Draw::setXY(0,0);
