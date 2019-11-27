@@ -1,17 +1,6 @@
 #include "../../include/Map/Draw.h"
 
-void SplitString(const string input_string, vector<string>& v, const string c) {
-	string::size_type pos1, pos2;
-	pos2 = input_string.find(c);
-	pos1 = 0;
-	while (string::npos != pos2) {
-		v.push_back(input_string.substr(pos1, pos2 - pos1));//2019/01/01 7 - 5
-		pos1 = pos2 + c.size();
-		pos2 = input_string.find(c, pos1);
-	}
-	if (pos1 != input_string.length())
-		v.push_back(input_string.substr(pos1));
-}
+
 
 void Draw::setXY(int _x, int _y) {
 	COORD XY;
@@ -22,7 +11,7 @@ void Draw::setXY(int _x, int _y) {
 
 void Draw::show(int _x, int _y, string _image) {
 	vector<string> list;
-	SplitString(_image, list, "\n");
+	Tool::SplitString(_image, list, "\n");
 	for (vector<string>::iterator it = list.begin(); it != list.end(); it++) {
 		setXY(_x, _y++);
 		cout << *it;

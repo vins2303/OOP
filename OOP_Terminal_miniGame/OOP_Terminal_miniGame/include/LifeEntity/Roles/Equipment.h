@@ -1,4 +1,4 @@
-#include "Attributes.h"
+#include "../Attributes.h"
 #ifndef _EQUIPMENT_H_
 #define _EQUIPMENT_H_
 
@@ -42,6 +42,7 @@ public:
     int sumAttack();
     int sumSP();
     int sumDef();
+    int sumCrt();
 
 
 };

@@ -4,7 +4,7 @@ Account::Account() {
     isSignIn = false;
     account = "";
     password = "";
-    Menu();
+    //Menu();
 }
 Account::~Account() {
 }
@@ -49,7 +49,7 @@ bool Account::SignIn() {
             cout << "µn¤J¦¨¥\!" << endl;
             account  = account_;
             password = password_;
-            system("pause");
+            //system("pause");
             return true;
         }
         else {
@@ -94,3 +94,5 @@ string Account::isAccount(string _accout) {
     str.ReleaseBuffer();
     return string( str );
 }
+
+string Account::getAccount() { return account; }

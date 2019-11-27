@@ -20,28 +20,35 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Account\Account.h" />
+    <ClInclude Include="include\Account\RolesList.h" />
     <ClInclude Include="include\Error\Error.h" />
     <ClInclude Include="include\LifeEntity\Attributes.h" />
-    <ClInclude Include="include\LifeEntity\Attributes_range.h" />
-    <ClInclude Include="include\LifeEntity\Equipment.h" />
-    <ClInclude Include="include\LifeEntity\FootColor.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Backpack.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Equipment.h" />
+    <ClInclude Include="include\LifeEntity\LifeAttributes.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Race.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Roles.h" />
     <ClInclude Include="include\Map\Draw.h" />
     <ClInclude Include="include\Map\Figure_Rect.h" />
     <ClInclude Include="include\Map\Map.h" />
     <ClInclude Include="include\Map\Map_object.h" />
-    <ClInclude Include="include\Map\objectType.h" />
+    <ClInclude Include="include\Tool\Tool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Account\Account.cpp" />
+    <ClCompile Include="lib\Account\RolesList.cpp" />
     <ClCompile Include="lib\Error\Error.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
-    <ClCompile Include="lib\LifeEntity\Attributes_range.cpp" />
-    <ClCompile Include="lib\LifeEntity\Equipment.cpp" />
-    <ClCompile Include="lib\LifeEntity\FootColor.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp" />
+    <ClCompile Include="lib\LifeEntity\LifeAttributes.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Race.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Roles.cpp" />
     <ClCompile Include="lib\Map\Draw.cpp" />
     <ClCompile Include="lib\Map\Figure_Rect.cpp" />
     <ClCompile Include="lib\Map\Map.cpp" />
     <ClCompile Include="lib\Map\Map_object.cpp" />
+    <ClCompile Include="lib\Tool\Tool.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Account.ini" />
+    <None Include="Data\Attributes\Race.ini" />
+    <None Include="Data\Attributes\Role.ini" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

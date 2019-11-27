@@ -7,13 +7,13 @@
 #define SHOW_MP_FIGURE(_num) ((_num) ? "#": " ")
 #define SHOW_MP_FRAME ("|| ");
 
-Attributes::Attributes(int _LV, int _HP, int _MP, int _attack, int _sp, int _def) :
+Attributes::Attributes(int _HP, int _MP, int _attack, int _sp, int _def,int _CRT) :
     HP(_HP),
     MP(_MP),
     Attack(_attack),
-    LV(_LV),
     SP(_sp),
-    Def(_def)
+    Def(_def),
+    CRT(_CRT)
 {}
 
 Attributes::~Attributes() {
@@ -26,9 +26,10 @@ Attributes::~Attributes() {
 int Attributes::getHP()        { return HP; }
 int Attributes::getMP()        { return MP; }
 int Attributes::getAttack()    { return Attack; }
-int Attributes::getLV()        { return LV; }
 int Attributes::getSP()        { return SP; }
 int Attributes::getDef()       { return Def; }
+int Attributes::getCrt()       { return CRT; }
+
 
 /*
                             set
@@ -36,9 +37,9 @@ int Attributes::getDef()       { return Def; }
 int Attributes::setHP(int _num) { return HP = _num; }
 int Attributes::setMP(int _num) { return MP = _num; }
 int Attributes::setAttack(int _num)    { return Attack = _num; }
-int Attributes::setLV(int _num)        { return LV = _num > AttributesMaxLV ? AttributesMaxLV : _num; }
 int Attributes::setSP(int _num)        { return SP = _num; }
 int Attributes::setDef(int _num)       { return Def = _num; }
+int Attributes::setCrt(int _num) { return CRT = _num > 100 ? 100 : CRT; }
 
 /*
                             Add
@@ -46,10 +47,9 @@ int Attributes::setDef(int _num)       { return Def = _num; }
 int Attributes::addHP(int _num, bool percent, bool zero)        { return setHP(     ADD_FUN(getHP(), _num, percent, zero)); }
 int Attributes::addMP(int _num, bool percent, bool zero)        { return setMP(     ADD_FUN(getMP(), _num, percent, zero)); }
 int Attributes::addAttack(int _num, bool percent, bool zero)    { return setAttack( ADD_FUN(getAttack(), _num, percent, zero)); }
-int Attributes::addLV(int _num, bool percent, bool zero)        { return setLV(     ADD_FUN(getLV(), _num, percent, zero)); }
 int Attributes::addSP(int _num, bool percent, bool zero)        { return setSP(     ADD_FUN(getSP(), _num, percent, zero)); }
 int Attributes::addDef(int _num, bool percent, bool zero)       { return setDef(    ADD_FUN(getDef(), _num, percent, zero)); }
-
+int Attributes::addCrt(int _num)                                { return setCrt(getCrt() + _num); }
 /*
 *                                 Tool
 */

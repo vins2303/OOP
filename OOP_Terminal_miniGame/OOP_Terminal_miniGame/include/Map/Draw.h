@@ -1,3 +1,4 @@
+
 #ifndef DRAW_H
 #define DRAW_H
 
@@ -6,7 +7,8 @@
 #include<windows.h>
 #include<fstream>
 #include<vector>
-#include "..\\Error\Error.h"
+#include "../../include/Tool/Tool.h"
+#include "../Error/Error.h"
 using namespace std;
 
 

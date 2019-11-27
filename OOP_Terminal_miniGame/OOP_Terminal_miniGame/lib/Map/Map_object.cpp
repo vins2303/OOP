@@ -1,6 +1,6 @@
 #include "../../include/Map/Map_object.h"
 
-Map_object::Map_object(string _objectPath, string _object_name, objectType _object, int _x, int _y, int _width, int _heigh)
+Map_object::Map_object(string _objectPath, string _object_name, Map_object::objectType _object, int _x, int _y, int _width, int _heigh)
 	:object(_object),
 	object_name(_object_name),
 	X(_x), Y(_y),
@@ -9,11 +9,11 @@ Map_object::Map_object(string _objectPath, string _object_name, objectType _obje
 	image(Draw::getImage(_objectPath, _object_name)) {
 }
 
-objectType Map_object::getObject() {
+Map_object::objectType Map_object::getObject() {
 	return object;
 }
 
-Map_object Map_object::setObject(objectType _M) {
+Map_object Map_object::setObject(Map_object::objectType _M) {
 	object = _M;
 	return *this;
 
@@ -39,4 +39,24 @@ void Map_object::setHeight(int _height) {
 
 string Map_object::getName() {
 	return object_name;
+}
+Map_object::objectType Map_object::StringToObjectType(string _str) {
+    transform(_str.begin(), _str.end(), _str.begin(), tolower);
+   
+        if (_str == "null")
+            return Map_object::objectType::null;
+        if (_str == "warrior")
+            return Map_object::objectType::Warrior;
+        if (_str == "houst")
+            return Map_object::objectType::Houst;
+        if (_str == "wall")
+            return Map_object::objectType::Wall;
+        if (_str == "boor")
+            return Map_object::objectType::Boor;
+        if (_str == "monster")
+            return Map_object::objectType::Monster;
+        if (_str == "foorColor")
+            return Map_object::objectType::FoorColor;
+ 
+    return Map_object::objectType::null;
 }

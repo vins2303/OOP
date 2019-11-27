@@ -7,7 +7,7 @@ void Map::getObject(string _Map_name) {
 	Map_object* obj;
 	string name;
     string file_path;
-	int type;
+	string type;
 	int x, y, width, heigh;
 
     if (!Read.is_open()) {
@@ -17,8 +17,8 @@ void Map::getObject(string _Map_name) {
 
 	while (!Read.eof()) {
 		Read >> file_path >> name >> type >> x >> y >> width >> heigh;
-		setMapType(x, y, width, heigh, objectType(type));
-		obj = new Map_object(file_path, name, objectType(type), x, y, width, heigh);
+		setMapType(x, y, width, heigh, Map_object::StringToObjectType(type));
+		obj = new Map_object(file_path, name, Map_object::StringToObjectType(type), x, y, width, heigh);
 		object.push_back(obj);
 	}
 	Read.close();
@@ -26,9 +26,9 @@ void Map::getObject(string _Map_name) {
 
 
 Map::Map(string _Map_name, int _width, int _high) :width(_width), high(_high), Map_name(_Map_name) {
-	MapType = new objectType * [_high];
+	MapType = new Map_object::objectType * [_high];
 	for (int i = 0; i < _high; i++)
-		MapType[i] = new objectType[_width];
+		MapType[i] = new Map_object::objectType[_width];
 
 	getObject("Data\\Image\\Map_object\\" + _Map_name + ".txt");
 }
@@ -42,23 +42,23 @@ Map::~Map() {
 	object.clear();
 }
 
-objectType Map::getMap(int _x, int _y) {
+Map_object::objectType Map::getMap(int _x, int _y) {
 	return MapType[_y][_x];
 }
 
-objectType** Map::getMap() {
+Map_object::objectType** Map::getMap() {
 	return MapType;
 }
 
-void Map::setMapType(int _x, int _y, objectType _object) {
-	MapType[_y][_x] = objectType(_object);
+void Map::setMapType(int _x, int _y, Map_object::objectType _object) {
+	MapType[_y][_x] = Map_object::objectType(_object);
 
 }
 
-void Map::setMapType(int _x, int _y, int width, int heigh, objectType _object) {
+void Map::setMapType(int _x, int _y, int width, int heigh, Map_object::objectType _object) {
 	for (int i = _y; i < _y + heigh; i++)
 		for (int j = _x; j < _x + width; j++)
-			MapType[_y][_x] = objectType(_object);
+			MapType[_y][_x] = Map_object::objectType(_object);
 }
 
 

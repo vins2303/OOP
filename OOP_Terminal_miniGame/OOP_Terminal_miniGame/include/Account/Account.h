@@ -13,13 +13,13 @@ using namespace std;
 class Account {
 private:
     bool isSignIn;
-    string  account;
+    string account;
     string password;
 public:
     Account();
     ~Account();
     void Menu();
-
+    string getAccount();
 private:
     bool SignIn();
     void Registered();

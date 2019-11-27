@@ -43,6 +43,18 @@
     <Filter Include="來源檔案\Account">
       <UniqueIdentifier>{88939216-f00b-4e26-b496-222f28e259f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\LifeEntity\Roles">
+      <UniqueIdentifier>{91dad01a-3d5b-4518-9e1c-0c53ccf7488c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Tool">
+      <UniqueIdentifier>{fffb3050-396d-4c27-b65a-5616d080b227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\LifeEntity\Roles">
+      <UniqueIdentifier>{938b7f5f-f9ff-4f90-b4f8-7b58fe9a4a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Tool">
+      <UniqueIdentifier>{56f9d95c-21cb-462b-9989-57f91c00b71b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Map\Map.h">
@@ -57,26 +69,35 @@
     <ClInclude Include="include\Map\Draw.h">
       <Filter>標頭檔\Map</Filter>
     </ClInclude>
-    <ClInclude Include="include\Map\objectType.h">
-      <Filter>標頭檔\Map</Filter>
-    </ClInclude>
     <ClInclude Include="include\LifeEntity\Attributes.h">
-      <Filter>標頭檔\LifeEntity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LifeEntity\Attributes_range.h">
-      <Filter>標頭檔\LifeEntity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LifeEntity\FootColor.h">
       <Filter>標頭檔\LifeEntity</Filter>
     </ClInclude>
     <ClInclude Include="include\Error\Error.h">
       <Filter>標頭檔\Error</Filter>
     </ClInclude>
-    <ClInclude Include="include\LifeEntity\Equipment.h">
-      <Filter>標頭檔\LifeEntity</Filter>
-    </ClInclude>
     <ClInclude Include="include\Account\Account.h">
       <Filter>標頭檔\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Account\RolesList.h">
+      <Filter>標頭檔\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Equipment.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Roles.h">
+      <Filter>標頭檔\LifeEntity\Roles</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\LifeAttributes.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Backpack.h">
+      <Filter>標頭檔\LifeEntity\Roles</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tool\Tool.h">
+      <Filter>標頭檔\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Race.h">
+      <Filter>標頭檔\LifeEntity\Roles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,23 +116,35 @@
     <ClCompile Include="main.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Attributes_range.cpp">
-      <Filter>來源檔案\LifeEntity</Filter>
-    </ClCompile>
     <ClCompile Include="lib\LifeEntity\Attributes.cpp">
-      <Filter>來源檔案\LifeEntity</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\LifeEntity\FootColor.cpp">
       <Filter>來源檔案\LifeEntity</Filter>
     </ClCompile>
     <ClCompile Include="lib\Error\Error.cpp">
       <Filter>來源檔案\Error</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Equipment.cpp">
+    <ClCompile Include="lib\Account\Account.cpp">
+      <Filter>來源檔案\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Account\RolesList.cpp">
+      <Filter>來源檔案\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Roles.cpp">
+      <Filter>來源檔案\LifeEntity\Roles</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp">
+      <Filter>來源檔案\LifeEntity\Roles</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\LifeAttributes.cpp">
       <Filter>來源檔案\LifeEntity</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Account\Account.cpp">
-      <Filter>來源檔案</Filter>
+    <ClCompile Include="lib\LifeEntity\Roles\Race.cpp">
+      <Filter>來源檔案\LifeEntity\Roles</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Tool\Tool.cpp">
+      <Filter>來源檔案\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +159,10 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\Account.ini" />
+    <None Include="Data\Account.ini">
+      <Filter>資源檔</Filter>
+    </None>
+    <None Include="Data\Attributes\Race.ini" />
+    <None Include="Data\Attributes\Role.ini" />
   </ItemGroup>
 </Project>
