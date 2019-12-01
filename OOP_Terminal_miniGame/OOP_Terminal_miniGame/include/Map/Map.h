@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include "Map_object.h"
-#include "..\\Error\\Error.h"
+#include <map>
 using std::vector;
 using std::string;
 #define MAP_WIDTH_DEF 102
@@ -31,6 +31,7 @@ public:
 	void addObject(Map_object* obj);
 	void showObject();
 	void showWall();
+    static void read_Map(map<string, Map*>&);
 };
 
 #endif

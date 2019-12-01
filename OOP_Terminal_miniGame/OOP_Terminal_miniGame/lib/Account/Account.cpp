@@ -1,25 +1,20 @@
 #include "../../include/Account/Account.h"
 
-Account::Account() {
-    isSignIn = false;
-    account = "";
-    password = "";
+Account::Account(): isSignIn(false), account(""), password(""){
     //Menu();
 }
 Account::~Account() {
 }
 
-void Account::Menu(){
+void Account::AccountMenu(){
     while (!isSignIn){
         system("cls");
         cout << "1. 登入遊戲" << endl;
         cout << "2. 註冊帳號" << endl;
         cout << "3. 結束遊戲" << endl;
-        switch (_getch())
-        {
+        switch (_getch()){
         case '1':
             isSignIn = SignIn();
-
             break;
         case '2':
             Registered();
@@ -38,7 +33,7 @@ bool Account::SignIn() {
     string password_;
     while (1){
         system("cls");
-        cout << "登入...(eixt 離開)\n帳號：";
+        cout << "登入...(exit 離開)\n帳號：";
         cin >> account_;
         if (account_ == "exit") return false;
         cout << "密碼：";
@@ -53,7 +48,7 @@ bool Account::SignIn() {
             return true;
         }
         else {
-            cout << "請檢察帳號密碼是否錯誤!" << endl;
+            cout << "請檢查帳號密碼是否錯誤!" << endl;
             system("pause");
         }
     }
@@ -96,3 +91,43 @@ string Account::isAccount(string _accout) {
 }
 
 string Account::getAccount() { return account; }
+
+void Account::clear() {
+    isSignIn = false;
+    account = "";
+    password = "";
+}
+
+
+bool Account::IsSignIn() { return isSignIn; }
+
+bool Account::rmAccount() {
+    int getKey;
+    string dir="";
+    system("cls");
+    cout << "確定刪除此帳號? 是(y) 否(n)" << endl;
+    while(1){
+        getKey = _getch();
+        if (getKey == 'n' || getKey == 'N')
+            return false;
+        if (getKey == 'y' || getKey == 'Y') {
+            WritePrivateProfileString(account.c_str(), NULL, NULL, "Data/Account.ini");
+            dir = "Data\\Account\\" + account;
+            //if (GetFileAttributesA(dir.c_str()) == INVALID_FILE_ATTRIBUTES) {
+            //dir = ;
+            if (Tool::CheckFolderExist(dir)) {
+                system(("rmdir /s /q " + dir).c_str());
+                system("cls");
+                //_rmdir(dir.c_str());
+            }
+            //}
+            cout << "刪除帳號成功!"<<endl;
+            system("pause");
+            return true;
+
+            //break;
+        }
+    }
+    
+    
+}

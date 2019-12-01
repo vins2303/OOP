@@ -2,7 +2,7 @@
 
 
 
-void Draw::setXY(int _x, int _y) {
+inline void Draw::setXY(int _x, int _y) {
 	COORD XY;
 	XY.X = _x;
 	XY.Y = _y;
@@ -32,9 +32,8 @@ string Draw::getImage(string path, string _image, string end) {
 	string out = "";
 	ifstream ReadFile(path);
 
-    //if(ReadFile == NULL) return "openError"
     if (!ReadFile.is_open()) {
-        Error::showOpenError("Draw.cpp", "getImage()", path);
+        assert(ReadFile);
         return "NULL";
     }
     

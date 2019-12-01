@@ -9,21 +9,38 @@
 #include <vector>
 #include "../LifeEntity/Roles/Roles.h"
 #include "../../include/Tool/Tool.h"
+//#include "../../include/Map/Draw.h"
 
 using std::string;
+#define SELROLESP_COL(num) ((num) * 16 + ((num)==0   ? 0 : 1))
 
-class RolesList : Account {
+#define SHOWRACEINFO_COUNT 8
+#define SHOWRACEINFO_COL(num) ((num) * SHOWRACEINFO_COUNT * 2)
+
+class RolesList : public Account {
 private:
     Roles* roles;
 public:
-    RolesList(Account &);
+    RolesList();
+    ~RolesList();
+
+    Roles* getRoles();
 
     void FindRoles(vector<Roles*>&);
     
-    void Menu();
+    void RolesListMenu();
+
+    bool selRoles();
 
     bool addRoles();
 
+    void DeleteRoles();
+
+private:
+    void clearRolesList(vector<Roles*>&);
+    void showRolesList(vector<Roles*>&, unsigned int row);
+    void showRaceInfo(const vector<string> &raceList, const string _file, const unsigned int _row);
+    void showRoleInfo(const vector<string> &rolesList, const string _file, const unsigned int _row);
 
 
 };

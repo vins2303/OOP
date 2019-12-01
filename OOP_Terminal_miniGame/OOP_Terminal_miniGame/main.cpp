@@ -1,10 +1,10 @@
-// #pragma execution_character_set("utf-8")
+
+
 #include<iostream>
-// #include<fstream>
 #include<string>
 #include<cstring>
 #include <conio.h>
-
+#include<map>
 #include "include/Map/Draw.h" 
 #include "include/Map/Map.h" 
 #include "include/Map/Figure_Rect.h" 
@@ -13,44 +13,50 @@
 
 using namespace std;
 
+void Game_start();
 void Game_initial();
 void Key();
 
-Map* map;
 
-COORD point;
+//Map* map;
+map<string, Map*> maplist;
 #define MAX_LENGTH 500
-Account* account;
 RolesList* roleslist;
+
 int main() {
 	Game_initial();
-	point.X = 2;
-	point.Y = 1;
-	while (1)
-	{
-		//Draw::setXY(0,0);
-		//cout<< _getch();
-		Key();
-		
-
-	}
-
+    
+    Game_start();
+    //system("pause");
 	return 0;
 }
 
 void Game_initial() {
-    account = new Account();
-    account->Menu();
-    roleslist = new RolesList(*account);
-    roleslist->Menu();
-    map = new Map("Market");
-    map->showObject();
+
+    roleslist = new RolesList();
+    Map::read_Map(maplist);
+}
+
+void Game_start() {
+    while (true){
+        roleslist->AccountMenu();
+        roleslist->RolesListMenu();
+        system("cls");
+        if (roleslist->getRoles() != NULL) {
+
+            //map = new Map("Market");
+            //map->showObject();
+            //_getch();
+        }
+
+    }
 
 }
 
+
 void Key() {
 
-    static int k;
+    /*static int k;
     if (_kbhit()) {
         switch (_getch())
         {
@@ -77,5 +83,5 @@ void Key() {
             break;
         }
 
-    }
+    }*/
 }

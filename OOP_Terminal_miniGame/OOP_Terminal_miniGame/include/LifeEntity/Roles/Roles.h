@@ -10,12 +10,12 @@
 #include "Race.h"
 using std::string;
 
-class Roles : public  LifeAttributes, public Equipment{
+class Roles : public  LifeAttributes, public Equipment, public Race {
 public:
     enum class RoleType {
-        Warrior, //劍士
-        Magician,//法師
-        Thief    //海盜
+        劍士, //劍士
+        法師,//法師
+        海盜    //海盜
     };
 
 private:
@@ -24,7 +24,7 @@ private:
     int drop; //調寶率
     Map_object *object;//腳色物件
     RoleType role;
-    Race::RaceType race;
+    //Race::RaceType race;
 public:
     Roles(string _name, int _LV, int _nowHP, int _nowMP, int _Exp, Race::RaceType _race, RoleType _role);
 
@@ -34,8 +34,8 @@ public:
     int getExp();
     int getUpExp();
     int getDrop();
-
-
+    string getRoleType();
+   
     string setName(string _name);
     int setExp(int _exp);
     int setDrop(int _drop);
@@ -48,7 +48,7 @@ public:
 
     static RoleType StringToRolesType(string _type);
     static string RolesTypeToString(RoleType _type);
-    inline int INITIAL(Race::RaceType _race, RoleType _role, string _att);
+    static inline int sum_Attributes(Race::RaceType _race, RoleType _role, string _att);
 };
 
 #endif

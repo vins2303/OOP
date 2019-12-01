@@ -25,9 +25,8 @@ void Tool::findFile(string path, vector<string>& files) {
     intptr_t   hFile = 0;
     struct _finddata_t fileinfo;
     string p;
-    if ((hFile = _findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1){
+    if ((hFile = _findfirst(p.assign(path).append("/*").c_str(), &fileinfo)) != -1){
         do{
-            int sss = fileinfo.attrib & _A_SUBDIR;
             if (!(fileinfo.attrib & _A_SUBDIR)) {
                //files.push_back(p.assign(path).append("\\").append(fileinfo.name));
                 files.push_back(fileinfo.name);
@@ -78,4 +77,9 @@ void Tool::getIpAppName(string _path, vector<string>& _data) {
             ss += name[i];
         }
     }
+}
+
+
+bool Tool::CheckFolderExist(const string& strPath){
+    return _access(strPath.c_str(), 0) == 0 ? true : false;
 }

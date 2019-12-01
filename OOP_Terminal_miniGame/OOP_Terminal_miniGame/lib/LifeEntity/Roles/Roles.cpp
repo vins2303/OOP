@@ -3,20 +3,22 @@
 Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, Race::RaceType _race, RoleType _role) :
     name(_name),
     exp(Exp),
-    drop(INITIAL(_race, _role, "Drop")),
+    drop(sum_Attributes(_race, _role, "Drop")),
     role(_role),
-    race(_race),
     object(NULL),//暫時
+    Race(_race),
     Equipment(),//暫時
-    LifeAttributes(_LV,
-        nowHP,
-        nowMP,
-        INITIAL(_race, _role, "Attack"),
-        INITIAL(_race, _role, "SP"),
-        INITIAL(_race, _role, "DEF"),
-        INITIAL(_race, _role, "CRT"),
-        INITIAL(_race, _role, "HP"),
-        INITIAL(_race, _role, "MP"))
+    LifeAttributes(
+        _LV,
+        nowHP == -1 ? sum_Attributes(_race, _role, "HP") * _LV : nowHP,
+        nowMP == -1 ? sum_Attributes(_race, _role, "MP") * _LV : nowMP,
+        sum_Attributes(_race, _role, "Attack"),
+        sum_Attributes(_race, _role, "SP"),
+        sum_Attributes(_race, _role, "DEF"),
+        sum_Attributes(_race, _role, "CRT"),
+        sum_Attributes(_race, _role, "HP"),
+        sum_Attributes(_race, _role, "MP")
+    )
 {}
 
 
@@ -44,36 +46,40 @@ int Roles::addDrop(int _drop) { return setDrop(getDrop() + _drop); }
 bool Roles::isUpLv() { return getExp() >= getUpExp() ? true : false; }
 
 Roles::RoleType  Roles::StringToRolesType(string _type) {
-    transform(_type.begin(), _type.end(), _type.begin(), tolower);
-    if (_type == "warrior")
-        return RoleType::Warrior;
-    if (_type == "thief")
-        return RoleType::Thief;
-    if (_type == "magician")
-        return RoleType::Magician;
+    //transform(_type.begin(), _type.end(), _type.begin(), tolower);
+    if (_type == "劍士")
+        return RoleType::劍士;
+    if (_type == "海盜")
+        return RoleType::海盜;
+    if (_type == "法師")
+        return RoleType::法師;
 
-    return RoleType::Warrior;
+    return RoleType::劍士;
 }
 
 string Roles::RolesTypeToString(Roles::RoleType _type) {
     string out = "";
     switch (_type)
     {
-    case Roles::RoleType::Warrior:
-        out = "Warrior";
+    case Roles::RoleType::劍士:
+        out = "劍士";
         break;
-    case Roles::RoleType::Magician:
-        out = "Magician";
+    case Roles::RoleType::法師:
+        out = "法師";
         break;
-    case Roles::RoleType::Thief:
-        out = "Thief";
+    case Roles::RoleType::海盜:
+        out = "海盜";
         break;
     }
     return out;
 }
 
-int Roles::INITIAL(Race::RaceType _race, RoleType _role, string _att) {
+inline int Roles::sum_Attributes(Race::RaceType _race, RoleType _role, string _att) {
     return
     GetPrivateProfileInt(Race::RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
     GetPrivateProfileInt(RolesTypeToString(_role).c_str(), _att.c_str(), 0, "Data/Attributes/Role.ini");
+}
+
+string Roles::getRoleType() {
+    return RolesTypeToString(role);
 }

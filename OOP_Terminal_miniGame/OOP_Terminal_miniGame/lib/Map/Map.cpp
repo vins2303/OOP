@@ -1,6 +1,5 @@
 
 #include "../../include/Map/Map.h"
-
 //Åª¨úª«¥ó
 void Map::getObject(string _Map_name) {
 	ifstream Read(_Map_name);
@@ -11,12 +10,14 @@ void Map::getObject(string _Map_name) {
 	int x, y, width, heigh;
 
     if (!Read.is_open()) {
-        Error::showOpenError("Map.cpp", "getObject()", _Map_name);
+        assert(Read);
+
+        //Error::showOpenError("Map.cpp", "getObject()", _Map_name);
         return;
     }
 
-	while (!Read.eof()) {
-		Read >> file_path >> name >> type >> x >> y >> width >> heigh;
+	while (Read >> file_path >> name >> type >> x >> y >> width >> heigh) {
+		
 		setMapType(x, y, width, heigh, Map_object::StringToObjectType(type));
 		obj = new Map_object(file_path, name, Map_object::StringToObjectType(type), x, y, width, heigh);
 		object.push_back(obj);
@@ -29,8 +30,7 @@ Map::Map(string _Map_name, int _width, int _high) :width(_width), high(_high), M
 	MapType = new Map_object::objectType * [_high];
 	for (int i = 0; i < _high; i++)
 		MapType[i] = new Map_object::objectType[_width];
-
-	getObject("Data\\Image\\Map_object\\" + _Map_name + ".txt");
+	getObject("Data\\Image\\Map_object\\" + _Map_name + (_Map_name.find(".txt")==-1?".txt":""));
 }
 
 Map::~Map() {
@@ -95,3 +95,12 @@ void Map::showObject() {
 	}
 }
 
+void Map::read_Map(map<string, Map*>& map_list) {
+    vector<string> getMapName;
+    Map* Read_Map;
+    Tool::findFile("Data/Image/Map_object", getMapName);
+    for (vector<string>::iterator it = getMapName.begin(); it != getMapName.end(); it++) {
+        Read_Map = new Map(*it);
+        map_list[*it] = Read_Map;
+    }
+}

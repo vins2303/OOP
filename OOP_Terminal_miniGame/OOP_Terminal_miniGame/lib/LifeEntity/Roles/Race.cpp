@@ -5,39 +5,42 @@ Race::Race(RaceType _type):raceType(_type)
 {}
 
 Race::RaceType Race::StringToRaceType(string _race) {
-    transform(_race.begin(), _race.end(), _race.begin(), tolower);
-    if (_race == "human")
-        return RaceType::Human;
-    if (_race == "orc")
-        return RaceType::Orc;
-    if (_race == "elves")
-        return RaceType::Elves;
-    if (_race == "dwart")
-        return RaceType::Dwarf;
+    //transform(_race.begin(), _race.end(), _race.begin(), tolower);
+    if (_race == "人族")
+        return RaceType::人族;
+    if (_race == "矮人")
+        return RaceType::矮人;
+    if (_race == "精靈")
+        return RaceType::精靈;
+    if (_race == "獸人")
+        return RaceType::獸人;
 
-    return RaceType::Human;
+    return RaceType::人族;
 }
 
+
+
+Race::RaceType Race::getRace() { return raceType; }
+string Race::getRaceType() { return RaceTypeToString(raceType); }
 string Race::RaceTypeToString(Race::RaceType _type) {
     string outType = "";
     switch (_type) {
-    case RaceType::Dwarf:
-        outType = "Dwarf";
+    case RaceType::人族:
+        outType = "人族";
         break;
-    case RaceType::Elves:
-        outType = "Elves";
+    case RaceType::矮人:
+        outType = "矮人";
         break;
-    case RaceType::Human:
-        outType = "Human";
+    case RaceType::精靈:
+        outType = "精靈";
         break;
-    case RaceType::Orc:
-        outType = "Orc";
+    case RaceType::獸人:
+        outType = "獸人";
         break;
     }
     return outType;
 }
 
-Race::RaceType Race::getRace() { return raceType; }
 
 void Race::setRace(RaceType _race) { raceType = _race; }
 void Race::setRace(string _race) { setRace(StringToRaceType(_race)); }

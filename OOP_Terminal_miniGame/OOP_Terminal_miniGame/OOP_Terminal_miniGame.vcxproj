@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="include\Account\Account.h" />
     <ClInclude Include="include\Account\RolesList.h" />
-    <ClInclude Include="include\Error\Error.h" />
     <ClInclude Include="include\LifeEntity\Attributes.h" />
     <ClInclude Include="include\LifeEntity\Roles\Backpack.h" />
     <ClInclude Include="include\LifeEntity\Roles\Equipment.h" />
@@ -37,7 +36,6 @@
   <ItemGroup>
     <ClCompile Include="lib\Account\Account.cpp" />
     <ClCompile Include="lib\Account\RolesList.cpp" />
-    <ClCompile Include="lib\Error\Error.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp" />
@@ -128,7 +126,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>

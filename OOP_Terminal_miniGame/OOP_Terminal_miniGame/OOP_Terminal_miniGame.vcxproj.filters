@@ -72,9 +72,6 @@
     <ClInclude Include="include\LifeEntity\Attributes.h">
       <Filter>標頭檔\LifeEntity</Filter>
     </ClInclude>
-    <ClInclude Include="include\Error\Error.h">
-      <Filter>標頭檔\Error</Filter>
-    </ClInclude>
     <ClInclude Include="include\Account\Account.h">
       <Filter>標頭檔\Account</Filter>
     </ClInclude>
@@ -118,9 +115,6 @@
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\Attributes.cpp">
       <Filter>來源檔案\LifeEntity</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Error\Error.cpp">
-      <Filter>來源檔案\Error</Filter>
     </ClCompile>
     <ClCompile Include="lib\Account\Account.cpp">
       <Filter>來源檔案\Account</Filter>

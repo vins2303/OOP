@@ -18,6 +18,8 @@ public:
     static void mkdir(string _path);
     static void SplitString(const string input_string, vector<string>& v, const string c);
     static void getIpAppName(string _path, vector<string>& _data);
+    static bool CheckFolderExist(const string& strPath);
+    //static bool RmDir(const string& strPath);
 };
 
 #endif // ! _TOOL_H_
