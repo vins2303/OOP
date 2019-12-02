@@ -57,9 +57,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Map\Map.h">
-      <Filter>標頭檔\Map</Filter>
-    </ClInclude>
     <ClInclude Include="include\Map\Map_object.h">
       <Filter>標頭檔\Map</Filter>
     </ClInclude>
@@ -96,11 +93,11 @@
     <ClInclude Include="include\LifeEntity\Roles\Race.h">
       <Filter>標頭檔\LifeEntity\Roles</Filter>
     </ClInclude>
+    <ClInclude Include="include\Map\Game_Map.h">
+      <Filter>標頭檔\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lib\Map\Map.cpp">
-      <Filter>來源檔案\Map</Filter>
-    </ClCompile>
     <ClCompile Include="lib\Map\Map_object.cpp">
       <Filter>來源檔案\Map</Filter>
     </ClCompile>
@@ -140,17 +137,18 @@
     <ClCompile Include="lib\Tool\Tool.cpp">
       <Filter>來源檔案\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="lib\Map\Game_Map.cpp">
+      <Filter>來源檔案\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Data\Image\Map_object\Market.txt">
-      <Filter>資源檔\Image\Map_object</Filter>
-    </Text>
     <Text Include="Data\Image\Monster.txt">
       <Filter>資源檔\Image</Filter>
     </Text>
     <Text Include="Data\Image\object.txt">
       <Filter>資源檔\Image</Filter>
     </Text>
+    <Text Include="Data\Image\Map_object\水世界.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Account.ini">

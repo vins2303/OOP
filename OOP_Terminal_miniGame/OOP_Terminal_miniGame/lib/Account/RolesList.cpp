@@ -16,7 +16,7 @@ void RolesList::RolesListMenu() {
         cout << "1. 選擇角色" << endl;
         cout << "2. 新增角色" << endl;
         cout << "3. 刪除角色" << endl;
-        cout << "4. 返回登入畫面" << endl;
+        cout << "4. 返回登入畫面" << endl<<endl;
         cout << "5. 刪除此帳號" << endl;
         switch (_getch())
         {
@@ -161,9 +161,11 @@ bool RolesList::addRoles() {
                 WritePrivateProfileString(name.c_str(), "HP", to_string(Roles::sum_Attributes(race_type, role_type, "HP")).c_str(), outfile.c_str());
                 WritePrivateProfileString(name.c_str(), "MP", to_string(Roles::sum_Attributes(race_type, role_type, "MP")).c_str(), outfile.c_str());
                 WritePrivateProfileString(name.c_str(), "EXP", "0", outfile.c_str());
-                WritePrivateProfileString(name.c_str(), "MapName", "Market", outfile.c_str());
-                WritePrivateProfileString(name.c_str(), "MapX", "0", outfile.c_str());
-                WritePrivateProfileString(name.c_str(), "MapY", "0", outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "MapNow", "市集", outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "ObjectX", "50", outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "ObjectY", "22", outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "ObjectWidth", "3", outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "ObjectHeigh", "4", outfile.c_str());
 
                 cout << "新增角色成功!" << endl;
                 system("pause");
@@ -196,8 +198,19 @@ void RolesList::FindRoles(vector<Roles*> &out) {
             GetPrivateProfileInt((*it).c_str(), "HP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "MP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "EXP", INT_MAX, inifile.c_str()),
+            Tool::readStringIni(*it, "MapNow","NULL", inifile),
             race,
-            role
+            role,
+            Map_object("data/Image/object.txt", 
+                "Warrior",
+                Map_object::objectType::Warrior,
+                GetPrivateProfileInt((*it).c_str(), "ObjectX", INT_MAX, inifile.c_str()),
+                GetPrivateProfileInt((*it).c_str(), "ObjectY", INT_MAX, inifile.c_str()),
+                GetPrivateProfileInt((*it).c_str(), "ObjectWidth", INT_MAX, inifile.c_str()),
+                GetPrivateProfileInt((*it).c_str(), "ObjectHeigh", INT_MAX, inifile.c_str())
+
+
+            )
         );   
         out.push_back(roles);
     }

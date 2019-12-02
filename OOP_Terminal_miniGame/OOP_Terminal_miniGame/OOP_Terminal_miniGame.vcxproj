@@ -29,7 +29,7 @@
     <ClInclude Include="include\LifeEntity\Roles\Roles.h" />
     <ClInclude Include="include\Map\Draw.h" />
     <ClInclude Include="include\Map\Figure_Rect.h" />
-    <ClInclude Include="include\Map\Map.h" />
+    <ClInclude Include="include\Map\Game_Map.h" />
     <ClInclude Include="include\Map\Map_object.h" />
     <ClInclude Include="include\Tool\Tool.h" />
   </ItemGroup>
@@ -44,13 +44,13 @@
     <ClCompile Include="lib\LifeEntity\Roles\Roles.cpp" />
     <ClCompile Include="lib\Map\Draw.cpp" />
     <ClCompile Include="lib\Map\Figure_Rect.cpp" />
-    <ClCompile Include="lib\Map\Map.cpp" />
+    <ClCompile Include="lib\Map\Game_Map.cpp" />
     <ClCompile Include="lib\Map\Map_object.cpp" />
     <ClCompile Include="lib\Tool\Tool.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Data\Image\Map_object\Market.txt" />
+    <Text Include="Data\Image\Map_object\水世界.txt" />
     <Text Include="Data\Image\Monster.txt" />
     <Text Include="Data\Image\object.txt" />
   </ItemGroup>

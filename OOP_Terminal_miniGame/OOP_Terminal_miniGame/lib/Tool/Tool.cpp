@@ -83,3 +83,11 @@ void Tool::getIpAppName(string _path, vector<string>& _data) {
 bool Tool::CheckFolderExist(const string& strPath){
     return _access(strPath.c_str(), 0) == 0 ? true : false;
 }
+
+string Tool::readStringIni(string lpAppName, string lpKeyName, string lpDefaut, string lpFileName) {
+    CString read;
+    GetPrivateProfileString(lpAppName.c_str(), lpKeyName.c_str(), lpDefaut.c_str(), read.GetBuffer(255), 255, lpFileName.c_str());
+    read.ReleaseBuffer();
+    return string( read );
+}
+

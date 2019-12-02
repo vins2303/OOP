@@ -6,7 +6,7 @@
 #include <conio.h>
 #include<map>
 #include "include/Map/Draw.h" 
-#include "include/Map/Map.h" 
+#include "include/Map/Game_Map.h" 
 #include "include/Map/Figure_Rect.h" 
 #include "include/Account/Account.h"
 #include "include/Account/RolesList.h"
@@ -15,11 +15,11 @@ using namespace std;
 
 void Game_start();
 void Game_initial();
-void Key();
+void Key(bool& _isDrawMap);
 
 
-//Map* map;
-map<string, Map*> maplist;
+//Game_Map* map;
+map<string, Game_Map*> maplist;
 #define MAX_LENGTH 500
 RolesList* roleslist;
 
@@ -34,19 +34,23 @@ int main() {
 void Game_initial() {
 
     roleslist = new RolesList();
-    Map::read_Map(maplist);
+    Game_Map::read_Map(maplist);
+    //maplist.find("市集")->second->showObject();
+    //_getch();
+
 }
 
 void Game_start() {
+    bool isDrawMap = true;
     while (true){
         roleslist->AccountMenu();
         roleslist->RolesListMenu();
         system("cls");
-        if (roleslist->getRoles() != NULL) {
-
-            //map = new Map("Market");
-            //map->showObject();
-            //_getch();
+        while (roleslist->getRoles() != NULL) {
+            maplist.find(roleslist->getRoles()->getMap_Now())->second->setRoles(roleslist->getRoles());
+            Key(isDrawMap);
+           /* maplist.find("市集")->second->showObject();
+            roleslist->getRoles()->showObject();*/
         }
 
     }
@@ -54,34 +58,42 @@ void Game_start() {
 }
 
 
-void Key() {
-
-    /*static int k;
+void Key(bool &_isDrawMap) {
+    static bool isDraw = true;
+    static Map_object* overlapping_object;
+    overlapping_object = NULL;
     if (_kbhit()) {
+        isDraw = true;
         switch (_getch())
         {
-        case 72:
-
-            Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-            Draw::showObject(point.X, --point.Y, "data/Image/object.txt", "Warrior");
+        case 72:// Move Up
+            isDraw = true;
+            overlapping_object = roleslist->getRoles()->set_seat_Y( roleslist->getRoles()->get_seat_Y() - 1, maplist.find(roleslist->getRoles()->getMap_Now())->second->get_Object_List() );
             break;
-        case 75:
-            Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-            Draw::showObject(--point.X, point.Y, "data/Image/object.txt", "Warrior");
+        case 75:// Move Left
+            isDraw = true;
+            overlapping_object = roleslist->getRoles()->set_seat_X( roleslist->getRoles()->get_seat_X() - 1, maplist.find(roleslist->getRoles()->getMap_Now())->second->get_Object_List() );
+
             break;
-        case 80:
-            Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-            Draw::showObject(point.X, ++point.Y, "data/Image/object.txt", "Warrior");
+        case 80:// Move Down
+            isDraw = true;
+            overlapping_object = roleslist->getRoles()->set_seat_Y( roleslist->getRoles()->get_seat_Y() + 1, maplist.find(roleslist->getRoles()->getMap_Now())->second->get_Object_List() );
             break;
 
-        case 77:
-            Draw::clearMap(point.X, point.Y, Warrior_width, Warrior_high);
-            Draw::showObject(++point.X, point.Y, "data/Image/object.txt", "Warrior");
-
+        case 77:// Move Right
+            isDraw = true;
+            overlapping_object = roleslist->getRoles()->set_seat_X( roleslist->getRoles()->get_seat_X() + 1, maplist.find(roleslist->getRoles()->getMap_Now())->second->get_Object_List() );
             break;
         default:
             break;
         }
-
-    }*/
+        if (overlapping_object != NULL) {
+            cout << "";
+        }
+        
+    }
+    maplist.find(roleslist->getRoles()->getMap_Now())->second->Main_Draw(isDraw,_isDrawMap);
 }
+
+
+

@@ -2,7 +2,7 @@
 
 
 
-inline void Draw::setXY(int _x, int _y) {
+void Draw::setXY(int _x, int _y) {
 	COORD XY;
 	XY.X = _x;
 	XY.Y = _y;

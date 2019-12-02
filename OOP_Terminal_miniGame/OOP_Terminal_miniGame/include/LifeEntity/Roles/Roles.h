@@ -10,7 +10,7 @@
 #include "Race.h"
 using std::string;
 
-class Roles : public  LifeAttributes, public Equipment, public Race {
+class Roles : public  LifeAttributes, public Equipment, public Race, public Map_object {
 public:
     enum class RoleType {
         劍士, //劍士
@@ -22,11 +22,12 @@ private:
     string name;
     int exp; // (LV-1)^3 + 60
     int drop; //調寶率
-    Map_object *object;//腳色物件
+    //Map_object *object;//腳色物件
     RoleType role;
+    string Map_Now;
     //Race::RaceType race;
 public:
-    Roles(string _name, int _LV, int _nowHP, int _nowMP, int _Exp, Race::RaceType _race, RoleType _role);
+    Roles(string _name, int _LV, int _nowHP, int _nowMP, int _Exp, string Map_Now, Race::RaceType _race, RoleType _role, Map_object _object);
 
     ~Roles();
 
@@ -35,6 +36,7 @@ public:
     int getUpExp();
     int getDrop();
     string getRoleType();
+    string getMap_Now();
    
     string setName(string _name);
     int setExp(int _exp);
@@ -45,6 +47,11 @@ public:
     int addDrop(int _drop);
 
     bool isUpLv();
+
+    Map_object* set_seat_X(int _x, vector<Map_object*>& _object);
+    Map_object* set_seat_Y(int _y, vector<Map_object*>& _object);
+    Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);
+
 
     static RoleType StringToRolesType(string _type);
     static string RolesTypeToString(RoleType _type);
