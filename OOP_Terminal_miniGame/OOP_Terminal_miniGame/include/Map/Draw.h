@@ -21,8 +21,7 @@ using namespace std;
 
 class Draw {
 public:
-    static inline void setXY(int _x = 0, int _y = 0);
-    //static void showMap_wall();
+    static void setXY(int _x = 0, int _y = 0);
     static void showObject(int _x, int _y, string path, string _image);
     static void clearMap(int _x, int _y, int _width, int _heigh);
     static string getImage(string path, string _image, string end = "END");

@@ -4,9 +4,7 @@
 
 RolesList::RolesList() :Account(), roles(NULL){}
 
-RolesList::~RolesList() {
-    if (roles != NULL) delete roles;
-}
+RolesList::~RolesList() { if (roles != NULL) delete roles; }
 
 void RolesList::RolesListMenu() {
     bool isEnd = false;
@@ -164,8 +162,8 @@ bool RolesList::addRoles() {
                 WritePrivateProfileString(name.c_str(), "MapNow", "市集", outfile.c_str());
                 WritePrivateProfileString(name.c_str(), "ObjectX", "50", outfile.c_str());
                 WritePrivateProfileString(name.c_str(), "ObjectY", "22", outfile.c_str());
-                WritePrivateProfileString(name.c_str(), "ObjectWidth", "3", outfile.c_str());
-                WritePrivateProfileString(name.c_str(), "ObjectHeigh", "4", outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "ObjectWidth", ROLES_OBJECT_WIDTH, outfile.c_str());
+                WritePrivateProfileString(name.c_str(), "ObjectHeigh", ROLES_OBJECT_HEIGHT, outfile.c_str());
 
                 cout << "新增角色成功!" << endl;
                 system("pause");
@@ -199,6 +197,7 @@ void RolesList::FindRoles(vector<Roles*> &out) {
             GetPrivateProfileInt((*it).c_str(), "MP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "EXP", INT_MAX, inifile.c_str()),
             Tool::readStringIni(*it, "MapNow","NULL", inifile),
+            this->getAccount(),
             race,
             role,
             Map_object("data/Image/object.txt", 
@@ -208,8 +207,6 @@ void RolesList::FindRoles(vector<Roles*> &out) {
                 GetPrivateProfileInt((*it).c_str(), "ObjectY", INT_MAX, inifile.c_str()),
                 GetPrivateProfileInt((*it).c_str(), "ObjectWidth", INT_MAX, inifile.c_str()),
                 GetPrivateProfileInt((*it).c_str(), "ObjectHeigh", INT_MAX, inifile.c_str())
-
-
             )
         );   
         out.push_back(roles);

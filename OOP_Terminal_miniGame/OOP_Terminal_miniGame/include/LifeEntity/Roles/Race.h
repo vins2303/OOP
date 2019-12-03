@@ -26,7 +26,6 @@ public:
     static RaceType StringToRaceType(string _race);
     static string RaceTypeToString(RaceType _race);
 
-
     void setRace(RaceType _race);
     void setRace(string _race);
 };

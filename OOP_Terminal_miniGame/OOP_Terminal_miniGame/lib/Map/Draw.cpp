@@ -1,7 +1,6 @@
 #include "../../include/Map/Draw.h"
 
 
-
 void Draw::setXY(int _x, int _y) {
 	COORD XY;
 	XY.X = _x;
@@ -14,7 +13,7 @@ void Draw::show(int _x, int _y, string _image) {
 	Tool::SplitString(_image, list, "\n");
 	for (vector<string>::iterator it = list.begin(); it != list.end(); it++) {
 		setXY(_x, _y++);
-		cout << *it;
+		cout << *it<<endl;
 	}
 	list.clear();
 }

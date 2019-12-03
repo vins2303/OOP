@@ -28,14 +28,15 @@
     <ClInclude Include="include\LifeEntity\Roles\Race.h" />
     <ClInclude Include="include\LifeEntity\Roles\Roles.h" />
     <ClInclude Include="include\Map\Draw.h" />
-    <ClInclude Include="include\Map\Figure_Rect.h" />
     <ClInclude Include="include\Map\Game_Map.h" />
     <ClInclude Include="include\Map\Map_object.h" />
     <ClInclude Include="include\Tool\Tool.h" />
+    <ClInclude Include="include\keyboard_Event\Keyboard_Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Account\Account.cpp" />
     <ClCompile Include="lib\Account\RolesList.cpp" />
+    <ClCompile Include="lib\keyboard_Event\Keyboard_Event.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp" />
@@ -43,7 +44,6 @@
     <ClCompile Include="lib\LifeEntity\Roles\Race.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Roles.cpp" />
     <ClCompile Include="lib\Map\Draw.cpp" />
-    <ClCompile Include="lib\Map\Figure_Rect.cpp" />
     <ClCompile Include="lib\Map\Game_Map.cpp" />
     <ClCompile Include="lib\Map\Map_object.cpp" />
     <ClCompile Include="lib\Tool\Tool.cpp" />

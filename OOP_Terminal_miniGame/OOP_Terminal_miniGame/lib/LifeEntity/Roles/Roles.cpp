@@ -1,6 +1,7 @@
 #include "../../../include/LifeEntity/Roles/Roles.h"
 
-Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, Race::RaceType _race, RoleType _role, Map_object _object) :
+Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, string _account, Race::RaceType _race, RoleType _role, Map_object _object) :
+    account(_account),
     name(_name),
     exp(Exp),
     Map_Now(_Map_Now),
@@ -35,6 +36,7 @@ int Roles::getDrop() { return drop; }
 string Roles::setName(string _name) { return name = _name; }
 int Roles::setExp(int _exp) { return exp = _exp > getUpExp() ? getUpExp() : exp; }
 int Roles::setDrop(int _drop) { return drop = drop > 100 ? 100 : drop; }
+void Roles::setMap_Now(const string _map) { Map_Now = _map; }
 
 int Roles::addExp(int _exp, bool percent) { 
     int exp = ADD_FUN(getExp(), _exp, percent);
@@ -75,11 +77,12 @@ string Roles::RolesTypeToString(Roles::RoleType _type) {
     return out;
 }
 
-inline int Roles::sum_Attributes(Race::RaceType _race, RoleType _role, string _att) {
+int Roles::sum_Attributes(Race::RaceType _race, RoleType _role, string _att) {
     return
     GetPrivateProfileInt(Race::RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
     GetPrivateProfileInt(RolesTypeToString(_role).c_str(), _att.c_str(), 0, "Data/Attributes/Role.ini");
 }
+
 
 string Roles::getRoleType() {
     return RolesTypeToString(role);
@@ -87,40 +90,56 @@ string Roles::getRoleType() {
 
 string Roles::getMap_Now() { return Map_Now; }
 
+
+void Roles::wire_Roles_info() {
+    string outfile = "Data/Account/" + account + "/Roles.ini";
+    WritePrivateProfileString(name.c_str(), "LV", to_string(getLV()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Race", Race::RaceTypeToString(getRace()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Role", Roles::RolesTypeToString(role).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "HP", to_string(getHP()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "MP", to_string(getMP()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "EXP", to_string(getExp()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "MapNow", getMap_Now().c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectX", to_string(get_seat_X()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectY", to_string(get_seat_Y()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(getWidth()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
+}
+
 //*********************************** 角色移動 ***********************************
 //物件移動
-Map_object* Roles::set_seat_X(int _x, vector<Map_object*>& _object) {
+Map_object* Roles::set_Roles_Move_X(int _x, vector<Map_object*>& _object) {
     static Map_object* over;
     static int posX;
     over = NULL;
     posX = get_seat_X();
-    Map_object::set_seat_X(_x);
-    if ((over = Object_overlapping(*this, _object)) != NULL || get_seat_X() < 2 || get_seat_X() > 99) {
-        Map_object::set_seat_X(posX);
+    Map_object::set_Point_X(_x);
+    if ((over = Object_overlapping(*this, _object)) != NULL || get_seat_X() < 1 || get_seat_X() > MAP_WIDTH_DEF - getWidth()) {
+        Map_object::set_Point_X(posX);
         //Y = posY;
     }
     else {
-        Map_object::set_seat_X(posX);
+        Map_object::set_Point_X(posX);
         clear_Draw_Object();
-        Map_object::set_seat_X(_x);
+        Map_object::set_Point_X(_x);
     }
     return over;
 }
 
 //物件移動
-Map_object* Roles::set_seat_Y(int _y, vector<Map_object*>& _object) {
+Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
     static Map_object* over;
     static int posY;
     over = NULL;
     posY = get_seat_Y();
-    Map_object::set_seat_Y(_y);
-    if ((over = Object_overlapping(*this, _object)) != NULL || get_seat_Y() < 1 || get_seat_Y() >38) {
-        Map_object::set_seat_Y(posY);
+    Map_object::set_Point_Y(_y);
+    if ((over = Object_overlapping(*this, _object)) != NULL || get_seat_Y() < 1 || get_seat_Y() > MAP_HIGH_DEF-getHeigh()) {
+        Map_object::set_Point_Y(posY);
         //Y = posY;
     } else {
-        Map_object::set_seat_Y(posY);
+        Map_object::set_Point_Y(posY);
         clear_Draw_Object();
-        Map_object::set_seat_Y(_y);
+        Map_object::set_Point_Y(_y);
     }
     return over;
 }

@@ -22,14 +22,11 @@ bool Map_object::operator == (const Map_object& object) {
 }
 
 
-Map_object::objectType Map_object::getObject() {
-	return object;
-}
+Map_object::objectType Map_object::get_Object_Type() { return object; }
 
 Map_object Map_object::setObject(Map_object::objectType _M) {
 	object = _M;
 	return *this;
-
 }
 
 int Map_object::get_seat_X() { return X; }
@@ -38,63 +35,13 @@ int Map_object::getWidth() { return width; }
 int Map_object::getHeigh() { return heigh; }
 string Map_object::getImage() { return image; }
 
-void Map_object::set_seat_X(int _x) { X = _x; }
-void Map_object::set_seat_Y(int _y) { Y = _y; }
-
-////判斷是否重疊
-//Map_object* Map_object::Object_overlapping(Map_object & obj, vector<Map_object*>& _object) {
-//    for (vector<Map_object*>::iterator it = _object.begin(); it != _object.end(); it ++ )
-//        if (obj == (**it))
-//            return *it;
-//    return NULL;
-//}
-
-////物件移動
-//Map_object* Map_object::set_seat_X(int _x, vector<Map_object*>& _object) {
-//    static Map_object* over;
-//    static int posX;
-//    static int posX2;
-//    over = NULL;
-//    posX = X;
-//    X = _x;
-//    if ((over = Object_overlapping(*this, _object)) != NULL || X < 2 || X>99) {
-//        X = posX;
-//    }else {
-//        posX2 = X;
-//        X = posX;
-//        clear_Draw_Object();
-//        X = posX2;
-//    }
-//    return over;
-//}
-//
-////物件移動
-//Map_object* Map_object::set_seat_Y(int _y, vector<Map_object*>& _object) {
-//    static Map_object* over;
-//    static int posY;
-//    static int posY2;
-//    over = NULL;
-//    posY = Y;
-//    Y = _y;
-//    if ((over = Object_overlapping(*this, _object)) != NULL) {
-//        Y = posY;
-//    }
-//    else {
-//        posY2 = Y;
-//        Y = posY;
-//        clear_Draw_Object();
-//        Y = posY2;
-//    }
-//    return over;
-//}
-
-
+void Map_object::set_Point_X(int _x) { X = _x; }
+void Map_object::set_Point_Y(int _y) { Y = _y; }
 void Map_object::setWidth(int _width) {width = _width;}
 void Map_object::setHeight(int _height) {heigh = _height;}
 
-string Map_object::getName() {
-	return object_name;
-}
+string Map_object::getName() { return object_name; }
+
 Map_object::objectType Map_object::StringToObjectType(string _str) {
     transform(_str.begin(), _str.end(), _str.begin(), tolower);
    

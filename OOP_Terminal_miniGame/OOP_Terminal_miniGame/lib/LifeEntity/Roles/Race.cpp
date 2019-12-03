@@ -1,7 +1,6 @@
 #include "../../../include/LifeEntity/Roles/Race.h"
 
 Race::Race(RaceType _type):raceType(_type)
-
 {}
 
 Race::RaceType Race::StringToRaceType(string _race) {
@@ -40,7 +39,6 @@ string Race::RaceTypeToString(Race::RaceType _type) {
     }
     return outType;
 }
-
 
 void Race::setRace(RaceType _race) { raceType = _race; }
 void Race::setRace(string _race) { setRace(StringToRaceType(_race)); }

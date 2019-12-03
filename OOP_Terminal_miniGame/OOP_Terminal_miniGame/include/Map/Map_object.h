@@ -1,13 +1,10 @@
 #ifndef MAP_OBHECT_H
 #define MAP_OBHECT_H
 #include<iostream>
-//#include<vector>
 #include <algorithm>
 #include"Draw.h"
 
 using std::string;
-
-
 
 class Map_object {
 public:
@@ -31,7 +28,7 @@ public:
     bool operator == (const Map_object& object);
     static objectType StringToObjectType(string _str);
 
-	objectType getObject();
+	objectType get_Object_Type();
 
 	Map_object setObject(objectType _M);
 
@@ -42,19 +39,14 @@ public:
 	string getImage();
 	string getName();
 
-	void set_seat_X(int _x);
-	void set_seat_Y(int _y);
-    /*Map_object* set_seat_X(int _x, vector<Map_object*> &_object);
-    Map_object* set_seat_Y(int _y, vector<Map_object*> & _object);*/
+	void set_Point_X(int _x);
+	void set_Point_Y(int _y);
 
 	void setWidth(int _width);
 	void setHeight(int _height);
 
     void showObject();
     void clear_Draw_Object();
-
-    /*Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);*/
-
 };
 
 #endif

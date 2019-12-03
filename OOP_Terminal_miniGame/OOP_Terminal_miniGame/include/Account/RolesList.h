@@ -23,17 +23,11 @@ private:
 public:
     RolesList();
     ~RolesList();
-
     Roles* getRoles();
-
     void FindRoles(vector<Roles*>&);
-    
     void RolesListMenu();
-
     bool selRoles();
-
     bool addRoles();
-
     void DeleteRoles();
 
 private:
@@ -41,7 +35,5 @@ private:
     void showRolesList(vector<Roles*>&, unsigned int row);
     void showRaceInfo(const vector<string> &raceList, const string _file, const unsigned int _row);
     void showRoleInfo(const vector<string> &rolesList, const string _file, const unsigned int _row);
-
-
 };
 #endif
