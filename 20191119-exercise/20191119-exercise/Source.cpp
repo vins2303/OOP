@@ -21,9 +21,8 @@ public:
 			delete[] list[i];
 		delete[] list;
 	}
-	//Matrix XXX;
-	//cout << XXX;
-	friend ostream& operator<<(ostream& output, const Matrix& matrix) {
+
+    friend ostream& operator<<(ostream& output, const Matrix& matrix) {
 		for (int i = 0; i < matrix.row; i++) {
 			for (int j = 0; j < matrix.col; j++) {
 				output << matrix.list[i][j]<<" ";
@@ -32,7 +31,7 @@ public:
 		}
 		return output;
 	}
-	//cin >> XXX
+
 	friend istream& operator>>(istream & input, Matrix & number) {
 		
 		if (number.count < number.row * number.col) {

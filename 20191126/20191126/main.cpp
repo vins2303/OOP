@@ -8,8 +8,6 @@ public:
     int a, b;
     vector<Polynomial*> pol;
 
-
-
     bool compare(Polynomial*p1, Polynomial*p2) {
         return p1->b > p2->b;
     }
@@ -19,7 +17,6 @@ public:
             out << data.pol[i]->a << "x^" << data.pol[i]->b;
             if (i != data.pol.size() - 1) out << "+";
         }
-    
         return out;
     }
 
@@ -45,8 +42,8 @@ public:
                 return i;
         return -1;
     }
-
-    Polynomial operator+( Polynomial &p2) {
+    
+    Polynomial operator+( Polynomial &p2 ) {
         bool is = false;
         Polynomial out;
         int n;
