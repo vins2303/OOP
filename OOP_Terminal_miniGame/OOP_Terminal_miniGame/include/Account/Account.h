@@ -21,17 +21,15 @@ public:
     Account();
     ~Account();
     void AccountMenu();
-    string getAccount();
     void clear();
     bool IsSignIn();
     bool rmAccount();
+    string getAccount();
 
 private:
     bool SignIn();
     void Registered();
     string isAccount(string _accout);
-
 };
-
 
 #endif

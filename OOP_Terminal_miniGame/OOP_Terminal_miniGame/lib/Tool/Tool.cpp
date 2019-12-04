@@ -1,6 +1,5 @@
 #include "../../include/Tool/Tool.h"
 
-
 void Tool::findDir(string path, vector<string>& files) {
     intptr_t   hFile = 0;
     struct _finddata_t fileinfo;
@@ -9,13 +8,12 @@ void Tool::findDir(string path, vector<string>& files) {
     {
         do
         {
-            if ((fileinfo.attrib & _A_SUBDIR)){//是否為資料夾
+            if ((fileinfo.attrib & _A_SUBDIR)) {//是否為資料夾
                 if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0) {
                     files.push_back(fileinfo.name);
                     //  files.push_back(p.assign(path).append("\\").append(fileinfo.name));
                 }
             }
-         
         } while (_findnext(hFile, &fileinfo) == 0);
         _findclose(hFile);
     }
@@ -25,10 +23,10 @@ void Tool::findFile(string path, vector<string>& files) {
     intptr_t   hFile = 0;
     struct _finddata_t fileinfo;
     string p;
-    if ((hFile = _findfirst(p.assign(path).append("/*").c_str(), &fileinfo)) != -1){
-        do{
+    if ((hFile = _findfirst(p.assign(path).append("/*").c_str(), &fileinfo)) != -1) {
+        do {
             if (!(fileinfo.attrib & _A_SUBDIR)) {
-               //files.push_back(p.assign(path).append("\\").append(fileinfo.name));
+                //files.push_back(p.assign(path).append("\\").append(fileinfo.name));
                 files.push_back(fileinfo.name);
             }
         } while (_findnext(hFile, &fileinfo) == 0);
@@ -43,10 +41,9 @@ void Tool::mkdir(string _path) {
     _path = "";
     for (vector<string>::iterator it = vec.begin(); it != vec.end(); it++) {
         _path += *it + "/";
-        if (_access(_path.c_str(),0)) {
-             ret = _mkdir(_path.c_str());
+        if (_access(_path.c_str(), 0)) {
+            ret = _mkdir(_path.c_str());
         }
-
     }
 }
 
@@ -64,13 +61,13 @@ void Tool::SplitString(const string input_string, vector<string>& v, const strin
 }
 
 void Tool::getIpAppName(string _path, vector<string>& _data) {
-    TCHAR name[2048] = {0};
+    TCHAR name[2048] = { 0 };
     string ss = "";
     GetPrivateProfileSectionNames(name, 2048, _path.c_str());
     if (name[0] == 0) return;
     for (int i = 0; i < 2048; i++) {
         if (name[i] == 0) {
-            if(ss != "") _data.push_back(ss);
+            if (ss != "") _data.push_back(ss);
             ss = "";
         }
         else {
@@ -79,8 +76,7 @@ void Tool::getIpAppName(string _path, vector<string>& _data) {
     }
 }
 
-
-bool Tool::CheckFolderExist(const string& strPath){
+bool Tool::CheckFolderExist(const string& strPath) {
     return _access(strPath.c_str(), 0) == 0 ? true : false;
 }
 
@@ -88,6 +84,5 @@ string Tool::readStringIni(string lpAppName, string lpKeyName, string lpDefaut, 
     CString read;
     GetPrivateProfileString(lpAppName.c_str(), lpKeyName.c_str(), lpDefaut.c_str(), read.GetBuffer(255), 255, lpFileName.c_str());
     read.ReleaseBuffer();
-    return string( read );
+    return string(read);
 }
-

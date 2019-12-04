@@ -1,0 +1,1 @@
+Data/Image/Monster.txt ©¾ªì§Ê Monster 7 3 10 20

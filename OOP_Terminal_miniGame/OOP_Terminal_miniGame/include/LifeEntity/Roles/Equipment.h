@@ -13,11 +13,11 @@ private:
 
 public:
     Equipment(Attributes* _weapon = NULL,
-              Attributes* _deputy = NULL,
-              Attributes* _helmet = NULL,
-              Attributes* _breastplate = NULL,
-              Attributes* _pants = NULL,
-              Attributes* _shoes = NULL);
+        Attributes* _deputy = NULL,
+        Attributes* _helmet = NULL,
+        Attributes* _breastplate = NULL,
+        Attributes* _pants = NULL,
+        Attributes* _shoes = NULL);
 
     ~Equipment();
 
@@ -43,8 +43,6 @@ public:
     int sumSP();
     int sumDef();
     int sumCrt();
-
-
 };
 
 #endif

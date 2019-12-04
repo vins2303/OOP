@@ -12,7 +12,7 @@
 using std::string;
 
 #define MAP_WIDTH_DEF 150
-#define MAP_HIGH_DEF  48
+#define MAP_HIGH_DEF  50
 #define ROLES_OBJECT_WIDTH "6"
 #define ROLES_OBJECT_HEIGHT "3"
 
@@ -26,7 +26,6 @@ public:
 
 private:
     string account;
-
     string name;
     int exp; // (LV-1)^3 + 60
     int drop; //½ÕÄ_²v
@@ -45,7 +44,7 @@ public:
     int getDrop();
     string getRoleType();
     string getMap_Now();
-   
+
     string setName(string _name);
     int setExp(int _exp);
     int setDrop(int _drop);
@@ -58,11 +57,11 @@ public:
 
     Map_object* set_Roles_Move_X(int _x, vector<Map_object*>& _object);
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);
-    Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);
+    //Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);
 
     void wire_Roles_info();
     static RoleType StringToRolesType(string _type);
-    static string RolesTypeToString  (RoleType _type);
+    static string RolesTypeToString(RoleType _type);
     static int sum_Attributes(Race::RaceType _race, RoleType _role, string _att);
 };
 

@@ -42,6 +42,5 @@ public:
     int addCrt(int);
 
     int ADD_FUN(int _now, int _add, bool percent = false, bool setZero = true);
-
 };
 #endif

@@ -1,6 +1,6 @@
 #include "../../../include/LifeEntity/Roles/Race.h"
 
-Race::Race(RaceType _type):raceType(_type)
+Race::Race(RaceType _type) :raceType(_type)
 {}
 
 Race::RaceType Race::StringToRaceType(string _race) {
@@ -16,8 +16,6 @@ Race::RaceType Race::StringToRaceType(string _race) {
 
     return RaceType::¤H±Ú;
 }
-
-
 
 Race::RaceType Race::getRace() { return raceType; }
 string Race::getRaceType() { return RaceTypeToString(raceType); }

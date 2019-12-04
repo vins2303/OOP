@@ -1,0 +1,2 @@
+Data/Image/Monster.txt ¾{³½ Monster 9 4 5 10
+Data/Image/Monster.txt ¤ô¥À Monster 9 4 5 10

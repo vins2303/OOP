@@ -2,7 +2,6 @@
 #define _BACKPACK_H_
 
 class Backpack {
-
 };
 
 #endif // !1

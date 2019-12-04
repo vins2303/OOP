@@ -26,14 +26,14 @@ public:
     Roles* getRoles();
     void FindRoles(vector<Roles*>&);
     void RolesListMenu();
-    bool selRoles();
+    bool Selete_Roles();
     bool addRoles();
     void DeleteRoles();
 
 private:
     void clearRolesList(vector<Roles*>&);
     void showRolesList(vector<Roles*>&, unsigned int row);
-    void showRaceInfo(const vector<string> &raceList, const string _file, const unsigned int _row);
-    void showRoleInfo(const vector<string> &rolesList, const string _file, const unsigned int _row);
+    void showRaceInfo(const vector<string>& raceList, const string _file, const unsigned int _row);
+    void showRoleInfo(const vector<string>& rolesList, const string _file, const unsigned int _row);
 };
 #endif

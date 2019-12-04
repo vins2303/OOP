@@ -23,7 +23,6 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
     )
 {}
 
-
 Roles::~Roles() {
     //if (object != NULL) delete object;
 }
@@ -38,10 +37,10 @@ int Roles::setExp(int _exp) { return exp = _exp > getUpExp() ? getUpExp() : exp;
 int Roles::setDrop(int _drop) { return drop = drop > 100 ? 100 : drop; }
 void Roles::setMap_Now(const string _map) { Map_Now = _map; }
 
-int Roles::addExp(int _exp, bool percent) { 
+int Roles::addExp(int _exp, bool percent) {
     int exp = ADD_FUN(getExp(), _exp, percent);
     if (exp > getUpExp()) exp = getUpExp();
-    return setExp(exp); 
+    return setExp(exp);
 }
 
 int Roles::addDrop(int _drop) { return setDrop(getDrop() + _drop); }
@@ -79,17 +78,15 @@ string Roles::RolesTypeToString(Roles::RoleType _type) {
 
 int Roles::sum_Attributes(Race::RaceType _race, RoleType _role, string _att) {
     return
-    GetPrivateProfileInt(Race::RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
-    GetPrivateProfileInt(RolesTypeToString(_role).c_str(), _att.c_str(), 0, "Data/Attributes/Role.ini");
+        GetPrivateProfileInt(Race::RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
+        GetPrivateProfileInt(RolesTypeToString(_role).c_str(), _att.c_str(), 0, "Data/Attributes/Role.ini");
 }
-
 
 string Roles::getRoleType() {
     return RolesTypeToString(role);
 }
 
 string Roles::getMap_Now() { return Map_Now; }
-
 
 void Roles::wire_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
@@ -107,16 +104,15 @@ void Roles::wire_Roles_info() {
 }
 
 //*********************************** 角色移動 ***********************************
-//物件移動
+/*物件移動 X*/
 Map_object* Roles::set_Roles_Move_X(int _x, vector<Map_object*>& _object) {
     static Map_object* over;
     static int posX;
     over = NULL;
     posX = get_seat_X();
     Map_object::set_Point_X(_x);
-    if ((over = Object_overlapping(*this, _object)) != NULL || get_seat_X() < 1 || get_seat_X() > MAP_WIDTH_DEF - getWidth()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_seat_X() < 1 || get_seat_X() > MAP_WIDTH_DEF - getWidth()) {
         Map_object::set_Point_X(posX);
-        //Y = posY;
     }
     else {
         Map_object::set_Point_X(posX);
@@ -126,17 +122,18 @@ Map_object* Roles::set_Roles_Move_X(int _x, vector<Map_object*>& _object) {
     return over;
 }
 
-//物件移動
+/*物件移動 Y*/
 Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
     static Map_object* over;
     static int posY;
     over = NULL;
     posY = get_seat_Y();
     Map_object::set_Point_Y(_y);
-    if ((over = Object_overlapping(*this, _object)) != NULL || get_seat_Y() < 1 || get_seat_Y() > MAP_HIGH_DEF-getHeigh()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_seat_Y() < 1 || get_seat_Y() > MAP_HIGH_DEF - getHeigh()) {
         Map_object::set_Point_Y(posY);
         //Y = posY;
-    } else {
+    }
+    else {
         Map_object::set_Point_Y(posY);
         clear_Draw_Object();
         Map_object::set_Point_Y(_y);
@@ -144,11 +141,11 @@ Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
     return over;
 }
 
-//判斷是否重疊
-Map_object* Roles::Object_overlapping(Map_object& obj, vector<Map_object*>& _object) {
-    for (vector<Map_object*>::iterator it = _object.begin(); it != _object.end(); it++)
-        if (obj == (**it))
-            return *it;
-    return NULL;
-}
+////判斷是否重疊
+//Map_object* Roles::Object_overlapping(Map_object& obj, vector<Map_object*>& _object) {
+//    for (vector<Map_object*>::iterator it = _object.begin(); it != _object.end(); it++)
+//        if (obj == (**it))
+//            return *it;
+//    return NULL;
+//}
 //**********************************************************************************************

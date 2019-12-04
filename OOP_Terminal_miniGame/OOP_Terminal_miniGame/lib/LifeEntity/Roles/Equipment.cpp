@@ -1,6 +1,5 @@
 #include"../../../include/LifeEntity/Roles/Equipment.h"
 
-
 Equipment::Equipment(
     Attributes* _weapon,
     Attributes* _deputy,
@@ -34,11 +33,11 @@ Attributes* Equipment::getPants() { return pants; }
 Attributes* Equipment::getShoes() { return shoes; }
 
 Attributes* Equipment::setWeapon(Attributes* _data) { return weapon = _data; }
-Attributes* Equipment::setDeputy(Attributes *_data) { return deputy = _data; }
-Attributes* Equipment::setHelmet(Attributes *_data) { return helmet = _data; }
-Attributes* Equipment::setBreastplate(Attributes *_data) { return breastplate= _data; }
-Attributes* Equipment::setPants(Attributes *_data) { return pants = _data; }
-Attributes* Equipment::setShoes(Attributes *_data) { return shoes = _data; }
+Attributes* Equipment::setDeputy(Attributes* _data) { return deputy = _data; }
+Attributes* Equipment::setHelmet(Attributes* _data) { return helmet = _data; }
+Attributes* Equipment::setBreastplate(Attributes* _data) { return breastplate = _data; }
+Attributes* Equipment::setPants(Attributes* _data) { return pants = _data; }
+Attributes* Equipment::setShoes(Attributes* _data) { return shoes = _data; }
 
 int Equipment::sumHP() {
     int sum = 0;
@@ -69,7 +68,6 @@ int Equipment::sumAttack() {
     if (pants != NULL)       sum += pants->getAttack();
     if (shoes != NULL)       sum += shoes->getAttack();
     return sum;
-
 }
 int Equipment::sumDef() {
     int sum = 0;
@@ -91,9 +89,9 @@ int Equipment::sumSP() {
     if (shoes != NULL)       sum += shoes->getDef();
     return sum;
 }
-int Equipment::sumCrt(){ 
+int Equipment::sumCrt() {
     int sum = 0;
-    if (weapon != NULL)      sum+=weapon->getCrt();
+    if (weapon != NULL)      sum += weapon->getCrt();
     if (deputy != NULL)      sum += deputy->getCrt();
     if (helmet != NULL)      sum += helmet->getCrt();
     if (breastplate != NULL) sum += breastplate->getCrt();

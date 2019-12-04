@@ -19,10 +19,10 @@ private:
 
 public:
     Race(RaceType _type);
-    
+
     RaceType getRace();
     string getRaceType();
-    
+
     static RaceType StringToRaceType(string _race);
     static string RaceTypeToString(RaceType _race);
 

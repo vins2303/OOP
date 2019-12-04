@@ -1,4 +1,3 @@
-
 #ifndef DRAW_H
 #define DRAW_H
 
@@ -22,6 +21,7 @@ using namespace std;
 class Draw {
 public:
     static void setXY(int _x = 0, int _y = 0);
+    static void SetColor(int f = 7, int b = 0);
     static void showObject(int _x, int _y, string path, string _image);
     static void clearMap(int _x, int _y, int _width, int _heigh);
     static string getImage(string path, string _image, string end = "END");

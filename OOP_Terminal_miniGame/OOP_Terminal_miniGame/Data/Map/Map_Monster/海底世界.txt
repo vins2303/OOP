@@ -1,0 +1,1 @@
+Data/Image/Monster.txt ÁÂ¦ÑÁó Monster 15 4 10 15
