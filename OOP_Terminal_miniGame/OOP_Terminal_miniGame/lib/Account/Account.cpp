@@ -85,7 +85,7 @@ string Account::isAccount(string _accout) {
     return string(str);
 }
 
-string Account::getAccount() { return account; }
+string Account::GetAccount() { return account; }
 
 void Account::clear() {
     isSignIn = false;

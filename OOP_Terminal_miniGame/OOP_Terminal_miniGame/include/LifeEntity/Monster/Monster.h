@@ -5,7 +5,7 @@
 class Monster : public Map_object {
 public:
     Monster(Map_object _object);
-    virtual void* getClass() { return this; }
+    virtual void* get_This() { return this; }
 };
 
 #endif

@@ -16,14 +16,16 @@ using std::string;
 #define ROLES_OBJECT_WIDTH "6"
 #define ROLES_OBJECT_HEIGHT "3"
 
-class Roles : public  LifeAttributes, public Equipment, public Race, public Map_object {
-public:
-    enum class RoleType {
-        劍士, //劍士
-        法師,//法師
-        海盜    //海盜
-    };
+enum class RoleType {
+    劍士, //劍士
+    法師,//法師
+    海盜    //海盜
+};
 
+RoleType StringToRolesType(string   _type);
+string   RolesTypeToString(RoleType _type);
+
+class Roles : public  LifeAttributes, public Equipment, public Race, public Map_object {
 private:
     string account;
     string name;
@@ -34,7 +36,7 @@ private:
     string Map_Now;
     //Race::RaceType race;
 public:
-    Roles(string _name, int _LV, int _nowHP, int _nowMP, int _Exp, string Map_Now, string account, Race::RaceType _race, RoleType _role, Map_object _object);
+    Roles(string _name, int _LV, int _nowHP, int _nowMP, int _Exp, string Map_Now, string account, RaceType _race, RoleType _role, Map_object _object);
 
     ~Roles();
 
@@ -60,9 +62,7 @@ public:
     //Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);
 
     void wire_Roles_info();
-    static RoleType StringToRolesType(string _type);
-    static string RolesTypeToString(RoleType _type);
-    static int sum_Attributes(Race::RaceType _race, RoleType _role, string _att);
+    static int sum_Attributes(RaceType _race, RoleType _role, string _att);
 };
 
 #endif

@@ -75,7 +75,7 @@ void RolesList::DeleteRoles() {
             if (getKey == 27)
                 isExit = true;
             else if ((unsigned int)(getKey = getKey - 1 - '0') < roleslist.size()) {
-                WritePrivateProfileString(roleslist[getKey]->getName().c_str(), NULL, NULL, ("Data/Account/" + getAccount() + "/Roles.ini").c_str());
+                WritePrivateProfileString(roleslist[getKey]->getName().c_str(), NULL, NULL, ("Data/Account/" + GetAccount() + "/Roles.ini").c_str());
                 cout << "刪除成功!" << endl;
                 system("pause");
             }
@@ -86,15 +86,15 @@ void RolesList::DeleteRoles() {
 
 bool RolesList::addRoles() {
     string name;
-    Race::RaceType race_type = Race::RaceType::人族;
-    Roles::RoleType role_type = Roles::RoleType::法師;
+    RaceType race_type = RaceType::人族;
+    RoleType role_type = RoleType::法師;
     vector<string> namelist;
     bool isEnd = false;
     int getKey;
 
     while (1) {
         system("cls");
-        Tool::getIpAppName("Data/Account/" + getAccount() + "/Roles.ini", namelist);
+        Tool::getIpAppName("Data/Account/" + GetAccount() + "/Roles.ini", namelist);
         if (namelist.size() > 2) {
             isEnd = true;
             cout << "角色以到達上限!" << endl;
@@ -125,7 +125,7 @@ bool RolesList::addRoles() {
             if (getKey == 27) {
                 break;
             }if ((unsigned int)(getKey = getKey - '0' - 1) < TypeList.size()) {
-                race_type = Race::StringToRaceType(TypeList[getKey]);
+                race_type = StringToRaceType(TypeList[getKey]);
                 isEnd = true;
             }
         }
@@ -141,7 +141,7 @@ bool RolesList::addRoles() {
                 if (getKey == 27) {
                     break;
                 }if ((unsigned int)(getKey = getKey - '0' - 1) < TypeList.size()) {
-                    role_type = Roles::StringToRolesType(TypeList[getKey]);
+                    role_type = StringToRolesType(TypeList[getKey]);
                     isEnd = true;
                 }
             }
@@ -150,19 +150,19 @@ bool RolesList::addRoles() {
             if (isEnd) {
                 system("cls");
                 cout << setw(10) << "角色名稱：" << name << endl;
-                cout << setw(10) << "種族：" << Race::RaceTypeToString(race_type) << endl;
-                cout << setw(10) << "職業：" << Roles::RolesTypeToString(role_type) << endl;
+                cout << setw(10) << "種族：" << RaceTypeToString(race_type) << endl;
+                cout << setw(10) << "職業：" << RolesTypeToString(role_type) << endl;
                 cout << "確定新增(y) 取消(N)" << endl;
                 while (1) {
                     if ((getKey = _getch()) == 'y' || getKey == 'Y' || getKey == 'n' || getKey == 'N')
                         break;
                 }
                 if (getKey == 'y' || getKey == 'Y') {
-                    Tool::mkdir("Data/Account/" + getAccount());
-                    string outfile = "Data/Account/" + getAccount() + "/Roles.ini";
+                    Tool::mkdir("Data/Account/" + GetAccount());
+                    string outfile = "Data/Account/" + GetAccount() + "/Roles.ini";
                     WritePrivateProfileString(name.c_str(), "LV", "1", outfile.c_str());
-                    WritePrivateProfileString(name.c_str(), "Race", Race::RaceTypeToString(race_type).c_str(), outfile.c_str());
-                    WritePrivateProfileString(name.c_str(), "Role", Roles::RolesTypeToString(role_type).c_str(), outfile.c_str());
+                    WritePrivateProfileString(name.c_str(), "Race", RaceTypeToString(race_type).c_str(), outfile.c_str());
+                    WritePrivateProfileString(name.c_str(), "Role", RolesTypeToString(role_type).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "HP", to_string(Roles::sum_Attributes(race_type, role_type, "HP")).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "MP", to_string(Roles::sum_Attributes(race_type, role_type, "MP")).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "EXP", "0", outfile.c_str());
@@ -184,19 +184,19 @@ bool RolesList::addRoles() {
 
 void RolesList::FindRoles(vector<Roles*>& out) {
     Roles* roles;
-    string inifile = "Data/Account/" + getAccount() + "/Roles.ini";
+    string inifile = "Data/Account/" + GetAccount() + "/Roles.ini";
     vector<string> roleslist;
     Tool::getIpAppName(inifile, roleslist);
     CString read_ini;
-    Race::RaceType race;
-    Roles::RoleType role;
+    RaceType race;
+    RoleType role;
     for (vector<string>::iterator it = roleslist.begin(); it != roleslist.end(); it++) {
         GetPrivateProfileString(it->c_str(), "Race", "NULL", read_ini.GetBuffer(255), 255, inifile.c_str());
         read_ini.ReleaseBuffer();
-        race = Race::StringToRaceType(string(read_ini));
+        race = StringToRaceType(string(read_ini));
         GetPrivateProfileString(it->c_str(), "Role", "NULL", read_ini.GetBuffer(255), 255, inifile.c_str());
         read_ini.ReleaseBuffer();
-        role = Roles::StringToRolesType(string(read_ini));
+        role = StringToRolesType(string(read_ini));
 
         roles = new Roles(
             *it,
@@ -205,12 +205,12 @@ void RolesList::FindRoles(vector<Roles*>& out) {
             GetPrivateProfileInt((*it).c_str(), "MP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "EXP", INT_MAX, inifile.c_str()),
             Tool::readStringIni(*it, "MapNow", "NULL", inifile),
-            this->getAccount(),
+            this->GetAccount(),
             race,
             role,
             Map_object("data/Image/object.txt",
                 "Warrior",
-                Map_object::objectType::Warrior,
+                objectType::Warrior,
                 GetPrivateProfileInt((*it).c_str(), "ObjectX", INT_MAX, inifile.c_str()),
                 GetPrivateProfileInt((*it).c_str(), "ObjectY", INT_MAX, inifile.c_str()),
                 GetPrivateProfileInt((*it).c_str(), "ObjectWidth", INT_MAX, inifile.c_str()),

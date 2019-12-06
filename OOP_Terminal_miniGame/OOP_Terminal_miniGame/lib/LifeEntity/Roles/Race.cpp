@@ -3,7 +3,7 @@
 Race::Race(RaceType _type) :raceType(_type)
 {}
 
-Race::RaceType Race::StringToRaceType(string _race) {
+RaceType StringToRaceType(string _race) {
     //transform(_race.begin(), _race.end(), _race.begin(), tolower);
     if (_race == "人族")
         return RaceType::人族;
@@ -13,13 +13,10 @@ Race::RaceType Race::StringToRaceType(string _race) {
         return RaceType::精靈;
     if (_race == "獸人")
         return RaceType::獸人;
-
     return RaceType::人族;
 }
 
-Race::RaceType Race::getRace() { return raceType; }
-string Race::getRaceType() { return RaceTypeToString(raceType); }
-string Race::RaceTypeToString(Race::RaceType _type) {
+string RaceTypeToString(RaceType _type) {
     string outType = "";
     switch (_type) {
     case RaceType::人族:
@@ -37,6 +34,8 @@ string Race::RaceTypeToString(Race::RaceType _type) {
     }
     return outType;
 }
+string Race::getRaceType() { return RaceTypeToString(raceType); }
 
+RaceType Race::getRace() { return raceType; }
 void Race::setRace(RaceType _race) { raceType = _race; }
 void Race::setRace(string _race) { setRace(StringToRaceType(_race)); }

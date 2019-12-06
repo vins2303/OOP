@@ -13,12 +13,11 @@ private:
 
 public:
     Keyboard_Event(map<string, Game_Map*>* _map, RolesList* _roleslist);
-
     void Run();
+
 private:
     bool Overlapping_Object(Map_object*);
     void Read_Key(bool& _isDrawMap);
-
     void Show_Map_Pos();
 };
 

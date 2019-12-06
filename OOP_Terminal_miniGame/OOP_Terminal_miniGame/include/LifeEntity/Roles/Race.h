@@ -5,15 +5,17 @@
 #include <string>
 using std::string;
 
-class Race {
-public:
-    enum class RaceType : int {
-        人族,//人族
-        獸人,  //獸人
-        精靈,//精靈
-        矮人 //矮人
-    };
+enum class RaceType : int {
+    人族,//人族
+    獸人,  //獸人
+    精靈,//精靈
+    矮人 //矮人
+};
 
+RaceType StringToRaceType(string _race);
+string RaceTypeToString(RaceType _race);
+
+class Race {
 private:
     RaceType raceType;
 
@@ -22,9 +24,6 @@ public:
 
     RaceType getRace();
     string getRaceType();
-
-    static RaceType StringToRaceType(string _race);
-    static string RaceTypeToString(RaceType _race);
 
     void setRace(RaceType _race);
     void setRace(string _race);

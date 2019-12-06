@@ -24,8 +24,9 @@ public:
     void clear();
     bool IsSignIn();
     bool rmAccount();
-    string getAccount();
-
+    string GetAccount();
+    void setAccount(string _acc) { account = _acc; }
+    string getAccount() { return account; }
 private:
     bool SignIn();
     void Registered();

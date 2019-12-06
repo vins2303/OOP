@@ -7,6 +7,8 @@ void Draw::setXY(int _x, int _y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), XY);
 }
 
+//¶Â¡@ÂÅ¡@ºñ¡@«C¡@¬õ¡@µµ¡@¶À¡@¥Õ
+//¢¯¡@¢°¡@¢±¡@¢²¡@¢³¡@¢´¡@¢µ¡@¢¶
 void Draw::SetColor(int f, int b) {
     unsigned short ForeColor = f + 16 * b;
     HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);

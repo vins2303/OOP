@@ -48,6 +48,7 @@ void Map_Pos::Show_Map_Pos(int f) {
     }
 
     Draw::SetColor();
+
     {
         if (E) {
             Draw::setXY(MAP_POS_WIDTH_ADD(X) + MAP_POS_WIDTH + 1, MAP_POS_HEIGH_ADD(Y) + MAP_POS_HEIGH / 2);

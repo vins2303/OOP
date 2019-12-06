@@ -15,8 +15,6 @@ void Keyboard_Event::Run() {
             maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
         }
         while (roleslist->getRoles() != NULL) {
-            //maplist[roleslist->getRoles()->getMap_Now()]->setRoles(roleslist->getRoles());
-
             Read_Key(isDrawMap);
         }
     }
@@ -70,7 +68,7 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
 bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
     switch (_obj->get_Object_Type())
     {
-    case Map_object::objectType::Boor:
+    case objectType::Boor:
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find(_obj->getName())->second, _obj);
         roleslist->getRoles()->wire_Roles_info();
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
@@ -82,7 +80,8 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
     }
     return false;
 }
-//顯示世界地圖
+
+/*列印世界地圖*/
 void Keyboard_Event::Show_Map_Pos() {
     system("cls");
     for (map<string, Game_Map*>::iterator it = maplist->begin(); it != maplist->end(); it++)

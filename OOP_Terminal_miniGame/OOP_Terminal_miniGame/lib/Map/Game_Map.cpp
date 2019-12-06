@@ -15,7 +15,7 @@ void Game_Map::Read_Map_Object(string _Map_name) {
 
     //讀取地圖物件
     while (Read >> file_path >> name >> type >> x >> y >> width >> heigh) {
-        obj = new Map_object(file_path, name, Map_object::StringToObjectType(type), x, y, width, heigh);
+        obj = new Map_object(file_path, name, StringToObjectType(type), x, y, width, heigh);
         object.push_back(obj);
     }
     Read.close();
@@ -37,8 +37,8 @@ Game_Map::~Game_Map() {
     object.clear();
 }
 
-int Game_Map::getWidth() { return width; }
-int Game_Map::getHigh() { return high; }
+int Game_Map::get_Map_Width() { return width; }
+int Game_Map::get_Map_High() { return high; }
 
 void Game_Map::addObject(Map_object* obj) { object.push_back(obj); }
 
@@ -113,14 +113,13 @@ void Game_Map::Main_Draw(bool& _isDraw, bool& _isDrawMap) {
     }
 }
 
-//地圖傳送
 bool Game_Map::Map_Transmission(Game_Map* _map, Map_object* _obj) {
     _map->setRoles(roles);
     roles->setMap_Now(_map->get_Map_Name());
     if (roles->get_seat_X() > width / 3 * 2)
-        roles->set_Point_X(1 + _obj->getWidth());
+        roles->set_Point_X(1 + _obj->get_Map_Width());
     else if (roles->get_seat_X() < width / 3)
-        roles->set_Point_X(width - roles->getWidth() - _obj->getWidth());
+        roles->set_Point_X(width - roles->get_Map_Width() - _obj->get_Map_Width());
 
     if (roles->get_seat_Y() > high / 3 * 2)
         roles->set_Point_Y(1 + _obj->getHeigh());
@@ -131,7 +130,6 @@ bool Game_Map::Map_Transmission(Game_Map* _map, Map_object* _obj) {
     return true;
 }
 
-/*                               Monster                              */
 void Game_Map::Rand_Monster(string _Map_Name) {
     if (_Map_Name == "") _Map_Name = Map_Monster_Path(Map_Name);
     ifstream Read(_Map_Name);
@@ -148,7 +146,7 @@ void Game_Map::Rand_Monster(string _Map_Name) {
     }
 
     for (vector<Map_object*>::iterator it = object.begin(); it != object.end(); it++) {
-        if ((*it)->get_Object_Type() == Map_object::objectType::Monster) {
+        if ((*it)->get_Object_Type() == objectType::Monster) {
             delete* it;
             object.erase(it);
             it = object.begin();
@@ -165,7 +163,7 @@ void Game_Map::Rand_Monster(string _Map_Name) {
                 point_y = rand() % (this->high - heigh - 2) + 1;
 
                 if (moster == NULL) {
-                    moster = new Monster(Map_object(file_path, name, Map_object::StringToObjectType(type), point_x, point_y, width, heigh));
+                    moster = new Monster(Map_object(file_path, name, StringToObjectType(type), point_x, point_y, width, heigh));
                 }
                 else {
                     moster->set_Point_X(point_x);

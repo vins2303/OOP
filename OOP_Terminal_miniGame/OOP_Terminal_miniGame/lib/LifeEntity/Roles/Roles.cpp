@@ -1,6 +1,6 @@
 #include "../../../include/LifeEntity/Roles/Roles.h"
 
-Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, string _account, Race::RaceType _race, RoleType _role, Map_object _object) :
+Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, string _account, RaceType _race, RoleType _role, Map_object _object) :
     account(_account),
     name(_name),
     exp(Exp),
@@ -47,7 +47,7 @@ int Roles::addDrop(int _drop) { return setDrop(getDrop() + _drop); }
 
 bool Roles::isUpLv() { return getExp() >= getUpExp() ? true : false; }
 
-Roles::RoleType  Roles::StringToRolesType(string _type) {
+RoleType StringToRolesType(string _type) {
     //transform(_type.begin(), _type.end(), _type.begin(), tolower);
     if (_type == "劍士")
         return RoleType::劍士;
@@ -59,26 +59,26 @@ Roles::RoleType  Roles::StringToRolesType(string _type) {
     return RoleType::劍士;
 }
 
-string Roles::RolesTypeToString(Roles::RoleType _type) {
+string RolesTypeToString(RoleType _type) {
     string out = "";
     switch (_type)
     {
-    case Roles::RoleType::劍士:
+    case RoleType::劍士:
         out = "劍士";
         break;
-    case Roles::RoleType::法師:
+    case RoleType::法師:
         out = "法師";
         break;
-    case Roles::RoleType::海盜:
+    case RoleType::海盜:
         out = "海盜";
         break;
     }
     return out;
 }
 
-int Roles::sum_Attributes(Race::RaceType _race, RoleType _role, string _att) {
+int Roles::sum_Attributes(RaceType _race, RoleType _role, string _att) {
     return
-        GetPrivateProfileInt(Race::RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
+        GetPrivateProfileInt(RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
         GetPrivateProfileInt(RolesTypeToString(_role).c_str(), _att.c_str(), 0, "Data/Attributes/Role.ini");
 }
 
@@ -91,15 +91,15 @@ string Roles::getMap_Now() { return Map_Now; }
 void Roles::wire_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
     WritePrivateProfileString(name.c_str(), "LV", to_string(getLV()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "Race", Race::RaceTypeToString(getRace()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "Role", Roles::RolesTypeToString(role).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Race", RaceTypeToString(getRace()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Role", RolesTypeToString(role).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "HP", to_string(getHP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "MP", to_string(getMP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "EXP", to_string(getExp()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "MapNow", getMap_Now().c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectX", to_string(get_seat_X()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectY", to_string(get_seat_Y()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(getWidth()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Map_Width()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
 }
 
@@ -111,7 +111,7 @@ Map_object* Roles::set_Roles_Move_X(int _x, vector<Map_object*>& _object) {
     over = NULL;
     posX = get_seat_X();
     Map_object::set_Point_X(_x);
-    if ((over = Object_Overlapping(_object)) != NULL || get_seat_X() < 1 || get_seat_X() > MAP_WIDTH_DEF - getWidth()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_seat_X() < 1 || get_seat_X() > MAP_WIDTH_DEF - get_Map_Width()) {
         Map_object::set_Point_X(posX);
     }
     else {
