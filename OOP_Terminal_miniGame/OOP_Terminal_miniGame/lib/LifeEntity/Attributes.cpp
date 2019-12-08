@@ -27,7 +27,7 @@ int Attributes::getMP() { return MP; }
 int Attributes::getAttack() { return Attack; }
 int Attributes::getSP() { return SP; }
 int Attributes::getDef() { return Def; }
-int Attributes::getCrt() { return CRT; }
+int Attributes::getCRT() { return CRT; }
 
 /*
                             set
@@ -47,7 +47,7 @@ int Attributes::addMP(int _num, bool percent, bool zero) { return setMP(ADD_FUN(
 int Attributes::addAttack(int _num, bool percent, bool zero) { return setAttack(ADD_FUN(getAttack(), _num, percent, zero)); }
 int Attributes::addSP(int _num, bool percent, bool zero) { return setSP(ADD_FUN(getSP(), _num, percent, zero)); }
 int Attributes::addDef(int _num, bool percent, bool zero) { return setDef(ADD_FUN(getDef(), _num, percent, zero)); }
-int Attributes::addCrt(int _num) { return setCrt(getCrt() + _num); }
+int Attributes::addCrt(int _num) { return setCrt(getCRT() + _num); }
 /*
 *                                 Tool
 */

@@ -87,7 +87,7 @@ string Account::isAccount(string _accout) {
 
 string Account::GetAccount() { return account; }
 
-void Account::clear() {
+void Account::Sign_out() {
     isSignIn = false;
     account = "";
     password = "";

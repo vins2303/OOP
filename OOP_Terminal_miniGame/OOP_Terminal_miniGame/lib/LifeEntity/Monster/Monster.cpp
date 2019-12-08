@@ -1,5 +1,31 @@
 #include "../../../include/LifeEntity/Monster/Monster.h"
+#include <conio.h>
+#include <iomanip>
 
 Monster::Monster(Map_object _object) :
-    Map_object(_object)
+    Map_object(_object),
+    LifeAttributes(
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "LV"),
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "HP"),
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "MP"),
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "Attack"),
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "SP"),
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "DEF"),
+        Read_Moater_Attributes_ini(_object.getName().c_str(), "CRT")
+    )
+
 {}
+
+void Monster::show_info(int _x, int _y) {
+    showObject(_x, _y);
+    _y = getHeigh() + _y;
+    int n = this->getAttack();
+    Draw::setXY(_x, (++_y)++); cout << right << setw(8) << "等級：" << this->getLV();
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "生命：" << this->Attributes::getHP();
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "攻擊力：" << this->Attributes::getAttack();
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "速度：" << this->Attributes::getSP();
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "防禦：" << this->Attributes::getDef();
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "爆擊率：" << this->Attributes::getCRT();
+    Draw::setXY(_x, ++_y);     cout << "按 Q 進入戰鬥";
+    Draw::setXY(_x, _y++);
+}

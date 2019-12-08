@@ -29,7 +29,7 @@ public:
     bool Selete_Roles();
     bool addRoles();
     void DeleteRoles();
-
+    void Clear_Now_Roles();
 private:
     void clearRolesList(vector<Roles*>&);
     void showRolesList(vector<Roles*>&, unsigned int row);

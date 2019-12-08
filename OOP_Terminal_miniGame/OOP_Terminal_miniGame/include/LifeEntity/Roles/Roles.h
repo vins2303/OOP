@@ -61,7 +61,7 @@ public:
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);
     //Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);
 
-    void wire_Roles_info();
+    void Save_Roles_info();
     static int sum_Attributes(RaceType _race, RoleType _role, string _att);
 };
 

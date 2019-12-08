@@ -91,12 +91,12 @@ int Equipment::sumSP() {
 }
 int Equipment::sumCrt() {
     int sum = 0;
-    if (weapon != NULL)      sum += weapon->getCrt();
-    if (deputy != NULL)      sum += deputy->getCrt();
-    if (helmet != NULL)      sum += helmet->getCrt();
-    if (breastplate != NULL) sum += breastplate->getCrt();
-    if (pants != NULL)       sum += pants->getCrt();
-    if (shoes != NULL)       sum += shoes->getCrt();
+    if (weapon != NULL)      sum += weapon->getCRT();
+    if (deputy != NULL)      sum += deputy->getCRT();
+    if (helmet != NULL)      sum += helmet->getCRT();
+    if (breastplate != NULL) sum += breastplate->getCRT();
+    if (pants != NULL)       sum += pants->getCRT();
+    if (shoes != NULL)       sum += shoes->getCRT();
     if (sum > 100) sum = 100;
     return sum;
 }

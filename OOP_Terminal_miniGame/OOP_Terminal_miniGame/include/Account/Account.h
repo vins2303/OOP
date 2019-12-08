@@ -21,7 +21,7 @@ public:
     Account();
     ~Account();
     void AccountMenu();
-    void clear();
+    void Sign_out();
     bool IsSignIn();
     bool rmAccount();
     string GetAccount();

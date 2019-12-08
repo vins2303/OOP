@@ -25,7 +25,7 @@ public:
     int getAttack();
     int getSP();
     int getDef();
-    int getCrt();
+    int getCRT();
 
     int setHP(int);
     int setMP(int);

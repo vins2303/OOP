@@ -88,7 +88,7 @@ string Roles::getRoleType() {
 
 string Roles::getMap_Now() { return Map_Now; }
 
-void Roles::wire_Roles_info() {
+void Roles::Save_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
     WritePrivateProfileString(name.c_str(), "LV", to_string(getLV()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Race", RaceTypeToString(getRace()).c_str(), outfile.c_str());

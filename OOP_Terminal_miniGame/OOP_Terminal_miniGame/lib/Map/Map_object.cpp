@@ -65,8 +65,8 @@ objectType StringToObjectType(string _str) {
     return objectType::null;
 }
 
-void Map_object::showObject() {
-    Draw::show(X, Y, image);
+void Map_object::showObject(int _x, int _y) {
+    Draw::show(_x == INT_MAX ? X : _x, _y == INT_MAX ? Y : _y, image);
 }
 
 void Map_object::clear_Draw_Object() {

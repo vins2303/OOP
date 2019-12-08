@@ -47,7 +47,7 @@ public:
     void setWidth(int _width);
     void setHeight(int _height);
 
-    void showObject();
+    void showObject(int _x = INT_MAX, int _y = INT_MAX);
     void clear_Draw_Object();
 
     Map_object* Object_Overlapping(vector<Map_object*>& _object);

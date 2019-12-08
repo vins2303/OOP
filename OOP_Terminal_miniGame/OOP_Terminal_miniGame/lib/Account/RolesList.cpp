@@ -31,7 +31,7 @@ void RolesList::RolesListMenu() {
                 delete roles;
                 roles = NULL;
             }
-            Account::clear();
+            Account::Sign_out();
 
             isEnd = true;
             break;
@@ -42,7 +42,7 @@ void RolesList::RolesListMenu() {
                     delete roles;
                     roles = NULL;
                 }
-                Account::clear();
+                Account::Sign_out();
             }
             break;
         default:
@@ -82,6 +82,11 @@ void RolesList::DeleteRoles() {
         }
         clearRolesList(roleslist);
     }
+}
+
+void RolesList::Clear_Now_Roles() {
+    delete roles;
+    roles = NULL;
 }
 
 bool RolesList::addRoles() {
