@@ -12,9 +12,12 @@ Monster::Monster(Map_object _object) :
         Read_Moater_Attributes_ini(_object.getName().c_str(), "SP"),
         Read_Moater_Attributes_ini(_object.getName().c_str(), "DEF"),
         Read_Moater_Attributes_ini(_object.getName().c_str(), "CRT")
-    )
+    ),
+    exp(Read_Moater_Attributes_ini(_object.getName().c_str(), "EXP"))
 
 {}
+
+Monster::~Monster() {}
 
 void Monster::show_info(int _x, int _y) {
     showObject(_x, _y);
@@ -26,6 +29,10 @@ void Monster::show_info(int _x, int _y) {
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "速度：" << this->Attributes::getSP();
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "防禦：" << this->Attributes::getDef();
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "爆擊率：" << this->Attributes::getCRT();
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "經驗值：" << this->exp;
     Draw::setXY(_x, ++_y);     cout << "按 Q 進入戰鬥";
     Draw::setXY(_x, _y++);
 }
+
+int Monster::getExp() { return exp; }
+void Monster::setExp(int _n) { exp = _n; }

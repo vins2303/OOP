@@ -113,6 +113,15 @@ void Game_Map::Main_Draw(bool& _isDraw, bool& _isDrawMap) {
     }
 }
 
+void Game_Map::Clear_0HP_Monster() {
+    for (vector<Map_object*>::iterator it = object.begin(); it != object.end(); it++) {
+        if ((*it)->get_Object_Type() == objectType::Monster && ((Monster*)(*it))->getHP() == 0) {
+            object.erase(it);
+            it = object.begin();
+        }
+    }
+}
+
 bool Game_Map::Map_Transmission(Game_Map* _map, Map_object* _obj) {
     _map->setRoles(roles);
     roles->setMap_Now(_map->get_Map_Name());
@@ -133,7 +142,7 @@ bool Game_Map::Map_Transmission(Game_Map* _map, Map_object* _obj) {
 void Game_Map::Rand_Monster(string _Map_Name) {
     if (_Map_Name == "") _Map_Name = Map_Monster_Path(Map_Name);
     ifstream Read(_Map_Name);
-    Monster* moster;
+    Monster* monster;
     int point_x, point_y;
     string name;
     string file_path;
@@ -157,20 +166,20 @@ void Game_Map::Rand_Monster(string _Map_Name) {
     while (Read >> file_path >> name >> type >> width >> heigh >> min_size >> max_szie) {
         rand_size = ((max_szie - min_size) == 0 ? max_szie : (rand() % (max_szie - min_size)) + min_size);
         for (int i = 0; i < rand_size; i++) {
+            monster = NULL;
             do {
-                moster = NULL;
                 point_x = rand() % (this->width - width - 1) + 1;
                 point_y = rand() % (this->high - heigh - 2) + 1;
 
-                if (moster == NULL) {
-                    moster = new Monster(Map_object(file_path, name, StringToObjectType(type), point_x, point_y, width, heigh));
+                if (monster == NULL) {
+                    monster = new Monster(Map_object(file_path, name, StringToObjectType(type), point_x, point_y, width, heigh));
                 }
                 else {
-                    moster->set_Point_X(point_x);
-                    moster->set_Point_Y(point_y);
+                    monster->set_Point_X(point_x);
+                    monster->set_Point_Y(point_y);
                 }
-            } while (moster->Object_Overlapping(object) != NULL || (*moster == *roles));
-            object.push_back(moster);
+            } while (monster->Object_Overlapping(object) != NULL || (*monster == *roles));
+            object.push_back(monster);
         }
     }
     Read.close();

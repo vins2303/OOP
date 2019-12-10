@@ -7,6 +7,8 @@ LifeAttributes::LifeAttributes(int _LV, int _HP, int _MP, int _attack, int _sp, 
     maxMP(_maxMP == -1 ? _MP : _maxMP)
 {}
 
+LifeAttributes::~LifeAttributes() {}
+
 inline int LifeAttributes::getLV() { return LV; }
 int LifeAttributes::getMaxHP() { return LVMagnification(maxHP); }
 int LifeAttributes::getMaxMP() { return LVMagnification(maxMP); }
@@ -33,3 +35,33 @@ int LifeAttributes::addMaxMP(int _maxmp, bool percent) {
 }
 
 int LifeAttributes::addLV(int _add) { return setLV(getLV() + _add); }
+
+LifeAttributes* LifeAttributes::showHP(bool a_LV, bool show, bool LF) {
+    static int hp, maxhp;
+    Draw::SetColor(4);
+    hp = a_LV ? getHP() : Attributes::getHP();
+    maxhp = a_LV ? getMaxHP() : maxHP;
+    cout << SHOW_HP_FRAME_BEGIN;
+    for (int i = 0; i < SHOW_MAX_HP; i++)
+        cout << SHOW_HP_FIGURE(i < (hp * (SHOW_MAX_HP / (double)(maxhp))));
+    cout << SHOW_HP_FRAME_END;
+    Draw::SetColor();
+    if (show) cout << hp << "/" << maxhp;
+    if (LF) cout << endl;
+    return this;
+}
+
+LifeAttributes* LifeAttributes::showMP(bool a_LV, bool show, bool LF) {
+    static int mp, maxmp;
+    Draw::SetColor(1);
+    mp = a_LV ? getMP() : Attributes::getMP();
+    maxmp = a_LV ? getMaxMP() : maxMP;
+    cout << SHOW_HP_FRAME_BEGIN;
+    for (int i = 0; i < SHOW_MAX_HP; i++)
+        cout << SHOW_HP_FIGURE(i < (mp * (SHOW_MAX_HP / (double)(maxmp))));
+    cout << SHOW_HP_FRAME_END;
+    Draw::SetColor();
+    if (show) cout << mp << "/" << maxmp;
+    if (LF) cout << endl;
+    return this;
+}

@@ -26,7 +26,6 @@ private:
     string object_name;
 public:
     Map_object(string _objectPath, string _object_name, objectType _objectType, int _x, int _y, int _width, int _heigh);
-    virtual void* get_This();
 
     bool operator == (const Map_object& object);
 

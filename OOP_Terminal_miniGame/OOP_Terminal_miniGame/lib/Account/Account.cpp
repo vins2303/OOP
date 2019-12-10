@@ -66,7 +66,7 @@ void Account::Registered() {
         if (password == "exit") return;
 
         if (isAccount(account) == "NULL") {
-            WritePrivateProfileString(account.c_str(), "Password", password.c_str(), AccountFile);
+            WritePrivateProfileString(account.c_str(), "Password", password.c_str(), AccountPath);
             cout << "µù¥U¦¨¥\!" << endl;
             system("pause");
             return;
@@ -80,7 +80,7 @@ void Account::Registered() {
 
 string Account::isAccount(string _accout) {
     CString str;
-    GetPrivateProfileString(_accout.c_str(), "Password", "NULL", str.GetBuffer(200), 200, AccountFile);
+    GetPrivateProfileString(_accout.c_str(), "Password", "NULL", str.GetBuffer(200), 200, AccountPath);
     str.ReleaseBuffer();
     return string(str);
 }

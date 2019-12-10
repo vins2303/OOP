@@ -1,4 +1,5 @@
 #include "../../include/keyboard_Event/Keyboard_Event.h"
+#include "../../include/LifeEntity/Fighting/Fighting.h"
 
 Keyboard_Event::Keyboard_Event(map<string, Game_Map*>* _map, RolesList* _roleslist) :
     maplist(_map), roleslist(_roleslist), Buff_Key(0)
@@ -75,25 +76,27 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
 
 //碰撞到物件
 bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
-    switch (_obj->get_Object_Type())
-    {
+    switch (_obj->get_Object_Type()) {
+        /*====================================================================================================================================*/
     case objectType::Boor:
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find(_obj->getName())->second, _obj);
         roleslist->getRoles()->Save_Roles_info();
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
         return true;
-        break;
-
+        //break;
+/*====================================================================================================================================*/
     case objectType::Monster:
-
-        ((Monster*)_obj->get_This())->show_info(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 2);
+        ((Monster*)_obj)->show_info(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 2);
         Buff_Key = _getch();
         if (Buff_Key == 'q' || Buff_Key == 'Q') {
+            Fighting_Fun((Monster*)_obj);
+            roleslist->getRoles()->Save_Roles_info();
+            return true;
         }
-        else
-            Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 1, 0, 20, 20);
+        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 1, 0, 20, 20);
         return false;
-        break;
+        /*====================================================================================================================================*/
+                        //break;
     default:
         break;
     }
@@ -142,4 +145,17 @@ void Keyboard_Event::Back_To_Selete_Roles() {
 void Keyboard_Event::Back_To_Selete_Account() {
     Back_To_Selete_Roles();
     roleslist->Sign_out();
+}
+
+void Keyboard_Event::Fighting_Fun(Monster* _obj) {
+    Fighting fig(roleslist->getRoles(), _obj);
+    fig.Fighting_Start();
+    maplist->find(roleslist->getRoles()->getMap_Now())->second->Clear_0HP_Monster();
+    if (roleslist->getRoles()->getHP() == 0) {
+        cout << "你已經死亡!" << endl;
+
+        roleslist->getRoles()->setHP(roleslist->getRoles()->getMaxHP());
+        maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find("市集")->second, _obj);
+        system("pause");
+    }
 }

@@ -102,6 +102,9 @@
     <ClInclude Include="include\Map\Map_Pos.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="include\LifeEntity\Fighting\Fighting.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map_object.cpp">
@@ -150,6 +153,9 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="lib\Map\Map_Pos.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Fighting\Fighting.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

@@ -22,6 +22,9 @@ private:
     void Esc_Table();
     void Back_To_Selete_Roles();
     void Back_To_Selete_Account();
+
+private:
+    void Fighting_Fun(Monster*);
 };
 
 #endif

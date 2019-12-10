@@ -10,7 +10,7 @@
 #include "../../include/Tool/Tool.h"
 using namespace std;
 
-#define AccountFile "Data/Account.ini"
+#define AccountPath "Data/Account.ini"
 
 class Account {
 private:

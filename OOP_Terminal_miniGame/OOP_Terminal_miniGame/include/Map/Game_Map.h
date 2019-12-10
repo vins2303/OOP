@@ -28,6 +28,8 @@ public:
     Roles* getRoles();
     string get_Map_Name();
 
+    void Clear_0HP_Monster();
+
     vector<Map_object*>& get_Object_List();
     void setRoles(Roles* _roles);
     void addObject(Map_object* obj);

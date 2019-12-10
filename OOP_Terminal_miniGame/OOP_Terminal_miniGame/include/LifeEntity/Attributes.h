@@ -41,6 +41,8 @@ public:
     int addDef(int, bool = false, bool = true);
     int addCrt(int);
 
+    //void showHP(bool show, bool LF);
+
     int ADD_FUN(int _now, int _add, bool percent = false, bool setZero = true);
 };
 #endif

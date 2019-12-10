@@ -9,8 +9,6 @@ Map_object::Map_object(string _objectPath, string _object_name, objectType _obje
     image(Draw::getImage(_objectPath, _object_name)) {
 }
 
-void* Map_object::get_This() { return this; }
-
 //判斷兩個物件重疊
 bool Map_object::operator == (const Map_object& object) {
     //if (&object == NULL) return false;

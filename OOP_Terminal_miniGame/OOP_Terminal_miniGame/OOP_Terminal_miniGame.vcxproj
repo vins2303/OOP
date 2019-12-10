@@ -22,6 +22,7 @@
     <ClInclude Include="include\Account\Account.h" />
     <ClInclude Include="include\Account\RolesList.h" />
     <ClInclude Include="include\LifeEntity\Attributes.h" />
+    <ClInclude Include="include\LifeEntity\Fighting\Fighting.h" />
     <ClInclude Include="include\LifeEntity\Monster\Monster.h" />
     <ClInclude Include="include\LifeEntity\Roles\Backpack.h" />
     <ClInclude Include="include\LifeEntity\Roles\Equipment.h" />
@@ -40,6 +41,7 @@
     <ClCompile Include="lib\Account\RolesList.cpp" />
     <ClCompile Include="lib\keyboard_Event\Keyboard_Event.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
+    <ClCompile Include="lib\LifeEntity\Fighting\Fighting.cpp" />
     <ClCompile Include="lib\LifeEntity\Monster\Monster.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp" />

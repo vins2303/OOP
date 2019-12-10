@@ -1,11 +1,4 @@
 #include "../../include/LifeEntity/Attributes.h"
-#define SHOW_MAX_HP 20
-#define SHOW_HP_FIGURE(_num) ((_num) ? "#" : " ")
-#define SHOW_HP_FRAME ("|| ");
-
-#define SHOW_MAX_MP 20
-#define SHOW_MP_FIGURE(_num) ((_num) ? "#": " ")
-#define SHOW_MP_FRAME ("|| ");
 
 Attributes::Attributes(int _HP, int _MP, int _attack, int _sp, int _def, int _CRT) :
     HP(_HP),
@@ -48,11 +41,24 @@ int Attributes::addAttack(int _num, bool percent, bool zero) { return setAttack(
 int Attributes::addSP(int _num, bool percent, bool zero) { return setSP(ADD_FUN(getSP(), _num, percent, zero)); }
 int Attributes::addDef(int _num, bool percent, bool zero) { return setDef(ADD_FUN(getDef(), _num, percent, zero)); }
 int Attributes::addCrt(int _num) { return setCrt(getCRT() + _num); }
+
+/*
+                            show
+*/
+//void Attributes::showHP(bool show, bool LF) {
+//    cout << SHOW_HP_FRAME;
+//    for (int i = 0; i < SHOW_MAX_HP; i++)
+//        cout << SHOW_HP_FIGURE(i < (HP->getNow() * (SHOW_MAX_HP / (double)HP->getTop())));
+//    cout << SHOW_HP_FRAME;
+//    if (show) cout << this->getHP();
+//    if (LF) cout << endl;
+//}
+
 /*
 *                                 Tool
 */
 int Attributes::ADD_FUN(int _now, int _add, bool percent, bool setZero) {
-    _now += percent ? (int)(_now * _add * 0.01) : _now;
+    _now += percent ? (int)(_now * _add * 0.01) : _add;
     if (setZero) if (_now < 0) _now = 0;
     return _now;
 }
