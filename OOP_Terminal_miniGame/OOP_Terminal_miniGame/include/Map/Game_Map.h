@@ -27,6 +27,7 @@ public:
     int get_Map_High();
     Roles* getRoles();
     string get_Map_Name();
+    int getNumber_of_Monster();
 
     void Clear_0HP_Monster();
 

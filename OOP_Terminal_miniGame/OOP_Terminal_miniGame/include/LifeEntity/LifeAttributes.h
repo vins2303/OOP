@@ -3,16 +3,22 @@
 
 #include "Attributes.h"
 #include "../Map/Draw.h"
-#define LVMagnification( num ) ( ( num ) * ( getLV() ) )
+
+//#define LVMagnification( num )  (num)
 #define SHOW_MAX_HP 20
 #define SHOW_HP_FIGURE(_num) ((_num) ? "=" : " ")
-#define SHOW_HP_FRAME_BEGIN ("[");
-#define SHOW_HP_FRAME_END ("]");
+#define SHOW_HP_FRAME_BEGIN "[";
+#define SHOW_HP_FRAME_END   "]";
 
 #define SHOW_MAX_MP 20
 #define SHOW_MP_FIGURE(_num) ((_num) ? "=": " ")
-#define SHOW_MP_FRAME_BEGIN ("[");
-#define SHOW_MP_FRAME_END ("]");
+#define SHOW_MP_FRAME_BEGIN "[";
+#define SHOW_MP_FRAME_END "]";
+
+#define SHOW_MAX_EXP 20
+#define SHOW_EXP_FIGURE(_num) ((_num) ? "=": " ")
+#define SHOW_EXP_FRAME_BEGIN "[";
+#define SHOW_EXP_FRAME_END   "]";
 
 class LifeAttributes : public Attributes {
 private:
@@ -21,7 +27,7 @@ private:
     int maxMP;
 
 public:
-    LifeAttributes(int _LV, int _HP, int _MP, int _attack, int _sp, int _def, int _CRT, int _maxHP = -1, int _maxMP = -1);
+    LifeAttributes(int _LV, int _HP, int _MP, int _attack, int _sp, int _def, int _drop, int _CRT, int _maxHP = -1, int _maxMP = -1);
     virtual ~LifeAttributes();
     inline int getLV();
     int getMaxHP();
@@ -30,6 +36,7 @@ public:
     int getSP();
     int getDef();
     int getCRT();
+    int getDrop();
 
     int setHP(int _num);
     int setMP(int _num);

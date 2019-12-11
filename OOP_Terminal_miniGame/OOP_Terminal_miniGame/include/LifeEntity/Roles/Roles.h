@@ -7,7 +7,7 @@
 #include <Windows.h>
 #include "../../Map/Map_object.h"
 //#include "../../Map/Game_Map.h"
-#include "Equipment.h"
+#include "Equipment/Equipment.h"
 #include "Race.h"
 using std::string;
 
@@ -16,22 +16,12 @@ using std::string;
 #define ROLES_OBJECT_WIDTH "6"
 #define ROLES_OBJECT_HEIGHT "3"
 
-enum class RoleType {
-    劍士, //劍士
-    法師,//法師
-    海盜    //海盜
-};
-
-RoleType StringToRolesType(string   _type);
-string   RolesTypeToString(RoleType _type);
-
 class Roles : public  LifeAttributes, public Equipment, public Race, public Map_object {
 private:
     string account;
     string name;
     int exp; // (LV-1)^3 + 60
-    int drop; //調寶率
-    //Map_object *object;//腳色物件
+    //int drop; //調寶率
     RoleType role;
     string Map_Now;
     //Race::RaceType race;
@@ -43,25 +33,28 @@ public:
     string getName();
     int getExp();
     int getUpExp();
-    int getDrop();
-    string getRoleType();
+    //int getDrop();
+    string getRoleType_S();
+    RoleType getRoleType();
     string getMap_Now();
 
     string setName(string _name);
     int setExp(int _exp);
-    int setDrop(int _drop);
     void setMap_Now(const string _map);
 
     int addExp(int _exp, bool percent = false);
-    int addDrop(int _drop);
+    //int addDrop(int _drop);
 
     bool isUpLv();
+    bool UP_LV(); //角色升級
 
     Map_object* set_Roles_Move_X(int _x, vector<Map_object*>& _object);
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);
-    //Map_object* Object_overlapping(Map_object& obj, vector<Map_object*>& _object);
 
     void Save_Roles_info();
+    void show_State();
+    void show_EXP(bool show = true, bool LF = true);
+
     static int sum_Attributes(RaceType _race, RoleType _role, string _att);
 };
 

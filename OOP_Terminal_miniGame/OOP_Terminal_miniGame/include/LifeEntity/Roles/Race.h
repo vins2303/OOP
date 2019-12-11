@@ -3,17 +3,8 @@
 
 #include <algorithm>
 #include <string>
+#include "../../Type.h"
 using std::string;
-
-enum class RaceType : int {
-    人族,//人族
-    獸人,  //獸人
-    精靈,//精靈
-    矮人 //矮人
-};
-
-RaceType StringToRaceType(string _race);
-string RaceTypeToString(RaceType _race);
 
 class Race {
 private:
@@ -22,8 +13,8 @@ private:
 public:
     Race(RaceType _type);
 
-    RaceType getRace();
-    string getRaceType();
+    string getRaceType_S();
+    RaceType getRaceType();
 
     void setRace(RaceType _race);
     void setRace(string _race);

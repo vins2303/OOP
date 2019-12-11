@@ -66,7 +66,7 @@ void RolesList::DeleteRoles() {
         else {
             cout << "刪除角色!(按 Ese 離開)" << endl;
 
-            showRolesList(roleslist, 2);
+            show_Total_RolesList(roleslist, 2);
             //for (unsigned int i = 0; i < roleslist.size(); i++) {
             //    cout << i+1 <<". " << roleslist[i]->getName() << endl;
             //}
@@ -91,8 +91,8 @@ void RolesList::Clear_Now_Roles() {
 
 bool RolesList::addRoles() {
     string name;
-    RaceType race_type = RaceType::人族;
-    RoleType role_type = RoleType::法師;
+    RaceType race_type = RaceType::Human;
+    RoleType role_type = RoleType::Magician;
     vector<string> namelist;
     bool isEnd = false;
     int getKey;
@@ -123,14 +123,14 @@ bool RolesList::addRoles() {
         isEnd = false;
         vector<string> TypeList;
         Tool::getIpAppName("Data/Attributes/Race.ini", TypeList);
-        showRaceInfo(TypeList, "Data/Attributes/Race.ini", 0);
+        show_Total_RaceInfo(TypeList, "Data/Attributes/Race.ini", 0);
 
         while (!isEnd) {
             getKey = _getch();
             if (getKey == 27) {
                 break;
             }if ((unsigned int)(getKey = getKey - '0' - 1) < TypeList.size()) {
-                race_type = StringToRaceType(TypeList[getKey]);
+                race_type = toRace_Type(TypeList[getKey]);
                 isEnd = true;
             }
         }
@@ -140,13 +140,13 @@ bool RolesList::addRoles() {
             isEnd = false;
             system("cls");
             Tool::getIpAppName("Data/Attributes/Role.ini", TypeList);
-            showRaceInfo(TypeList, "Data/Attributes/Role.ini", 0);
+            show_Total_RaceInfo(TypeList, "Data/Attributes/Role.ini", 0);
             while (!isEnd) {
                 getKey = _getch();
                 if (getKey == 27) {
                     break;
                 }if ((unsigned int)(getKey = getKey - '0' - 1) < TypeList.size()) {
-                    role_type = StringToRolesType(TypeList[getKey]);
+                    role_type = toRole_Type(TypeList[getKey]);
                     isEnd = true;
                 }
             }
@@ -155,8 +155,8 @@ bool RolesList::addRoles() {
             if (isEnd) {
                 system("cls");
                 cout << setw(10) << "角色名稱：" << name << endl;
-                cout << setw(10) << "種族：" << RaceTypeToString(race_type) << endl;
-                cout << setw(10) << "職業：" << RolesTypeToString(role_type) << endl;
+                cout << setw(10) << "種族：" << toString(race_type) << endl;
+                cout << setw(10) << "職業：" << toString(role_type) << endl;
                 cout << "確定新增(y) 取消(N)" << endl;
                 while (1) {
                     if ((getKey = _getch()) == 'y' || getKey == 'Y' || getKey == 'n' || getKey == 'N')
@@ -166,8 +166,8 @@ bool RolesList::addRoles() {
                     Tool::mkdir("Data/Account/" + GetAccount());
                     string outfile = "Data/Account/" + GetAccount() + "/Roles.ini";
                     WritePrivateProfileString(name.c_str(), "LV", "1", outfile.c_str());
-                    WritePrivateProfileString(name.c_str(), "Race", RaceTypeToString(race_type).c_str(), outfile.c_str());
-                    WritePrivateProfileString(name.c_str(), "Role", RolesTypeToString(role_type).c_str(), outfile.c_str());
+                    WritePrivateProfileString(name.c_str(), "Race", toString(race_type).c_str(), outfile.c_str());
+                    WritePrivateProfileString(name.c_str(), "Role", toString(role_type).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "HP", to_string(Roles::sum_Attributes(race_type, role_type, "HP")).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "MP", to_string(Roles::sum_Attributes(race_type, role_type, "MP")).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "EXP", "0", outfile.c_str());
@@ -198,10 +198,10 @@ void RolesList::FindRoles(vector<Roles*>& out) {
     for (vector<string>::iterator it = roleslist.begin(); it != roleslist.end(); it++) {
         GetPrivateProfileString(it->c_str(), "Race", "NULL", read_ini.GetBuffer(255), 255, inifile.c_str());
         read_ini.ReleaseBuffer();
-        race = StringToRaceType(string(read_ini));
+        race = toRace_Type(string(read_ini));
         GetPrivateProfileString(it->c_str(), "Role", "NULL", read_ini.GetBuffer(255), 255, inifile.c_str());
         read_ini.ReleaseBuffer();
-        role = StringToRolesType(string(read_ini));
+        role = toRole_Type(string(read_ini));
 
         roles = new Roles(
             *it,
@@ -209,7 +209,7 @@ void RolesList::FindRoles(vector<Roles*>& out) {
             GetPrivateProfileInt((*it).c_str(), "HP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "MP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "EXP", INT_MAX, inifile.c_str()),
-            Tool::readStringIni(*it, "MapNow", "NULL", inifile),
+            Tool::ReadStringIni(*it, "MapNow", "NULL", inifile),
             this->GetAccount(),
             race,
             role,
@@ -242,7 +242,7 @@ bool RolesList::Selete_Roles() {
         }
 
         cout << "請選擇角色:(Esc離開)" << endl;
-        showRolesList(roleslist, 3);
+        show_Total_RolesList(roleslist, 3);
 
         while (!isExit) {
             getKey = _getch();
@@ -268,7 +268,7 @@ void RolesList::clearRolesList(vector<Roles*>& _list) {
 
 Roles* RolesList::getRoles() { return roles; }
 
-void RolesList::showRolesList(vector<Roles*>& roleslist, unsigned int _row) {
+void RolesList::show_Total_RolesList(vector<Roles*>& roleslist, unsigned int _row) {
     static unsigned int row;
     for (unsigned int i = 0; i < roleslist.size(); i++) {
         row = _row;
@@ -277,8 +277,8 @@ void RolesList::showRolesList(vector<Roles*>& roleslist, unsigned int _row) {
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << "～～～～～～～";
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << roleslist[i]->getName();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "等級：" << roleslist[i]->getLV();
-        Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "種族：" << roleslist[i]->getRaceType();
-        Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "職業：" << roleslist[i]->getRoleType();
+        Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "種族：" << roleslist[i]->getRaceType_S();
+        Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "職業：" << roleslist[i]->getRoleType_S();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "攻擊力：" << roleslist[i]->getAttack();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "HP：" << roleslist[i]->getMaxHP();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "MP：" << roleslist[i]->getMaxMP();
@@ -288,7 +288,7 @@ void RolesList::showRolesList(vector<Roles*>& roleslist, unsigned int _row) {
     Draw::setXY(0, row++);
 }
 
-void RolesList::showRoleInfo(const vector<string>& rolesList, const string _file, const unsigned int _row) {
+void RolesList::show_Total_RoleInfo(const vector<string>& rolesList, const string _file, const unsigned int _row) {
     static unsigned int row;
     for (unsigned int i = 0; i < rolesList.size(); i++) {
         row = _row;
@@ -302,8 +302,8 @@ void RolesList::showRoleInfo(const vector<string>& rolesList, const string _file
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "HP：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "HP", INT_MAX, _file.c_str());
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "MP：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "MP", INT_MAX, _file.c_str());
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "速度：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "SP", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "爆擊：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "CRT", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "防禦：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "DEF", INT_MAX, _file.c_str());
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "爆擊：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "CRT", INT_MAX, _file.c_str()) << "%";
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "減傷：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "DEF", INT_MAX, _file.c_str()) << "%";
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "調寶率：" << left << setw(6) << GetPrivateProfileInt(rolesList[i].c_str(), "Drop", INT_MAX, _file.c_str());
         Draw::setXY(SHOWRACEINFO_COL(i), row++); for (int count = 0; count < SHOWRACEINFO_COUNT; count++) cout << "ˍ";
     }
@@ -316,7 +316,7 @@ void RolesList::showRoleInfo(const vector<string>& rolesList, const string _file
     Draw::setXY(0, row);
 }
 
-void RolesList::showRaceInfo(const vector<string>& raceList, const string _file, const unsigned int _row) {
+void RolesList::show_Total_RaceInfo(const vector<string>& raceList, const string _file, const unsigned int _row) {
     static unsigned int row;
     for (unsigned int i = 0; i < raceList.size(); i++) {
         row = _row;
@@ -327,12 +327,12 @@ void RolesList::showRaceInfo(const vector<string>& raceList, const string _file,
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(4) << (i + 1) << ". " << left << setw(10) << raceList.at(i);
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜"; for (int count = 0; count < SHOWRACEINFO_COUNT - 1; count++) cout << "∵";
         Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "攻擊力：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "Attack", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "HP：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "HP", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "MP：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "MP", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "速度：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "SP", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "爆擊：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "CRT", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "防禦：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "DEF", INT_MAX, _file.c_str());
-        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "調寶率：" << left << setw(6) << GetPrivateProfileInt(raceList[i].c_str(), "Drop", INT_MAX, _file.c_str());
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "HP：" << GetPrivateProfileInt(raceList[i].c_str(), "HP", INT_MAX, _file.c_str());
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "MP：" << GetPrivateProfileInt(raceList[i].c_str(), "MP", INT_MAX, _file.c_str());
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "速度：" << GetPrivateProfileInt(raceList[i].c_str(), "SP", INT_MAX, _file.c_str());
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "爆擊：" << GetPrivateProfileInt(raceList[i].c_str(), "CRT", INT_MAX, _file.c_str()) << "%";
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "減傷：" << GetPrivateProfileInt(raceList[i].c_str(), "DEF", INT_MAX, _file.c_str()) << "%";
+        Draw::setXY(SHOWRACEINFO_COL(i), row++); cout << "｜" << right << setw(8) << "調寶率：" << GetPrivateProfileInt(raceList[i].c_str(), "Drop", INT_MAX, _file.c_str());
         Draw::setXY(SHOWRACEINFO_COL(i), row++); for (int count = 0; count < SHOWRACEINFO_COUNT; count++) cout << "ˍ";
     }
     for (int i = 0; i < 13; i++) {

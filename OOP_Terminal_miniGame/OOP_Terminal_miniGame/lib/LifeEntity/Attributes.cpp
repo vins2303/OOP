@@ -1,12 +1,13 @@
 #include "../../include/LifeEntity/Attributes.h"
 
-Attributes::Attributes(int _HP, int _MP, int _attack, int _sp, int _def, int _CRT) :
+Attributes::Attributes(int _HP, int _MP, int _attack, int _sp, int _def, int _CRT, int _drop) :
     HP(_HP),
     MP(_MP),
     Attack(_attack),
     SP(_sp),
     Def(_def),
-    CRT(_CRT)
+    CRT(_CRT),
+    DROP(_drop)
 {}
 
 Attributes::~Attributes() {
@@ -21,6 +22,7 @@ int Attributes::getAttack() { return Attack; }
 int Attributes::getSP() { return SP; }
 int Attributes::getDef() { return Def; }
 int Attributes::getCRT() { return CRT; }
+int Attributes::getDrop() { return DROP; }
 
 /*
                             set
@@ -31,6 +33,8 @@ int Attributes::setAttack(int _num) { return Attack = _num; }
 int Attributes::setSP(int _num) { return SP = _num; }
 int Attributes::setDef(int _num) { return Def = _num; }
 int Attributes::setCrt(int _num) { return CRT = _num > 100 ? 100 : CRT; }
+
+int Attributes::setDrop(int _drop) { return DROP = _drop > 100 ? 100 : _drop; }
 
 /*
                             Add

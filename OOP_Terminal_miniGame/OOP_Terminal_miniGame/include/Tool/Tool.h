@@ -18,9 +18,10 @@ public:
     static void findFile(string _path, vector<string>& _files);
     static void mkdir(string _path);
     static void SplitString(const string input_string, vector<string>& v, const string c);
+    static vector<string> SplitString(const string input_string, const string c);
     static void getIpAppName(string _path, vector<string>& _data);
     static bool CheckFolderExist(const string& strPath);
-    static string readStringIni(string lpAppName, string lpKeyName, string lpDefaut, string lpFileName);
+    static string ReadStringIni(string lpAppName, string lpKeyName, string lpDefaut, string lpFileName);
     //static bool RmDir(const string& strPath);
 };
 

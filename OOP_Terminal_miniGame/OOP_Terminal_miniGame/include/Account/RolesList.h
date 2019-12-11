@@ -32,8 +32,8 @@ public:
     void Clear_Now_Roles();
 private:
     void clearRolesList(vector<Roles*>&);
-    void showRolesList(vector<Roles*>&, unsigned int row);
-    void showRaceInfo(const vector<string>& raceList, const string _file, const unsigned int _row);
-    void showRoleInfo(const vector<string>& rolesList, const string _file, const unsigned int _row);
+    void show_Total_RolesList(vector<Roles*>&, unsigned int row);
+    void show_Total_RaceInfo(const vector<string>& raceList, const string _file, const unsigned int _row);
+    void show_Total_RoleInfo(const vector<string>& rolesList, const string _file, const unsigned int _row);
 };
 #endif

@@ -24,9 +24,10 @@
     <ClInclude Include="include\LifeEntity\Attributes.h" />
     <ClInclude Include="include\LifeEntity\Fighting\Fighting.h" />
     <ClInclude Include="include\LifeEntity\Monster\Monster.h" />
-    <ClInclude Include="include\LifeEntity\Roles\Backpack.h" />
-    <ClInclude Include="include\LifeEntity\Roles\Equipment.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Back_Pack.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment.h" />
     <ClInclude Include="include\LifeEntity\LifeAttributes.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment_Attributes.h" />
     <ClInclude Include="include\LifeEntity\Roles\Race.h" />
     <ClInclude Include="include\LifeEntity\Roles\Roles.h" />
     <ClInclude Include="include\Map\Draw.h" />
@@ -35,16 +36,19 @@
     <ClInclude Include="include\Map\Map_Pos.h" />
     <ClInclude Include="include\Tool\Tool.h" />
     <ClInclude Include="include\keyboard_Event\Keyboard_Event.h" />
+    <ClInclude Include="include\Type.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment_Attributes.cpp" />
+    <ClCompile Include="lib\Type.cpp" />
     <ClCompile Include="lib\Account\Account.cpp" />
     <ClCompile Include="lib\Account\RolesList.cpp" />
     <ClCompile Include="lib\keyboard_Event\Keyboard_Event.cpp" />
     <ClCompile Include="lib\LifeEntity\Attributes.cpp" />
     <ClCompile Include="lib\LifeEntity\Fighting\Fighting.cpp" />
     <ClCompile Include="lib\LifeEntity\Monster\Monster.cpp" />
-    <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp" />
-    <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Back_Pack.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment.cpp" />
     <ClCompile Include="lib\LifeEntity\LifeAttributes.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Race.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Roles.cpp" />

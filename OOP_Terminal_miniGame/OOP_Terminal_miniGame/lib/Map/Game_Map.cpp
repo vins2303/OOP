@@ -101,6 +101,13 @@ void Game_Map::setRoles(Roles* _roles) {
 Roles* Game_Map::getRoles() { return roles; }
 string Game_Map::get_Map_Name() { return Map_Name; }
 
+int Game_Map::getNumber_of_Monster() {
+    int number = 0;
+    for (vector<Map_object*>::iterator it = object.begin(); it != object.end(); it++)
+        if ((*it)->get_Object_Type() == objectType::Monster) number++;
+    return number;
+}
+
 vector<Map_object*>& Game_Map::get_Object_List() { return object; }
 
 void Game_Map::Main_Draw(bool& _isDraw, bool& _isDrawMap) {

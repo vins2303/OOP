@@ -50,7 +50,12 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
             isDraw = true;
             overlapping_object = roleslist->getRoles()->set_Roles_Move_X(roleslist->getRoles()->get_seat_X() + 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
             break;
-
+        case 'i':
+            roleslist->getRoles()->show_State();
+            _getch();
+            isDraw = true;
+            _isDrawMap = true;
+            break;
         case 'm':
             Show_Map_Pos();
             isDraw = true;
@@ -96,7 +101,7 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
         else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 1, 0, 20, 20);
         return false;
         /*====================================================================================================================================*/
-                        //break;
+        //break;
     default:
         break;
     }
@@ -157,5 +162,9 @@ void Keyboard_Event::Fighting_Fun(Monster* _obj) {
         roleslist->getRoles()->setHP(roleslist->getRoles()->getMaxHP());
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find("¥«¶°")->second, _obj);
         system("pause");
+    }
+    else {
+        if (maplist->find(roleslist->getRoles()->getMap_Now())->second->getNumber_of_Monster()<3)
+            maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
     }
 }

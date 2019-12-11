@@ -19,7 +19,7 @@ public:
     void show_info(int _x, int _y = 0);
 
     int getExp();
-    void setExp(int);
+    //void setExp(int);
 };
 
 #endif

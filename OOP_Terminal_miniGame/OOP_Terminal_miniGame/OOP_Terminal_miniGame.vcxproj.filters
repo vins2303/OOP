@@ -25,12 +25,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="標頭檔\Error">
-      <UniqueIdentifier>{23394679-85d5-4414-ae42-5fd8bfb4f9a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="來源檔案\Error">
-      <UniqueIdentifier>{8de60b3d-c21a-4046-b215-2aa550314d81}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\Account">
       <UniqueIdentifier>{ddd42ce6-26aa-4769-aa8d-990d4351a191}</UniqueIdentifier>
     </Filter>
@@ -66,23 +60,11 @@
     <ClInclude Include="include\LifeEntity\Attributes.h">
       <Filter>標頭檔\LifeEntity</Filter>
     </ClInclude>
-    <ClInclude Include="include\Account\Account.h">
-      <Filter>標頭檔\Account</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Account\RolesList.h">
-      <Filter>標頭檔\Account</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LifeEntity\Roles\Equipment.h">
-      <Filter>標頭檔\LifeEntity</Filter>
-    </ClInclude>
     <ClInclude Include="include\LifeEntity\Roles\Roles.h">
       <Filter>標頭檔\LifeEntity\Roles</Filter>
     </ClInclude>
     <ClInclude Include="include\LifeEntity\LifeAttributes.h">
       <Filter>標頭檔\LifeEntity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LifeEntity\Roles\Backpack.h">
-      <Filter>標頭檔\LifeEntity\Roles</Filter>
     </ClInclude>
     <ClInclude Include="include\Tool\Tool.h">
       <Filter>標頭檔\Tool</Filter>
@@ -105,6 +87,24 @@
     <ClInclude Include="include\LifeEntity\Fighting\Fighting.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="include\Account\Account.h">
+      <Filter>標頭檔\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Account\RolesList.h">
+      <Filter>標頭檔\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Back_Pack.h">
+      <Filter>標頭檔\LifeEntity\Roles</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Type.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment.h">
+      <Filter>標頭檔\LifeEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment_Attributes.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map_object.cpp">
@@ -125,13 +125,7 @@
     <ClCompile Include="lib\Account\RolesList.cpp">
       <Filter>來源檔案\Account</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Roles\Backpack.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="lib\LifeEntity\Roles\Roles.cpp">
-      <Filter>來源檔案\LifeEntity\Roles</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Roles\Equipment.cpp">
       <Filter>來源檔案\LifeEntity\Roles</Filter>
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\LifeAttributes.cpp">
@@ -156,6 +150,18 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\Fighting\Fighting.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Back_Pack.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Type.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment.cpp">
+      <Filter>來源檔案\LifeEntity\Roles</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment_Attributes.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

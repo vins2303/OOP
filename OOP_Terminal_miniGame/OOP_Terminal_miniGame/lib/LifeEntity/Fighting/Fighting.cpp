@@ -23,7 +23,11 @@ bool Fighting::Fighting_Start() {
     }
 
     if (roles->getHP() > 0) {
-        cout << roles->getName() << "勝利! 獲得經驗:";
+        roles->addExp(monster->getExp());
+        cout << roles->getName() << "勝利! 獲得經驗:" << monster->getExp() << endl;
+        if (roles->UP_LV()) {
+            cout << "恭喜升級! 等級：" << roles->getLV() << endl;
+        }
     }
     else {
         cout << roles->getName() << "已經死亡";
@@ -37,7 +41,8 @@ void Fighting::Moster_Attack() {
     static bool _CRT;
     //static bool
     _CRT = (rand() % 100) < monster->getCRT();
-    _attack = (((rand() % monster->Attributes::getAttack() + 1) * (_CRT ? 2 : 1)) - roles->getDef());
+    _attack = (((rand() % monster->Attributes::getAttack() + 1) * (_CRT ? 2 : 1)));
+    _attack = (int)(_attack - (double)_attack * (double)roles->getDef() * 0.01);
     if (_attack < 1) _attack = 1;
     roles->addHP(_attack * -1);
     cout << roles->getName() << " 受到了" << (_CRT ? "暴擊傷害" : "") << "損失了" << _attack << "生命" << endl;
@@ -50,7 +55,9 @@ void Fighting::Roles_Attack() {
     _CRT = (rand() % 100) < roles->getCRT();
     int nn = roles->getAttack();
     int kk = monster->Attributes::getDef();
-    _attack = (((rand() % roles->getAttack() + 1) * (_CRT ? 2 : 1)) - monster->Attributes::getDef());
+    _attack = (((rand() % roles->getAttack() + 1) * (_CRT ? 2 : 1)));
+    _attack = (int)(_attack - (double)_attack * (double)monster->Attributes::getDef() * 0.01);
+
     if (_attack < 1) _attack = 1;
     monster->addHP(_attack * -1);
     cout << monster->getName() << " 受到了" << (_CRT ? "暴擊傷害" : "") << "損失了" << _attack << "生命" << endl;

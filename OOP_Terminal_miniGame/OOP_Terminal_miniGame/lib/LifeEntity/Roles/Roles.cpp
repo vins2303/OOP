@@ -1,15 +1,20 @@
 #include "../../../include/LifeEntity/Roles/Roles.h"
+#include <iomanip>
 
 Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, string _account, RaceType _race, RoleType _role, Map_object _object) :
     account(_account),
     name(_name),
     exp(Exp),
     Map_Now(_Map_Now),
-    drop(sum_Attributes(_race, _role, "Drop")),
     role(_role),
-    Map_object(_object),//暫時
+    Map_object(_object),
     Race(_race),
-    Equipment(),//暫時
+    /*裝備*/
+    Equipment(
+
+    ),
+
+    /*屬性*/
     LifeAttributes(
         _LV,
         nowHP == -1 ? sum_Attributes(_race, _role, "HP") * _LV : nowHP,
@@ -18,6 +23,7 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
         sum_Attributes(_race, _role, "SP"),
         sum_Attributes(_race, _role, "DEF"),
         sum_Attributes(_race, _role, "CRT"),
+        sum_Attributes(_race, _role, "Drop"),
         sum_Attributes(_race, _role, "HP"),
         sum_Attributes(_race, _role, "MP")
     )
@@ -30,69 +36,48 @@ Roles::~Roles() {
 string Roles::getName() { return name; }
 int Roles::getExp() { return exp; }
 int Roles::getUpExp() { return (int)(pow(getLV() - 1, 3) + 60); }
-int Roles::getDrop() { return drop; }
+//int Roles::getDrop() { return drop; }
 
 string Roles::setName(string _name) { return name = _name; }
-int Roles::setExp(int _exp) { return exp = _exp > getUpExp() ? getUpExp() : exp; }
-int Roles::setDrop(int _drop) { return drop = drop > 100 ? 100 : drop; }
+int Roles::setExp(int _exp) { return exp = (_exp > getUpExp() ? getUpExp() : _exp); }
+//int Roles::setDrop(int _drop) { return drop = drop > 100 ? 100 : drop; }
 void Roles::setMap_Now(const string _map) { Map_Now = _map; }
 
 int Roles::addExp(int _exp, bool percent) {
     int exp = ADD_FUN(getExp(), _exp, percent);
-    if (exp > getUpExp()) exp = getUpExp();
+    //if (exp > getUpExp()) exp = getUpExp();
     return setExp(exp);
 }
 
-int Roles::addDrop(int _drop) { return setDrop(getDrop() + _drop); }
+//int Roles::addDrop(int _drop) { return setDrop(getDrop() + _drop); }
 
 bool Roles::isUpLv() { return getExp() >= getUpExp() ? true : false; }
 
-RoleType StringToRolesType(string _type) {
-    //transform(_type.begin(), _type.end(), _type.begin(), tolower);
-    if (_type == "劍士")
-        return RoleType::劍士;
-    if (_type == "海盜")
-        return RoleType::海盜;
-    if (_type == "法師")
-        return RoleType::法師;
-
-    return RoleType::劍士;
-}
-
-string RolesTypeToString(RoleType _type) {
-    string out = "";
-    switch (_type)
-    {
-    case RoleType::劍士:
-        out = "劍士";
-        break;
-    case RoleType::法師:
-        out = "法師";
-        break;
-    case RoleType::海盜:
-        out = "海盜";
-        break;
+bool Roles::UP_LV() {
+    if (isUpLv()) {
+        addLV();
+        setHP(getMaxHP());
+        setMP(getMaxMP());
+        setExp(0);
+        return true;
     }
-    return out;
+    return false;
 }
 
 int Roles::sum_Attributes(RaceType _race, RoleType _role, string _att) {
-    return
-        GetPrivateProfileInt(RaceTypeToString(_race).c_str(), _att.c_str(), 0, "Data/Attributes/Race.ini") +
-        GetPrivateProfileInt(RolesTypeToString(_role).c_str(), _att.c_str(), 0, "Data/Attributes/Role.ini");
+    return GetPrivateProfileInt(toString(_race).c_str(), _att.c_str(), INT_MAX, "Data/Attributes/Race.ini") + GetPrivateProfileInt(toString(_role).c_str(), _att.c_str(), INT_MAX, "Data/Attributes/Role.ini");
 }
 
-string Roles::getRoleType() {
-    return RolesTypeToString(role);
-}
+string Roles::getRoleType_S() { return toString(role); }
+RoleType Roles::getRoleType() { return (role); }
 
 string Roles::getMap_Now() { return Map_Now; }
 
 void Roles::Save_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
     WritePrivateProfileString(name.c_str(), "LV", to_string(getLV()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "Race", RaceTypeToString(getRace()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "Role", RolesTypeToString(role).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Race", (getRaceType_S()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Role", toString(role).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "HP", to_string(getHP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "MP", to_string(getMP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "EXP", to_string(getExp()).c_str(), outfile.c_str());
@@ -139,6 +124,35 @@ Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
         Map_object::set_Point_Y(_y);
     }
     return over;
+}
+
+void Roles::show_State() {
+    system("cls");
+    cout << "\n\n\t\t\t角色狀態" << endl << endl;
+    cout << setw(20) << "角色名稱：" << " " << getName() << endl;
+    cout << setw(20) << "種族：" << " " << getRaceType_S() << endl;
+    cout << setw(20) << "職業：" << " " << getRoleType_S() << endl;
+    cout << setw(20) << "等級：" << " " << getLV() << endl;
+    cout << setw(20) << "生命：" << " "; showHP();
+    cout << setw(20) << "魔力：" << " "; showMP();
+    cout << setw(20) << "經驗值：" << " "; show_EXP();
+    cout << setw(20) << "攻擊力：" << " " << getAttack() << endl;
+    cout << setw(20) << "速度：" << " " << getSP() << endl;
+    cout << setw(20) << "暴擊：" << " " << getCRT() << "%" << endl;
+    cout << setw(20) << "減傷：" << " " << getDef() << "%" << endl;
+    cout << setw(20) << "掉寶率：" << " " << getDrop() << "%" << endl;
+}
+
+void Roles::show_EXP(bool show, bool LF) {
+    Draw::SetColor(2);
+    cout << SHOW_EXP_FRAME_BEGIN;
+    for (int i = 0; i < SHOW_MAX_EXP; i++)
+        cout << SHOW_EXP_FIGURE(i < (getExp() * (SHOW_MAX_EXP / (double)(getUpExp()))));
+    cout << SHOW_MP_FRAME_END;
+    Draw::SetColor();
+    if (show) cout << " " << getExp() << "/" << getUpExp();
+    if (LF) cout << endl;
+    //return this;
 }
 
 ////判斷是否重疊
