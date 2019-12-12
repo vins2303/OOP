@@ -6,11 +6,18 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
     name(_name),
     exp(Exp),
     Map_Now(_Map_Now),
-    role(_role),
+    Role(_role),
     Map_object(_object),
     Race(_race),
     /*¸Ë³Æ*/
     Equipment(
+
+    ),
+    /*­I¥]*/
+    Back_Pack(
+        _account,
+        _name,
+        GetPrivateProfileInt(_name.c_str(), "Money", INT_MAX, ("Data/Account/" + _account + "/Roles.ini").c_str())
 
     ),
 
@@ -68,8 +75,8 @@ int Roles::sum_Attributes(RaceType _race, RoleType _role, string _att) {
     return GetPrivateProfileInt(toString(_race).c_str(), _att.c_str(), INT_MAX, "Data/Attributes/Race.ini") + GetPrivateProfileInt(toString(_role).c_str(), _att.c_str(), INT_MAX, "Data/Attributes/Role.ini");
 }
 
-string Roles::getRoleType_S() { return toString(role); }
-RoleType Roles::getRoleType() { return (role); }
+//string Roles::getRoleType_S() { return toString(role); }
+//RoleType Roles::getRoleType() { return (role); }
 
 string Roles::getMap_Now() { return Map_Now; }
 
@@ -77,7 +84,7 @@ void Roles::Save_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
     WritePrivateProfileString(name.c_str(), "LV", to_string(getLV()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Race", (getRaceType_S()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "Role", toString(role).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Role", getRoleType_S().c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "HP", to_string(getHP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "MP", to_string(getMP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "EXP", to_string(getExp()).c_str(), outfile.c_str());

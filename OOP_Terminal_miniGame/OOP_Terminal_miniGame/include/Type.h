@@ -10,14 +10,14 @@ using namespace std;
                                  背包物品
 */
 #define VALUE_Back_Pack_Type \
-	etype(Weapon, "武器") \
-	etype(Deputy, "副武器") \
-	etype(Helmet, "頭盔") \
-    etype(Breastplate, "胸甲")\
-    etype(Pants, "褲子")\
-    etype(Shoes, "鞋子")\
-    etype(Consumables, "消耗品")\
-    etype(Sundries, "雜物")
+	    etype(Weapon, "武器") \
+	    etype(Deputy, "副武器") \
+	    etype(Helmet, "頭盔") \
+        etype(Breastplate, "胸甲")\
+        etype(Pants, "褲子")\
+        etype(Shoes, "鞋子")\
+        etype(Consumables, "消耗品")\
+        etype(Sundries, "雜物")
 
 #define etype(a, b) a,
 enum class Back_Pack_Type : int { VALUE_Back_Pack_Type };

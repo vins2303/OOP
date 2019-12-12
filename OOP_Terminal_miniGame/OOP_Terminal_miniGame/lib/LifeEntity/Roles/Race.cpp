@@ -3,6 +3,8 @@
 Race::Race(RaceType _type) :raceType(_type)
 {}
 
+Race::~Race() { }
+
 string Race::getRaceType_S() { return toString(raceType); }
 
 RaceType Race::getRaceType() { return raceType; }

@@ -176,6 +176,7 @@ bool RolesList::addRoles() {
                     WritePrivateProfileString(name.c_str(), "ObjectY", "22", outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "ObjectWidth", ROLES_OBJECT_WIDTH, outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "ObjectHeigh", ROLES_OBJECT_HEIGHT, outfile.c_str());
+                    WritePrivateProfileString(name.c_str(), "Money", "100", outfile.c_str());
 
                     cout << "新增角色成功!" << endl;
                     system("pause");

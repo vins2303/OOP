@@ -12,7 +12,7 @@ private:
 
 public:
     Race(RaceType _type);
-
+    ~Race();
     string getRaceType_S();
     RaceType getRaceType();
 

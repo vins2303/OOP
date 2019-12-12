@@ -8,7 +8,9 @@
 #include "../../Map/Map_object.h"
 //#include "../../Map/Game_Map.h"
 #include "Equipment/Equipment.h"
+#include "Back_Pack/Back_Pack.h"
 #include "Race.h"
+#include "Role.h"
 using std::string;
 
 #define MAP_WIDTH_DEF 150
@@ -16,13 +18,13 @@ using std::string;
 #define ROLES_OBJECT_WIDTH "6"
 #define ROLES_OBJECT_HEIGHT "3"
 
-class Roles : public  LifeAttributes, public Equipment, public Race, public Map_object {
+class Roles : public  LifeAttributes, public Equipment, public Race, public Role, public Map_object, public Back_Pack {
 private:
     string account;
     string name;
     int exp; // (LV-1)^3 + 60
     //int drop; //½ÕÄ_²v
-    RoleType role;
+    //RoleType role;
     string Map_Now;
     //Race::RaceType race;
 public:
@@ -34,8 +36,8 @@ public:
     int getExp();
     int getUpExp();
     //int getDrop();
-    string getRoleType_S();
-    RoleType getRoleType();
+    /*string getRoleType_S();
+    RoleType getRoleType();*/
     string getMap_Now();
 
     string setName(string _name);

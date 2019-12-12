@@ -105,6 +105,12 @@
     <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment_Attributes.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Goods.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Role.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map_object.cpp">
@@ -162,6 +168,12 @@
       <Filter>來源檔案\LifeEntity\Roles</Filter>
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment_Attributes.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Goods.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Role.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
