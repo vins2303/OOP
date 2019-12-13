@@ -24,7 +24,7 @@ enum class Back_Pack_Type : int { VALUE_Back_Pack_Type };
 #undef etype
 
 const string toString(Back_Pack_Type value);
-const Back_Pack_Type toEquipment_Type(string value);
+const Back_Pack_Type toBack_Pack_Type(string value);
 
 /*
                                ºØ±Ú

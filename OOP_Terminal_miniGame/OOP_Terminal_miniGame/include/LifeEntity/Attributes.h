@@ -17,7 +17,6 @@ private:
     int Def;
     int CRT;//ÃzÀ»²v
     int DROP;//½ÕÄ_²v
-
 public:
     Attributes(int _HP, int _MP, int _attack, int _sp, int _def, int _CRT, int _drop);
     virtual ~Attributes();

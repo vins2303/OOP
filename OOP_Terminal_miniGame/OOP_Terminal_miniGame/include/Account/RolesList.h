@@ -12,10 +12,10 @@
 //#include "../../include/Map/Draw.h"
 
 using std::string;
-#define SELROLESP_COL(num) ((num) * 16 + ((num)==0   ? 0 : 1))
+#define SELROLESP_COL(num) ((int)(num) * 16 + ((num)==0   ? 0 : 1))
 
 #define SHOWRACEINFO_COUNT 8
-#define SHOWRACEINFO_COL(num) ((num) * SHOWRACEINFO_COUNT * 2)
+#define SHOWRACEINFO_COL(num) (int)((num) * SHOWRACEINFO_COUNT * 2)
 
 class RolesList : public Account {
 private:
@@ -30,6 +30,7 @@ public:
     bool addRoles();
     void DeleteRoles();
     void Clear_Now_Roles();
+    void Save_Roles();
 private:
     void clearRolesList(vector<Roles*>&);
     void show_Total_RolesList(vector<Roles*>&, unsigned int row);

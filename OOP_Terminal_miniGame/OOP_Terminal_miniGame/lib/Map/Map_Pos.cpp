@@ -39,11 +39,11 @@ void Map_Pos::Show_Map_Pos(int f) {
     {
         if (ShowLV) {
             out_str = "©Çª«µ¥¯Å:" + to_string(LV);
-            Draw::setXY(MAP_POS_WIDTH_ADD(X) + (MAP_POS_WIDTH - out_str.length()) / 2 + 1, MAP_POS_HEIGH_ADD(Y) + 1);
+            Draw::setXY(MAP_POS_WIDTH_ADD(X) + (MAP_POS_WIDTH - (int)out_str.length()) / 2 + 1, MAP_POS_HEIGH_ADD(Y) + 1);
             cout << out_str;
         }
 
-        Draw::setXY(MAP_POS_WIDTH_ADD(X) + (MAP_POS_WIDTH - Map_Name.length()) / 2 + 1, MAP_POS_HEIGH_ADD(Y) + 2);
+        Draw::setXY(MAP_POS_WIDTH_ADD(X) + (MAP_POS_WIDTH - (int)Map_Name.length()) / 2 + 1, MAP_POS_HEIGH_ADD(Y) + 2);
         cout << Map_Name;
     }
 

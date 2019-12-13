@@ -39,8 +39,8 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
         case 75:// Move Left
             isDraw = true;
             overlapping_object = roleslist->getRoles()->set_Roles_Move_X(roleslist->getRoles()->get_seat_X() - 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
-
             break;
+
         case 80:// Move Down
             isDraw = true;
             overlapping_object = roleslist->getRoles()->set_Roles_Move_Y(roleslist->getRoles()->get_seat_Y() + 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
@@ -85,7 +85,7 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
         /*====================================================================================================================================*/
     case objectType::Boor:
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find(_obj->getName())->second, _obj);
-        roleslist->getRoles()->Save_Roles_info();
+        roleslist->Save_Roles();
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
         return true;
         //break;
@@ -95,7 +95,7 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
         Buff_Key = _getch();
         if (Buff_Key == 'q' || Buff_Key == 'Q') {
             Fighting_Fun((Monster*)_obj);
-            roleslist->getRoles()->Save_Roles_info();
+            roleslist->Save_Roles();
             return true;
         }
         else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 1, 0, 20, 20);
@@ -125,6 +125,8 @@ void Keyboard_Event::Esc_Table() {
     cout << "功能列表 (Esc返回)" << endl;
     cout << "1. 返回選擇角色" << endl;
     cout << "2. 返回登入畫面" << endl;
+    cout << "3. 存檔" << endl << endl;
+    cout << "4. 離開遊戲" << endl << endl;
     while (1) {
         getKey = _getch();
         switch (getKey) {
@@ -135,6 +137,15 @@ void Keyboard_Event::Esc_Table() {
         case '2':
             Back_To_Selete_Account();
             return;
+        case '3':
+            roleslist->Save_Roles();
+            cout << "角色以存檔!" << endl;
+            system("pause");
+            return;
+        case '4':
+            roleslist->Save_Roles();
+            exit(1);
+            return;
         case 27:
             return;
         }
@@ -142,7 +153,7 @@ void Keyboard_Event::Esc_Table() {
 }
 
 void Keyboard_Event::Back_To_Selete_Roles() {
-    roleslist->getRoles()->Save_Roles_info();
+    roleslist->Save_Roles();
     maplist->find(roleslist->getRoles()->getMap_Now())->second->setRoles(NULL);
     roleslist->Clear_Now_Roles();
 }
@@ -164,7 +175,7 @@ void Keyboard_Event::Fighting_Fun(Monster* _obj) {
         system("pause");
     }
     else {
-        if (maplist->find(roleslist->getRoles()->getMap_Now())->second->getNumber_of_Monster()<3)
+        if (maplist->find(roleslist->getRoles()->getMap_Now())->second->getNumber_of_Monster() < 3)
             maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
     }
 }

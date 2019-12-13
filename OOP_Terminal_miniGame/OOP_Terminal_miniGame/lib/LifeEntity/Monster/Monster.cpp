@@ -31,7 +31,7 @@ void Monster::show_info(int _x, int _y) {
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "減傷：" << this->Attributes::getDef() << "%";
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "爆擊率：" << this->Attributes::getCRT() << "%";
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "經驗值：" << this->exp;
-    Draw::setXY(_x, _y++);     cout << right << setw(8) << "掉寶率：" << this->getDrop()<<"%";
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "掉寶率：" << this->Attributes::getDrop()<<"%";
     Draw::setXY(_x, ++_y);     cout << "按 Q 進入戰鬥";
     Draw::setXY(_x, _y++);
 }

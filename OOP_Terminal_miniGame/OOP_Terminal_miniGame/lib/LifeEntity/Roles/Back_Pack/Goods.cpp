@@ -2,11 +2,12 @@
 
 #define Read_Equipment_Attributes_int_ini( lpAppName,lpKeyName) GetPrivateProfileInt((lpAppName).c_str(), lpKeyName, INT_MAX, "Data/Attributes/Equipment.ini")
 
-Goods::Goods(string _name, int _lv, Back_Pack_Type _type) :
+Goods::Goods(string _name, int _lv, Back_Pack_Type _type, int _Quantity) :
     Money(Read_Equipment_Attributes_int_ini(_name, "Money")),
     name(_name),
     LV(_lv),
     type(_type),
+    Quantity(_Quantity),
     Attributes(
         Read_Equipment_Attributes_int_ini(_name, "HP"),
         Read_Equipment_Attributes_int_ini(_name, "MP"),
@@ -46,3 +47,25 @@ int Goods::getLV() { return LV; }
 string Goods::getName() { return name; }
 
 Back_Pack_Type& Goods::getType() { return type; }
+
+bool Goods::isEquipment()
+{
+    if (type == Back_Pack_Type::Breastplate ||
+        type == Back_Pack_Type::Deputy ||
+        type == Back_Pack_Type::Helmet ||
+        type == Back_Pack_Type::Pants ||
+        type == Back_Pack_Type::Shoes ||
+        type == Back_Pack_Type::Weapon
+        ) return true;
+    return false;
+}
+
+bool Goods::isConsumables() {
+    if (type == Back_Pack_Type::Consumables)
+        return true;
+    return false;
+}
+
+string Goods::get_Back_Pack_Type_S() { return toString(type); }
+
+Back_Pack_Type Goods::getType_Back_Pack_Type() { return type; }

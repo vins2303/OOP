@@ -1,5 +1,4 @@
 #include "../../include/Account/RolesList.h"
-//#include "../../include/LifeEntity/Roles/Race.h"
 
 RolesList::RolesList() :Account(), roles(NULL) {}
 
@@ -87,6 +86,11 @@ void RolesList::DeleteRoles() {
 void RolesList::Clear_Now_Roles() {
     delete roles;
     roles = NULL;
+}
+
+void RolesList::Save_Roles() {
+    roles->Save_Roles_info();
+    roles->Save_BackPack();
 }
 
 bool RolesList::addRoles() {
@@ -313,7 +317,7 @@ void RolesList::show_Total_RoleInfo(const vector<string>& rolesList, const strin
         Draw::setXY(SHOWRACEINFO_COL(rolesList.size()), _row + i); cout << "｜";
     }
 
-    Draw::setXY(SHOWRACEINFO_COUNT * 2 * rolesList.size() / 2 - 2, _row + 1); cout << "職業";
+    Draw::setXY(SHOWRACEINFO_COUNT * 2 * (int)rolesList.size() / 2 - 2, _row + 1); cout << "職業";
     Draw::setXY(0, row);
 }
 
@@ -341,6 +345,6 @@ void RolesList::show_Total_RaceInfo(const vector<string>& raceList, const string
         Draw::setXY(SHOWRACEINFO_COL(raceList.size()), _row + i); cout << "｜";
     }
 
-    Draw::setXY(SHOWRACEINFO_COUNT * 2 * raceList.size() / 2 - 2, _row + 1); cout << "種族";
+    Draw::setXY(SHOWRACEINFO_COUNT * 2 * (int)raceList.size() / 2 - 2, _row + 1); cout << "種族";
     Draw::setXY(0, row);
 }

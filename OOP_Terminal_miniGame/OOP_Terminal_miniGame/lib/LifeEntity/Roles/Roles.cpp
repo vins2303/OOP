@@ -93,6 +93,7 @@ void Roles::Save_Roles_info() {
     WritePrivateProfileString(name.c_str(), "ObjectY", to_string(get_seat_Y()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Map_Width()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "Money", to_string(getMoney()).c_str(), outfile.c_str());
 }
 
 //*********************************** ¨¤¦â²¾°Ê ***********************************

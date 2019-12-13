@@ -14,7 +14,7 @@ const string toString(Back_Pack_Type value) {
     return table[value];
 }
 
-const Back_Pack_Type toEquipment_Type(string value) {
+const Back_Pack_Type toBack_Pack_Type(string value) {
     static map<string, Back_Pack_Type> table;
     static bool isInit = false;
     if (isInit) return table[value];
