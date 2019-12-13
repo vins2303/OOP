@@ -52,12 +52,16 @@ public:
 
     Map_object* set_Roles_Move_X(int _x, vector<Map_object*>& _object);
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);
-
-    void Save_Roles_info();
+    void Save_Roles();
     void show_State();
     void show_EXP(bool show = true, bool LF = true);
 
+    void Open_BackPack();
+    void Back_Pack_User_Item(Goods*& _gds);
+
     static int sum_Attributes(RaceType _race, RoleType _role, string _att);
+private:
+    void Save_Roles_info();
 };
 
 #endif

@@ -41,4 +41,12 @@ void Game_start() {
 }
 
 void Game_Exit() {
+    for (map<string, Game_Map*>::iterator it = (*maplist).begin(); it != (*maplist).end(); it++) {
+        delete it->second;
+        it->second = NULL;
+    }
+    delete roleslist;
+    delete keyboard_event;
+    roleslist = NULL;
+    keyboard_event = NULL;
 }

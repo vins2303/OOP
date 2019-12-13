@@ -29,6 +29,8 @@ void Back_Pack::Save_BackPack() {
     Save_BackPack_Equipment();
 }
 
+vector<Goods*>& Back_Pack::getBackPack_Goods() { return goods; }
+
 void Back_Pack::Read_BackPack_Equipment() {
     ifstream Read_back(BACK_PACK_EQUIPMENT_PAHT);
     string name, type;
@@ -46,11 +48,12 @@ void Back_Pack::Save_BackPack_Equipment() {
     static Equipment_Attributes* _equ;
     ofstream wire_back(BACK_PACK_EQUIPMENT_PAHT);
     for (vector<Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
-        if ((*it)->isEquipment()) {
+        if (typeid(**it) == typeid(Equipment_Attributes)) {
             _equ = (Equipment_Attributes*)(*it);
-            wire_back << _equ->getName() << " " << _equ->getLV() << " " << _equ->get_Back_Pack_Type_S() << endl;
+            wire_back << _equ->getName() << " " << _equ->getLV() << " " << _equ->getType_S() << endl;
         }
     }
+    _equ = NULL;
     wire_back.close();
 }
 

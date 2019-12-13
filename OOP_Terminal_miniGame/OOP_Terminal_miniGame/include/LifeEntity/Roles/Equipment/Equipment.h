@@ -1,6 +1,9 @@
 #ifndef _EQUIPMENT_H_
 #define _EQUIPMENT_H_
 
+#define Equipment_INI_PATH  ("Data/Account/" + account + "/" + name + "/Equipment.ini")
+#define Equipment_DIR_PATH  ("Data/Account/" + account + "/" + name )
+
 #include "../../Attributes.h"
 
 #include <string>
@@ -10,6 +13,8 @@ using namespace std;
 
 class Equipment {
 private:
+    string account;
+    string name;
     Equipment_Attributes* Weapon;//ªZ¾¹
     Equipment_Attributes* Deputy;//°Æ¤â
     Equipment_Attributes* Helmet;//ÀY²¯
@@ -19,15 +24,11 @@ private:
 
 public:
 
-    Equipment(
-        Equipment_Attributes* _weapon = NULL,
-        Equipment_Attributes* _deputy = NULL,
-        Equipment_Attributes* _helmet = NULL,
-        Equipment_Attributes* _breastplate = NULL,
-        Equipment_Attributes* _pants = NULL,
-        Equipment_Attributes* _shoes = NULL);
+    Equipment(string _acc, string _name);
 
     ~Equipment();
+
+    Equipment_Attributes* Put_on(Equipment_Attributes* _E);
 
     Equipment_Attributes* getWeapon();
     Equipment_Attributes* getDeputy();
@@ -52,7 +53,9 @@ public:
     int sumDef();
     int sumCrt();
 
-    static Equipment_Attributes* Read_Equipment_Attributes(string _account, string _name, Back_Pack_Type _type);
+    void show_Equipment();
+    void Save_Equipment();
+    Equipment_Attributes* Read_Equipment_Attributes(Back_Pack_Type _type);
 };
 
 #endif

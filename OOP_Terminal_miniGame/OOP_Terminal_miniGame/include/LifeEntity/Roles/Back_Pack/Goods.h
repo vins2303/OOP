@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _GOODS_H_
 #define _GOODS_H_
 
@@ -8,7 +9,11 @@
 #include <algorithm>
 #include "../../../../include/Tool/Tool.h"
 #include "../../Attributes.h"
+#include <cassert>
 #include "../../../Type.h"
+//#include "../Roles.h"
+//#include "Back_Pack.h"
+//#include "../Roles.h"
 using namespace std;
 
 class Goods : public Attributes {
@@ -37,8 +42,9 @@ public:
     bool isEquipment();
     bool isConsumables();
 
-    string get_Back_Pack_Type_S();
-    Back_Pack_Type getType_Back_Pack_Type();
+    virtual void show_info();
+    virtual bool User_Items();
+    string getType_S();
 };
 
 #endif // !

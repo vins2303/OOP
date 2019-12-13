@@ -36,7 +36,7 @@ bool Goods::Usable_Role(const RoleType& _role) {
 }
 
 bool Goods::Usable_Race(const RaceType& _race) {
-    if (find(Restricted_Race.begin(), Restricted_Race.end(), RaceType::null) == Restricted_Race.end()) return true;
+    if (find(Restricted_Race.begin(), Restricted_Race.end(), RaceType::null) != Restricted_Race.end()) return true;
     return (find(Restricted_Race.begin(), Restricted_Race.end(), _race) == Restricted_Race.end() ? false : true);
 }
 
@@ -45,8 +45,6 @@ int Goods::getMoney() { return Money; }
 int Goods::getLV() { return LV; }
 
 string Goods::getName() { return name; }
-
-Back_Pack_Type& Goods::getType() { return type; }
 
 bool Goods::isEquipment()
 {
@@ -66,6 +64,9 @@ bool Goods::isConsumables() {
     return false;
 }
 
-string Goods::get_Back_Pack_Type_S() { return toString(type); }
+void Goods::show_info() { assert(false); }
 
-Back_Pack_Type Goods::getType_Back_Pack_Type() { return type; }
+bool Goods::User_Items() { assert(false); return false; }
+
+string Goods::getType_S() { return toString(type); }
+Back_Pack_Type& Goods::getType() { return type; }

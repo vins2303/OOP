@@ -11,7 +11,8 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
     Race(_race),
     /*裝備*/
     Equipment(
-
+        _account,
+        _name
     ),
     /*背包*/
     Back_Pack(
@@ -69,6 +70,81 @@ bool Roles::UP_LV() {
         return true;
     }
     return false;
+}
+
+void Roles::Open_BackPack() {
+    vector<Goods*>& goods = getBackPack_Goods();
+    static int key;
+    int n = 0;
+    int i;
+    while (true) {
+        system("cls");
+        for (i = n * 10; i < goods.size() && i < (n + 1) * 10; i++) {
+            cout << left << setw(3) << to_string(i % 10) + "." << " ";
+            goods[i]->show_info();
+        }
+        cout << endl;
+        if (n != 0) cout << "(Q) 返回上一頁 ";
+        if (i < goods.size()) cout << "(W) 前往下一頁";
+        cout << endl;
+        key = _getch();
+        if (key == 27 || key == 'b' || key == 'B')
+            break;
+
+        switch (key)
+        {
+        case 27:
+        case 'b':
+        case 'B':
+            return;
+        case 'Q':
+        case 'q':
+            if (n != 0) n--;
+            break;
+
+        case 'w':
+        case 'W':
+            if (i < goods.size()) n++;
+            break;
+
+        default:
+            if ((key = key - '0') >= 0 && key < 10 && key + n * 10 < (int)goods.size()) {
+                Back_Pack_User_Item(goods[((int)key + n * 10)]);
+                for (vector<Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
+                    if (*it == NULL) {
+                        goods.erase(it);
+                        it = goods.begin();
+                    }
+                }
+            }
+            break;
+        }
+    }
+    Save_Roles();
+}
+
+void Roles::Back_Pack_User_Item(Goods*& _gds) {
+    if (_gds->User_Items()) {
+        if (typeid(*_gds) == typeid(Equipment_Attributes)) {
+            static Equipment_Attributes* equi;
+            equi = (Equipment_Attributes*)_gds;
+            if (equi->Usable(get_RoleType(), getRaceType())) {
+                if (getLV() >= equi->getLV())
+                    _gds = Put_on(equi);
+                else {
+                    cout << "你的等級未到達 無法使用!" << endl;
+                    system("pause");
+
+                }
+            }
+            else {
+                if (equi->Usable_Role(get_RoleType()) == false) cout << "你的職業無法使用!" << endl;
+                if (!equi->Usable_Race(getRaceType()) == false) cout << "你的種族無法使用!" << endl;
+                cout << endl;
+                system("pause");
+            }
+        }
+    }
 }
 
 int Roles::sum_Attributes(RaceType _race, RoleType _role, string _att) {
@@ -134,6 +210,12 @@ Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
     return over;
 }
 
+void Roles::Save_Roles() {
+    Save_Roles_info();
+    Save_BackPack();
+    Save_Equipment();
+}
+
 void Roles::show_State() {
     system("cls");
     cout << "\n\n\t\t\t角色狀態" << endl << endl;
@@ -149,6 +231,7 @@ void Roles::show_State() {
     cout << setw(20) << "暴擊：" << " " << getCRT() << "%" << endl;
     cout << setw(20) << "減傷：" << " " << getDef() << "%" << endl;
     cout << setw(20) << "掉寶率：" << " " << getDrop() << "%" << endl;
+    show_Equipment();
 }
 
 void Roles::show_EXP(bool show, bool LF) {

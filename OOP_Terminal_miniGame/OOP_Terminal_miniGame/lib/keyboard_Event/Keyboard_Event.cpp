@@ -61,6 +61,12 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
             isDraw = true;
             _isDrawMap = true;
             break;
+        case 'b':
+        case 'B':
+            roleslist->getRoles()->Open_BackPack();
+            isDraw = true;
+            _isDrawMap = true;
+            break;
         case 27:
             Esc_Table();
             isDraw = true;
@@ -85,7 +91,7 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
         /*====================================================================================================================================*/
     case objectType::Boor:
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find(_obj->getName())->second, _obj);
-        roleslist->Save_Roles();
+        roleslist->getRoles()->Save_Roles();
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
         return true;
         //break;
@@ -95,7 +101,7 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
         Buff_Key = _getch();
         if (Buff_Key == 'q' || Buff_Key == 'Q') {
             Fighting_Fun((Monster*)_obj);
-            roleslist->Save_Roles();
+            roleslist->getRoles()->Save_Roles();
             return true;
         }
         else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 1, 0, 20, 20);
@@ -138,12 +144,12 @@ void Keyboard_Event::Esc_Table() {
             Back_To_Selete_Account();
             return;
         case '3':
-            roleslist->Save_Roles();
+            roleslist->getRoles()->Save_Roles();
             cout << "¨¤¦â¥H¦sÀÉ!" << endl;
             system("pause");
             return;
         case '4':
-            roleslist->Save_Roles();
+            roleslist->getRoles()->Save_Roles();
             exit(1);
             return;
         case 27:
@@ -153,7 +159,7 @@ void Keyboard_Event::Esc_Table() {
 }
 
 void Keyboard_Event::Back_To_Selete_Roles() {
-    roleslist->Save_Roles();
+    roleslist->getRoles()->Save_Roles();
     maplist->find(roleslist->getRoles()->getMap_Now())->second->setRoles(NULL);
     roleslist->Clear_Now_Roles();
 }

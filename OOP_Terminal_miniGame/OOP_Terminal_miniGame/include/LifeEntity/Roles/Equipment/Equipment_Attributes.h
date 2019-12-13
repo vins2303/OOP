@@ -18,6 +18,9 @@ public:
     Equipment_Attributes(string _name, int _lv, Back_Pack_Type _type);
     virtual ~Equipment_Attributes();
 
+    virtual void show_info();
+    virtual bool User_Items();
+
     int getHP();
     int getMP();
     int getAttack();

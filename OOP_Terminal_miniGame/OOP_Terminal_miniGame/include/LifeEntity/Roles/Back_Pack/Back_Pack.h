@@ -3,12 +3,18 @@
 
 #include "Goods.h"
 #include <string>
+#include <iomanip>
 #include <fstream>
 #include "../Equipment/Equipment_Attributes.h"
+#include "../Equipment/Equipment.h"
+#include <conio.h>
+//#include "../Roles.h"
+
 using namespace std;
 
 class Back_Pack {
 private:
+
     string user_Account;
     string user_Name;
     int Money;
@@ -22,7 +28,7 @@ public:
 
     void Read_BackPack();
     void Save_BackPack();
-
+    vector<Goods*>& getBackPack_Goods();
 private:
     void Read_BackPack_Equipment();
     void Read_BackPack_Consumables();

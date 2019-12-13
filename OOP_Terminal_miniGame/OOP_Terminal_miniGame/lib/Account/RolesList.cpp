@@ -89,8 +89,6 @@ void RolesList::Clear_Now_Roles() {
 }
 
 void RolesList::Save_Roles() {
-    roles->Save_Roles_info();
-    roles->Save_BackPack();
 }
 
 bool RolesList::addRoles() {
