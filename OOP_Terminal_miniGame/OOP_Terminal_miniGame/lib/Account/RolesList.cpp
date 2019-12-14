@@ -75,6 +75,12 @@ void RolesList::DeleteRoles() {
                 isExit = true;
             else if ((unsigned int)(getKey = getKey - 1 - '0') < roleslist.size()) {
                 WritePrivateProfileString(roleslist[getKey]->getName().c_str(), NULL, NULL, ("Data/Account/" + GetAccount() + "/Roles.ini").c_str());
+                static string dir;
+                dir = "Data\\Account\\" + GetAccount() + "\\" + roleslist[getKey]->getName();
+                if (Tool::CheckFolderExist(dir)) {
+                    system(("rmdir /s /q " + dir).c_str());
+                    system("cls");
+                }
                 cout << "§R°£¦¨¥\!" << endl;
                 system("pause");
             }

@@ -11,10 +11,13 @@
 #include "../../Attributes.h"
 #include <cassert>
 #include "../../../Type.h"
+#include <conio.h>
 //#include "../Roles.h"
 //#include "Back_Pack.h"
 //#include "../Roles.h"
 using namespace std;
+
+#define Read_Equipment_Attributes_int_ini( lpAppName,lpKeyName) GetPrivateProfileInt((lpAppName).c_str(), lpKeyName, INT_MAX, "Data/Attributes/Equipment.ini")
 
 class Goods : public Attributes {
 private:
@@ -34,6 +37,8 @@ public:
     bool Usable_Role(const RoleType& _role);
     bool Usable_Race(const RaceType& _race);
 
+    int getQuantity();
+    void setQuantity(int _num = 1);
     int getLV();
     int getMoney();
     string getName();
@@ -43,7 +48,7 @@ public:
     bool isConsumables();
 
     virtual void show_info();
-    virtual bool User_Items();
+    virtual bool isUse();
     string getType_S();
 };
 

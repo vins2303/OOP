@@ -1,6 +1,5 @@
 #include "../../../../include/LifeEntity/Roles/Equipment/Equipment_Attributes.h"
 #include "../../../../include/Tool/Tool.h"
-#include <conio.h>
 
 Equipment_Attributes::Equipment_Attributes(string _name, int _lv, Back_Pack_Type _type) :
     Goods(_name, _lv, _type)
@@ -18,10 +17,10 @@ void Equipment_Attributes::show_info() {
     if (getDef() != 0) cout << "減傷：" << getDef() << "%\t";
     if (getCRT() != 0) cout << "暴擊：" << getCRT() << "%\t";
     if (getDrop() != 0) cout << "調寶率：" << getDrop() << "\t";
-    cout << endl<<endl;
+    cout << endl << endl;
 }
 
-bool Equipment_Attributes::User_Items() {
+bool Equipment_Attributes::isUse() {
     static int key;
     system("cls");
     cout << "是否要裝備： "; show_info();

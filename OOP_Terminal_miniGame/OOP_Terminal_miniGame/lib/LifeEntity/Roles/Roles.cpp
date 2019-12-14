@@ -1,5 +1,4 @@
 #include "../../../include/LifeEntity/Roles/Roles.h"
-#include <iomanip>
 
 Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, string _account, RaceType _race, RoleType _role, Map_object _object) :
     account(_account),
@@ -38,7 +37,6 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
 {}
 
 Roles::~Roles() {
-    //if (object != NULL) delete object;
 }
 
 string Roles::getName() { return name; }
@@ -74,17 +72,16 @@ bool Roles::UP_LV() {
 
 void Roles::Open_BackPack() {
     vector<Goods*>& goods = getBackPack_Goods();
-    static int key;
-    int n = 0;
-    int i;
+    static int key, _row, i;
+    _row = 0;
     while (true) {
         system("cls");
-        for (i = n * 10; i < goods.size() && i < (n + 1) * 10; i++) {
+        for (i = _row * 10; i < goods.size() && i < (_row + 1) * 10; i++) {
             cout << left << setw(3) << to_string(i % 10) + "." << " ";
             goods[i]->show_info();
         }
         cout << endl;
-        if (n != 0) cout << "(Q) 返回上一頁 ";
+        if (_row != 0) cout << "(Q) 返回上一頁 ";
         if (i < goods.size()) cout << "(W) 前往下一頁";
         cout << endl;
         key = _getch();
@@ -99,21 +96,24 @@ void Roles::Open_BackPack() {
             return;
         case 'Q':
         case 'q':
-            if (n != 0) n--;
+            if (_row != 0) _row--;
             break;
 
         case 'w':
         case 'W':
-            if (i < goods.size()) n++;
+            if (i < goods.size()) _row++;
             break;
 
         default:
-            if ((key = key - '0') >= 0 && key < 10 && key + n * 10 < (int)goods.size()) {
-                Back_Pack_User_Item(goods[((int)key + n * 10)]);
+            if ((key = key - '0') >= 0 && key < 10 && key + _row * 10 < (int)goods.size()) {
+                Back_Pack_User_Item(goods[(__int64)key + (__int64)_row * 10]);
+
                 for (vector<Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
                     if (*it == NULL) {
                         goods.erase(it);
-                        it = goods.begin();
+                        if (goods.size() > 0)
+                            it = goods.begin();
+                        else break;
                     }
                 }
             }
@@ -124,25 +124,30 @@ void Roles::Open_BackPack() {
 }
 
 void Roles::Back_Pack_User_Item(Goods*& _gds) {
-    if (_gds->User_Items()) {
-        if (typeid(*_gds) == typeid(Equipment_Attributes)) {
-            static Equipment_Attributes* equi;
-            equi = (Equipment_Attributes*)_gds;
-            if (equi->Usable(get_RoleType(), getRaceType())) {
-                if (getLV() >= equi->getLV())
-                    _gds = Put_on(equi);
-                else {
-                    cout << "你的等級未到達 無法使用!" << endl;
-                    system("pause");
-
+    if (_gds->isUse()) {
+        if (_gds->Usable(get_RoleType(), getRaceType())) {
+            if (getLV() >= _gds->getLV()) {
+                if (typeid(*_gds) == typeid(Equipment_Attributes)) {
+                    _gds = Put_on((Equipment_Attributes*)_gds);
+                }
+                else if (typeid(*_gds) == typeid(Consumables)) {
+                    ((Consumables*)_gds)->Use(*this);
+                    if (_gds->getQuantity() == 0) {
+                        delete _gds;
+                        _gds = NULL;
+                    }
                 }
             }
             else {
-                if (equi->Usable_Role(get_RoleType()) == false) cout << "你的職業無法使用!" << endl;
-                if (!equi->Usable_Race(getRaceType()) == false) cout << "你的種族無法使用!" << endl;
-                cout << endl;
+                cout << "你的等級未到達 無法使用!" << endl;
                 system("pause");
             }
+        }
+        else {
+            if (_gds->Usable_Role(get_RoleType()) == false) cout << "你的職業無法使用!" << endl;
+            if (!_gds->Usable_Race(getRaceType()) == false) cout << "你的種族無法使用!" << endl;
+            cout << endl;
+            system("pause");
         }
     }
 }

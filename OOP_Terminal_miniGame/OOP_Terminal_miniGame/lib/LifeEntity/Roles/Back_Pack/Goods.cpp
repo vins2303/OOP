@@ -1,7 +1,5 @@
 #include "../../../../include/LifeEntity/Roles/Back_Pack/Goods.h"
 
-#define Read_Equipment_Attributes_int_ini( lpAppName,lpKeyName) GetPrivateProfileInt((lpAppName).c_str(), lpKeyName, INT_MAX, "Data/Attributes/Equipment.ini")
-
 Goods::Goods(string _name, int _lv, Back_Pack_Type _type, int _Quantity) :
     Money(Read_Equipment_Attributes_int_ini(_name, "Money")),
     name(_name),
@@ -42,6 +40,15 @@ bool Goods::Usable_Race(const RaceType& _race) {
 
 int Goods::getMoney() { return Money; }
 
+int Goods::getQuantity() { return Quantity; }
+
+void Goods::setQuantity(int _num) {
+    if (_num >= 0) Quantity = _num;
+    else {
+        assert(false);
+    }
+}
+
 int Goods::getLV() { return LV; }
 
 string Goods::getName() { return name; }
@@ -66,7 +73,7 @@ bool Goods::isConsumables() {
 
 void Goods::show_info() { assert(false); }
 
-bool Goods::User_Items() { assert(false); return false; }
+bool Goods::isUse() { assert(false); return false; }
 
 string Goods::getType_S() { return toString(type); }
 Back_Pack_Type& Goods::getType() { return type; }

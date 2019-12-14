@@ -19,7 +19,7 @@ public:
     virtual ~Equipment_Attributes();
 
     virtual void show_info();
-    virtual bool User_Items();
+    virtual bool isUse();
 
     int getHP();
     int getMP();

@@ -1,6 +1,8 @@
 #ifndef FOOT_COLOR
 #define FOOT_COLOR
 
+#include <iomanip>
+#include "../../../include/LifeEntity/Roles/Back_Pack/Consumables.h"
 #include "../LifeAttributes.h"
 #include <string>
 #include <math.h>
@@ -11,6 +13,7 @@
 #include "Back_Pack/Back_Pack.h"
 #include "Race.h"
 #include "Role.h"
+
 using std::string;
 
 #define MAP_WIDTH_DEF 150

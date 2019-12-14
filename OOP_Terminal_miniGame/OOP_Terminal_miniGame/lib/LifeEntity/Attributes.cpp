@@ -20,9 +20,9 @@ int Attributes::getHP() { return HP; }
 int Attributes::getMP() { return MP; }
 int Attributes::getAttack() { return Attack; }
 int Attributes::getSP() { return SP; }
-int Attributes::getDef() { return Def; }
-int Attributes::getCRT() { return CRT; }
-int Attributes::getDrop() { return DROP; }
+int Attributes::getDef() { return Def > 100 ? 100 : Def; }
+int Attributes::getCRT() { return CRT > 100 ? 100 : CRT; }
+int Attributes::getDrop() { return DROP > 100 ? 100 : DROP; }
 
 /*
                             set
@@ -31,8 +31,8 @@ int Attributes::setHP(int _num) { return HP = _num; }
 int Attributes::setMP(int _num) { return MP = _num; }
 int Attributes::setAttack(int _num) { return Attack = _num; }
 int Attributes::setSP(int _num) { return SP = _num; }
-int Attributes::setDef(int _num) { return Def = _num; }
-int Attributes::setCrt(int _num) { return CRT = _num > 100 ? 100 : CRT; }
+int Attributes::setDef(int _num) { return Def = _num > 100 ? 100 : _num; }
+int Attributes::setCrt(int _num) { return CRT = _num > 100 ? 100 : _num; }
 
 int Attributes::setDrop(int _drop) { return DROP = _drop > 100 ? 100 : _drop; }
 
@@ -45,18 +45,6 @@ int Attributes::addAttack(int _num, bool percent, bool zero) { return setAttack(
 int Attributes::addSP(int _num, bool percent, bool zero) { return setSP(ADD_FUN(getSP(), _num, percent, zero)); }
 int Attributes::addDef(int _num, bool percent, bool zero) { return setDef(ADD_FUN(getDef(), _num, percent, zero)); }
 int Attributes::addCrt(int _num) { return setCrt(getCRT() + _num); }
-
-/*
-                            show
-*/
-//void Attributes::showHP(bool show, bool LF) {
-//    cout << SHOW_HP_FRAME;
-//    for (int i = 0; i < SHOW_MAX_HP; i++)
-//        cout << SHOW_HP_FIGURE(i < (HP->getNow() * (SHOW_MAX_HP / (double)HP->getTop())));
-//    cout << SHOW_HP_FRAME;
-//    if (show) cout << this->getHP();
-//    if (LF) cout << endl;
-//}
 
 /*
 *                                 Tool

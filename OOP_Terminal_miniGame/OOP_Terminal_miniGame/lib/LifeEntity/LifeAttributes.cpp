@@ -37,6 +37,11 @@ int LifeAttributes::addMaxMP(int _maxmp, bool percent) {
 
 int LifeAttributes::addLV(int _add) { return setLV(getLV() + _add); }
 
+void LifeAttributes::addAttributes(Attributes& _att) {
+    addHP(_att.getHP());
+    addMP(_att.getMP());
+}
+
 LifeAttributes* LifeAttributes::showHP(bool a_LV, bool show, bool LF) {
     static int hp, maxhp;
     Draw::SetColor(4);

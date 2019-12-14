@@ -7,8 +7,9 @@
 #include <fstream>
 #include "../Equipment/Equipment_Attributes.h"
 #include "../Equipment/Equipment.h"
+#include "../Role.h"
+#include "../Race.h"
 #include <conio.h>
-//#include "../Roles.h"
 
 using namespace std;
 

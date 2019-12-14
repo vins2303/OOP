@@ -1,0 +1,60 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+class CPersonalData {
+public:
+	CPersonalData (string input0, int input1, int input2, int input3) {name = input0; chinese = input1; english = input2; math = input3; avg = (float)(math + chinese + english)/3;}
+	float getAvg (){return avg;};
+	int getMath (){return math;};
+	int getCh (){return chinese;};
+	int getEng (){return english;};
+	string getName (){return name;};
+private:
+	string name;
+	int math;
+	int chinese;
+	int english;
+	float avg;
+};
+
+bool compare (CPersonalData *first, CPersonalData *second){
+	return (first->getAvg () > second->getAvg ());
+}
+void main (int argc, char** argv){
+	
+	if (argc != 3){
+		cout << "the command is\nexe_file input_file output_file" << endl;
+		return;
+	}
+	ifstream fin;
+	ofstream fout;
+	fin.open (argv[1]);
+	fout.open (argv[2]);
+	if (!fin){
+		cout << "input file " << argv [1] << "cannot be opened" << endl;
+		return;
+	} else if (!fout){
+		cout << "output file " << argv [2] << " cannot be opened" << endl;
+		return;
+	}
+	vector<CPersonalData *> myvec;
+	int data1, data2, data3, total = 0, counter = 0;
+	string name;
+	CPersonalData *buf;
+	while (fin >> name >> data1 >> data2 >> data3){
+		buf = new CPersonalData(name, data1, data2, data3);			
+		myvec.push_back (buf);
+	}
+	sort(myvec.begin(), myvec.end(), compare);
+	
+	for (vector<CPersonalData *>::iterator it = myvec.begin (); it != myvec.end(); it++){
+		fout << (*it)->getName () << "\t" << (*it)->getCh () << "\t" << (*it)->getEng () << "\t" << (*it)->getMath () << "\t" << (*it)->getAvg () << endl;
+	}
+
+	fin.close ();
+	fout.close();	
+}
