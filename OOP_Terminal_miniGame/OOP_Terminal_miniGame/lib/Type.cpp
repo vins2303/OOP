@@ -1,5 +1,17 @@
 #include "../include/Type.h"
 
+const Back_Pack_Type_Category toBack_Pack_Type_Category(Back_Pack_Type value) {
+    static map<Back_Pack_Type, Back_Pack_Type_Category> table;
+    static bool isInit = false;
+    if (isInit) return table[value];
+
+#define etype(a,b,c) table[ Back_Pack_Type::a ] = Back_Pack_Type_Category::c;
+    VALUE_Back_Pack_Type
+#undef etype
+        isInit = true;
+    return table[value];
+}
+
 /*
                 нIе]клл~
 */
@@ -7,7 +19,7 @@ const string toString(Back_Pack_Type value) {
     static map<Back_Pack_Type, string> table;
     static bool isInit = false;
     if (isInit) return table[value];
-#define etype(a,b) table[ Back_Pack_Type::a ] = b;
+#define etype(a,b,c) table[ Back_Pack_Type::a ] = b;
     VALUE_Back_Pack_Type
 #undef etype
         isInit = true;
@@ -18,7 +30,7 @@ const Back_Pack_Type toBack_Pack_Type(string value) {
     static map<string, Back_Pack_Type> table;
     static bool isInit = false;
     if (isInit) return table[value];
-#define etype(a,b) table[ b ] = Back_Pack_Type::a;
+#define etype(a,b,c) table[ b ] = Back_Pack_Type::a;
     VALUE_Back_Pack_Type
 #undef etype
         isInit = true;

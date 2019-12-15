@@ -5,7 +5,7 @@
 #define Equipment_DIR_PATH  ("Data/Account/" + account + "/" + name )
 
 #include "../../Attributes.h"
-
+//#include "../Back_Pack/Back_Pack.h"
 #include <string>
 #include<map>
 #include "Equipment_Attributes.h"
@@ -29,6 +29,8 @@ public:
     ~Equipment();
 
     Equipment_Attributes* Put_on(Equipment_Attributes* _E);
+
+    void Remove_Equipment(vector<Goods*>& goods);
 
     Equipment_Attributes* getWeapon();
     Equipment_Attributes* getDeputy();

@@ -49,6 +49,18 @@
     <Filter Include="標頭檔\keyboard_Event">
       <UniqueIdentifier>{2b3fc2cc-31d7-4c0f-a85f-ca7fe5ff27ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\LifeEntity\Fighting">
+      <UniqueIdentifier>{0aac1dd8-e54f-4651-8490-42572c0486dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\LifeEntity\Monster">
+      <UniqueIdentifier>{152945a6-5045-42f4-881c-c01673ce7aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\LifeEntity\Roles\Back_Pack">
+      <UniqueIdentifier>{1e9332c1-1814-474d-b9a1-8ec465f99160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\LifeEntity\Roles\Equipment">
+      <UniqueIdentifier>{d3fb6675-6d3e-4fcb-93dc-a751145425d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Map\Map_object.h">
@@ -114,6 +126,9 @@
     <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Consumables.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="include\LifeEntity\Monster\Drop.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map_object.cpp">
@@ -152,35 +167,38 @@
     <ClCompile Include="lib\keyboard_Event\Keyboard_Event.cpp">
       <Filter>來源檔案\keyboard_Event</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Monster\Monster.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Map\Map_Pos.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Fighting\Fighting.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Back_Pack.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="lib\Type.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment.cpp">
-      <Filter>來源檔案\LifeEntity\Roles</Filter>
+    <ClCompile Include="lib\LifeEntity\Fighting\Fighting.cpp">
+      <Filter>來源檔案\LifeEntity\Fighting</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment_Attributes.cpp">
-      <Filter>來源檔案</Filter>
+    <ClCompile Include="lib\LifeEntity\Monster\Drop.cpp">
+      <Filter>來源檔案\LifeEntity\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Goods.cpp">
-      <Filter>來源檔案</Filter>
+    <ClCompile Include="lib\LifeEntity\Monster\Monster.cpp">
+      <Filter>來源檔案\LifeEntity\Monster</Filter>
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\Roles\Role.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\LifeEntity\Roles</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment.cpp">
+      <Filter>來源檔案\LifeEntity\Roles\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Back_Pack.cpp">
+      <Filter>來源檔案\LifeEntity\Roles\Back_Pack</Filter>
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Consumables.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\LifeEntity\Roles\Back_Pack</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Goods.cpp">
+      <Filter>來源檔案\LifeEntity\Roles\Back_Pack</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment_Attributes.cpp">
+      <Filter>來源檔案\LifeEntity\Roles\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Map\Map_Pos.cpp">
+      <Filter>來源檔案\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

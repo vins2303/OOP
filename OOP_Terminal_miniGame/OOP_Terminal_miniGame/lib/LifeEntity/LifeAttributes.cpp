@@ -42,11 +42,11 @@ void LifeAttributes::addAttributes(Attributes& _att) {
     addMP(_att.getMP());
 }
 
-LifeAttributes* LifeAttributes::showHP(bool a_LV, bool show, bool LF) {
+LifeAttributes* LifeAttributes::showHP(bool a_LV, int _max, bool show, bool LF) {
     static int hp, maxhp;
     Draw::SetColor(4);
     hp = a_LV ? getHP() : Attributes::getHP();
-    maxhp = a_LV ? getMaxHP() : maxHP;
+    maxhp = _max == 0 ? (a_LV ? getMaxHP() : maxHP) : _max;
     cout << SHOW_HP_FRAME_BEGIN;
     for (int i = 0; i < SHOW_MAX_HP; i++)
         cout << SHOW_HP_FIGURE(i < (hp * (SHOW_MAX_HP / (double)(maxhp))));
@@ -57,11 +57,11 @@ LifeAttributes* LifeAttributes::showHP(bool a_LV, bool show, bool LF) {
     return this;
 }
 
-LifeAttributes* LifeAttributes::showMP(bool a_LV, bool show, bool LF) {
+LifeAttributes* LifeAttributes::showMP(bool a_LV, int _max, bool show, bool LF) {
     static int mp, maxmp;
     Draw::SetColor(1);
     mp = a_LV ? getMP() : Attributes::getMP();
-    maxmp = a_LV ? getMaxMP() : maxMP;
+    maxmp = _max == 0 ? (a_LV ? getMaxMP() : maxMP) : _max;
     cout << SHOW_MP_FRAME_BEGIN;
     for (int i = 0; i < SHOW_MAX_MP; i++)
         cout << SHOW_MP_FIGURE(i < (mp * (SHOW_MAX_MP / (double)(maxmp))));

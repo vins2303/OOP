@@ -15,7 +15,6 @@ using namespace std;
 
 class Back_Pack {
 private:
-
     string user_Account;
     string user_Name;
     int Money;
@@ -26,15 +25,17 @@ public:
 
     int getMoney();
     void setMoney(int _money);
-
+    int AddMoney(int _money);
     void Read_BackPack();
     void Save_BackPack();
+    void addGoods(Goods* _g);
+    Goods* findGoods(string _name);
     vector<Goods*>& getBackPack_Goods();
 private:
-    void Read_BackPack_Equipment();
+    /*void Read_BackPack_Equipment();
     void Read_BackPack_Consumables();
     void Save_BackPack_Equipment();
-    void Save_BackPack_Consumables();
+    void Save_BackPack_Consumables();*/
 };
 
 #endif // !1

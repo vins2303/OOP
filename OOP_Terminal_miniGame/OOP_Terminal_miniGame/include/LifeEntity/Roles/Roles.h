@@ -38,20 +38,24 @@ public:
     string getName();
     int getExp();
     int getUpExp();
-    //int getDrop();
-    /*string getRoleType_S();
-    RoleType getRoleType();*/
-    string getMap_Now();
-
     string setName(string _name);
     int setExp(int _exp);
     void setMap_Now(const string _map);
 
     int addExp(int _exp, bool percent = false);
-    //int addDrop(int _drop);
 
     bool isUpLv();
     bool UP_LV(); //¨¤¦â¤É¯Å
+
+    string getMap_Now();
+    /*                                       */
+    int getMaxHP();
+    int getMaxMP();
+    int getAttack();
+    int getSP();
+    int getDef();
+    int getCRT();
+    int getDrop();
 
     Map_object* set_Roles_Move_X(int _x, vector<Map_object*>& _object);
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);

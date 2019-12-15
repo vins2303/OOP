@@ -76,14 +76,19 @@ void Roles::Open_BackPack() {
     _row = 0;
     while (true) {
         system("cls");
+        show_State();
+        cout << "==================================== 背包 ====================================" << endl;
+        cout << "金幣：" << getMoney() << endl << endl;
         for (i = _row * 10; i < goods.size() && i < (_row + 1) * 10; i++) {
             cout << left << setw(3) << to_string(i % 10) + "." << " ";
             goods[i]->show_info();
         }
         cout << endl;
         if (_row != 0) cout << "(Q) 返回上一頁 ";
-        if (i < goods.size()) cout << "(W) 前往下一頁";
+        if (i < goods.size()) cout << "(W) 前往下一頁 ";
         cout << endl;
+        cout << "(E) 卸下裝備 " << endl;
+
         key = _getch();
         if (key == 27 || key == 'b' || key == 'B')
             break;
@@ -103,10 +108,30 @@ void Roles::Open_BackPack() {
         case 'W':
             if (i < goods.size()) _row++;
             break;
-
+        case 'e':
+        case 'E':
+            Remove_Equipment(getBackPack_Goods());
+            break;
         default:
             if ((key = key - '0') >= 0 && key < 10 && key + _row * 10 < (int)goods.size()) {
-                Back_Pack_User_Item(goods[(__int64)key + (__int64)_row * 10]);
+                int sel = 0;
+                system("cls");
+                cout << "1. 使用物品\n2. 丟棄物品";
+                while (sel == 0) {
+                    switch ((sel = _getch()))
+                    {
+                    case '1':
+                        Back_Pack_User_Item(goods[(__int64)key + (__int64)_row * 10]);
+                        break;
+                    case '2':
+                        delete goods[(__int64)key + (__int64)_row * 10];
+                        goods[(__int64)key + (__int64)_row * 10] = NULL;
+                        break;
+                    default:
+                        sel = 0;
+                        break;
+                    }
+                }
 
                 for (vector<Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
                     if (*it == NULL) {
@@ -160,6 +185,20 @@ int Roles::sum_Attributes(RaceType _race, RoleType _role, string _att) {
 //RoleType Roles::getRoleType() { return (role); }
 
 string Roles::getMap_Now() { return Map_Now; }
+
+int Roles::getMaxHP() { return LifeAttributes::getMaxHP() + Equipment::sumHP(); }
+
+int Roles::getMaxMP() { return LifeAttributes::getMaxMP() + Equipment::sumMP(); }
+
+int Roles::getAttack() { return LifeAttributes::getAttack() + Equipment::sumAttack(); }
+
+int Roles::getSP() { return LifeAttributes::getSP() + Equipment::sumSP(); }
+
+int Roles::getDef() { return LifeAttributes::getDef() + Equipment::sumHP(); }
+
+int Roles::getCRT() { return LifeAttributes::getCRT() + Equipment::sumHP(); }
+
+int Roles::getDrop() { return LifeAttributes::getDrop() + Equipment::sumHP(); }
 
 void Roles::Save_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
@@ -223,19 +262,19 @@ void Roles::Save_Roles() {
 
 void Roles::show_State() {
     system("cls");
-    cout << "\n\n\t\t\t角色狀態" << endl << endl;
-    cout << setw(20) << "角色名稱：" << " " << getName() << endl;
-    cout << setw(20) << "種族：" << " " << getRaceType_S() << endl;
-    cout << setw(20) << "職業：" << " " << getRoleType_S() << endl;
-    cout << setw(20) << "等級：" << " " << getLV() << endl;
-    cout << setw(20) << "生命：" << " "; showHP();
-    cout << setw(20) << "魔力：" << " "; showMP();
-    cout << setw(20) << "經驗值：" << " "; show_EXP();
-    cout << setw(20) << "攻擊力：" << " " << getAttack() << endl;
-    cout << setw(20) << "速度：" << " " << getSP() << endl;
-    cout << setw(20) << "暴擊：" << " " << getCRT() << "%" << endl;
-    cout << setw(20) << "減傷：" << " " << getDef() << "%" << endl;
-    cout << setw(20) << "掉寶率：" << " " << getDrop() << "%" << endl;
+    cout << "\n\t\t\t角色狀態" << endl << endl;
+    cout << setw(10) << "" << right << setw(10) << "角色名稱：" << " " << getName() << endl;
+    cout << setw(10) << "" << right << setw(10) << "種族：" << " " << getRaceType_S() << endl;
+    cout << setw(10) << "" << right << setw(10) << "職業：" << " " << getRoleType_S() << endl;
+    cout << setw(10) << "" << right << setw(10) << "等級：" << " " << getLV() << endl;
+    cout << setw(10) << "" << right << setw(10) << "生命：" << " "; showHP(true, getMaxHP());
+    cout << setw(10) << "" << right << setw(10) << "魔力：" << " "; showMP(true, getMaxMP());
+    cout << setw(10) << "" << right << setw(10) << "經驗值：" << " "; show_EXP();
+    cout << setw(10) << "" << right << setw(10) << "攻擊力：" << " " << getAttack() << endl;
+    cout << setw(10) << "" << right << setw(10) << "速度：" << " " << getSP() << endl;
+    cout << setw(10) << "" << right << setw(10) << "暴擊：" << " " << getCRT() << "%" << endl;
+    cout << setw(10) << "" << right << setw(10) << "減傷：" << " " << getDef() << "%" << endl;
+    cout << setw(10) << "" << right << setw(10) << "掉寶率：" << " " << getDrop() << "%" << endl;
     show_Equipment();
 }
 

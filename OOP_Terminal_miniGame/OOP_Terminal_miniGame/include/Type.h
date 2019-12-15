@@ -9,22 +9,36 @@ using namespace std;
 /*
                                  背包物品
 */
-#define VALUE_Back_Pack_Type \
-	    etype(Weapon, "武器") \
-	    etype(Deputy, "副武器") \
-	    etype(Helmet, "頭盔") \
-        etype(Breastplate, "胸甲")\
-        etype(Pants, "褲子")\
-        etype(Shoes, "鞋子")\
-        etype(Consumables, "消耗品")\
-        etype(Sundries, "雜物")
 
-#define etype(a, b) a,
+#define VALUE_Back_Pack_Type \
+	    etype(Weapon, "武器", Equipment) \
+	    etype(Deputy, "副武器", Equipment) \
+	    etype(Helmet, "頭盔", Equipment) \
+        etype(Breastplate, "胸甲", Equipment)\
+        etype(Pants, "褲子", Equipment)\
+        etype(Shoes, "鞋子", Equipment)\
+        etype(Consumables, "消耗品", Consumables)\
+        etype(Sundries, "雜物", Sundries)
+
+#define etype(a, b, c) a,
 enum class Back_Pack_Type : int { VALUE_Back_Pack_Type };
 #undef etype
 
 const string toString(Back_Pack_Type value);
 const Back_Pack_Type toBack_Pack_Type(string value);
+
+#define VALUE_Back_Pack_Type_Category \
+        etypeX(Equipment)\
+        etypeX(Consumables)\
+        etypeX(Sundries)
+
+#define etypeX(a) a,
+enum class Back_Pack_Type_Category :int { VALUE_Back_Pack_Type_Category };
+#undef etypeX
+
+const Back_Pack_Type_Category toBack_Pack_Type_Category(Back_Pack_Type value);
+
+//const Back_Pack_Type_
 
 /*
                                種族

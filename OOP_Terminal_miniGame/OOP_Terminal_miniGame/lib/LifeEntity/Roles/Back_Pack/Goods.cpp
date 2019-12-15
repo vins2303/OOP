@@ -1,10 +1,10 @@
 #include "../../../../include/LifeEntity/Roles/Back_Pack/Goods.h"
 
-Goods::Goods(string _name, int _lv, Back_Pack_Type _type, int _Quantity) :
+Goods::Goods(string _name, int _lv, int _Quantity) :
     Money(Read_Equipment_Attributes_int_ini(_name, "Money")),
     name(_name),
     LV(_lv),
-    type(_type),
+    type(toBack_Pack_Type(Tool::ReadStringIni(_name, "TYPE", "NULL", Read_Back_Pack_PATH))),
     Quantity(_Quantity),
     Attributes(
         Read_Equipment_Attributes_int_ini(_name, "HP"),
@@ -16,13 +16,18 @@ Goods::Goods(string _name, int _lv, Back_Pack_Type _type, int _Quantity) :
         Read_Equipment_Attributes_int_ini(_name, "Drop")
 
     ),
-    //Restricted_Role(toRoleType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Role", "NULL", "Data/Attributes/Equipment.ini"), " "))),
-    Restricted_Role(toRoleType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Role", "NULL", "Data/Attributes/Equipment.ini"), " "))),
-    Restricted_Race(toRaceType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Race", "NULL", "Data/Attributes/Equipment.ini"), " ")))
+    //Restricted_Role(toRoleType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Role", "NULL", Read_Back_Pack_PATH), " "))),
+    Restricted_Role(toRoleType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Role", "NULL", Read_Back_Pack_PATH), " "))),
+    Restricted_Race(toRaceType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Race", "NULL", Read_Back_Pack_PATH), " ")))
 {
 }
 
 Goods::~Goods() { }
+
+bool Goods::operator==(const Goods& _god) const
+{
+    return name == _god.name;
+}
 
 bool Goods::Usable(const RoleType& _role, const RaceType& _race) {
     return Usable_Role(_role) && Usable_Race(_race);
@@ -48,6 +53,8 @@ void Goods::setQuantity(int _num) {
         assert(false);
     }
 }
+
+void Goods::addQuantity(int _num) { Quantity += _num; }
 
 int Goods::getLV() { return LV; }
 

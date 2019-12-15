@@ -1,5 +1,4 @@
 #include"../../../../include/LifeEntity/Roles/Equipment/Equipment.h"
-#include "../../../../include/Tool/Tool.h"
 
 //Equipment::Equipment(
 //    Equipment_Attributes* _weapon,
@@ -72,6 +71,67 @@ Equipment_Attributes* Equipment::Put_on(Equipment_Attributes* _E) {
     }
     return retE;
 }
+
+void Equipment::Remove_Equipment(vector<Goods*>& goods) {
+    static int key;
+    while (1){
+        system("cls");
+        show_Equipment();
+        cout << "Esc 返回" << endl;
+        if (Weapon != NULL) cout << "1. 卸下武器" << endl;
+        if (Deputy != NULL)      cout << "2. 卸下副武器" << endl;
+        if (Helmet != NULL)      cout << "3. 卸下頭盔" << endl;
+        if (Breastplate != NULL) cout << "4. 卸下胸甲" << endl;
+        if (Pants != NULL)       cout << "5. 卸下褲子" << endl;
+        if (Shoes != NULL)       cout << "6. 卸下鞋子" << endl;
+
+        switch (_getch())
+        {
+        case '1':
+            if (Weapon != NULL) {
+                goods.push_back(Weapon);
+                Weapon = NULL;
+            }
+            break;
+        case '2':
+            if (Deputy != NULL) {
+                goods.push_back(Deputy);
+                Deputy = NULL;
+            }
+            break;
+        case '3':
+            if (Helmet != NULL) {
+                goods.push_back(Helmet);
+                Helmet = NULL;
+            }
+            break;
+        case '4':
+            if (Breastplate != NULL) {
+                goods.push_back(Breastplate);
+                Breastplate = NULL;
+            }
+            break;
+        case '5':
+            if (Pants != NULL) {
+                goods.push_back(Pants);
+                Pants = NULL;
+            }
+            break;
+        case '6':
+            if (Shoes != NULL) {
+                goods.push_back(Shoes);
+                Shoes = NULL;
+            }
+            break;
+        case 27:
+            return;
+        }
+    }
+}
+
+//void Equipment::Remove_Equipment(Back_Pack& back_pack)
+//{
+//}
 
 Equipment_Attributes* Equipment::getWeapon() { return Weapon; }
 Equipment_Attributes* Equipment::getDeputy() { return Deputy; }
@@ -151,14 +211,13 @@ int Equipment::sumCrt() {
 
 void Equipment::show_Equipment()
 {
-    cout << endl << endl << "==================================== 裝備 ====================================" << endl;
+    cout << endl << "==================================== 裝備 ====================================" << endl;
     if (Weapon != NULL)      Weapon->show_info();
     if (Deputy != NULL)      Deputy->show_info();
     if (Helmet != NULL)      Helmet->show_info();
     if (Breastplate != NULL) Breastplate->show_info();
     if (Pants != NULL)       Pants->show_info();
     if (Shoes != NULL)       Shoes->show_info();
-    cout << endl;
 }
 
 void Equipment::Save_Equipment() {
@@ -222,8 +281,7 @@ Equipment_Attributes* Equipment::Read_Equipment_Attributes(Back_Pack_Type _type)
     if (GetPrivateProfileInt(toString(_type).c_str(), "Have", 0, Equipment_INI_PATH.c_str())) {
         return new Equipment_Attributes(
             Tool::ReadStringIni(toString(_type), "Name", "NULL", Equipment_INI_PATH),
-            GetPrivateProfileInt(toString(_type).c_str(), "LV", INT_MAX, Equipment_INI_PATH.c_str()),
-            _type
+            GetPrivateProfileInt(toString(_type).c_str(), "LV", INT_MAX, Equipment_INI_PATH.c_str())
         );
     }
     return NULL;

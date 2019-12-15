@@ -15,6 +15,7 @@ public:
 
     bool Fighting_Start();
 private:
+    void Rand_Drop();
     void Moster_Attack();
     void Roles_Attack();
 };

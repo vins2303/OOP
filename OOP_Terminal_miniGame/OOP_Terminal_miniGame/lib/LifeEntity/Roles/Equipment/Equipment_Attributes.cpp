@@ -1,8 +1,8 @@
 #include "../../../../include/LifeEntity/Roles/Equipment/Equipment_Attributes.h"
 #include "../../../../include/Tool/Tool.h"
 
-Equipment_Attributes::Equipment_Attributes(string _name, int _lv, Back_Pack_Type _type) :
-    Goods(_name, _lv, _type)
+Equipment_Attributes::Equipment_Attributes(string _name, int _lv) :
+    Goods(_name, _lv)
 
 {}
 

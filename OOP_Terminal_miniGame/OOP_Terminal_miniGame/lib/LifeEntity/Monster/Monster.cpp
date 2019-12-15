@@ -12,9 +12,12 @@ Monster::Monster(Map_object _object) :
         Read_Moater_Attributes_ini(_object.getName().c_str(), "SP"),
         Read_Moater_Attributes_ini(_object.getName().c_str(), "DEF"),
         Read_Moater_Attributes_ini(_object.getName().c_str(), "CRT"),
-        Read_Moater_Attributes_ini(_object.getName().c_str(), "Drop")
+        //Read_Moater_Attributes_ini(_object.getName().c_str(), "Drop"),
+        0
     ),
-    exp(Read_Moater_Attributes_ini(_object.getName().c_str(), "EXP"))
+    exp(Read_Moater_Attributes_ini(_object.getName().c_str(), "EXP")),
+    Money(Read_Moater_Attributes_ini(_object.getName().c_str(), "Money")),
+    drop(Read_Drop())
 
 {}
 
@@ -31,10 +34,39 @@ void Monster::show_info(int _x, int _y) {
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "減傷：" << this->Attributes::getDef() << "%";
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "爆擊率：" << this->Attributes::getCRT() << "%";
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "經驗值：" << this->exp;
-    Draw::setXY(_x, _y++);     cout << right << setw(8) << "掉寶率：" << this->Attributes::getDrop()<<"%";
+    //Draw::setXY(_x, _y++);     cout << right << setw(8) << "掉寶率：" << this->Attributes::getDrop() << "%";
+    Draw::setXY(_x, _y++);     cout << right << setw(8) << "選賞金額：" << this->getMoney();
+    _y++;
+    Draw::setXY(_x, _y++); cout << "掉落物\t機率";
+    Draw::setXY(_x, _y++); cout << "------------";
+
+    for (vector<Drop*>::iterator it = drop.begin(); it != drop.end(); it++) {
+        Draw::setXY(_x, _y++); (*it)->show_info();
+    }
     Draw::setXY(_x, ++_y);     cout << "按 Q 進入戰鬥";
     Draw::setXY(_x, _y++);
 }
 
 int Monster::getExp() { return exp; }
-//void Monster::setExp(int _n) { exp = _n; }
+int Monster::getMoney() { return Money; }
+
+vector<Drop*>& Monster::getDrop() { return drop; }
+
+vector<Drop*> Monster::Read_Drop() {
+    string name;
+    int dop, n;
+    vector<Drop*> out;
+
+    ifstream Read_d(Read_Moater_DROP_PATH(string("ALL")));
+    while (Read_d >> name >> dop >> n) {
+        out.push_back(new Drop(name, dop, n));
+    }
+    Read_d.close();
+    Read_d.open(Read_Moater_DROP_PATH(getName()));
+    //ifstream Read_d(Read_Moater_DROP_PATH(getName()));
+    while (Read_d >> name >> dop >> n) {
+        out.push_back(new Drop(name, dop, n));
+    }
+    Read_d.close();
+    return out;
+}

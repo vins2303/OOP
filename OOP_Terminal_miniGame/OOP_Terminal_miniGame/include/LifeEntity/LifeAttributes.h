@@ -29,7 +29,7 @@ private:
 public:
     LifeAttributes(int _LV, int _HP, int _MP, int _attack, int _sp, int _def, int _drop, int _CRT, int _maxHP = -1, int _maxMP = -1);
     virtual ~LifeAttributes();
-    inline int getLV();
+    int getLV();
     int getMaxHP();
     int getMaxMP();
     int getAttack();
@@ -50,8 +50,8 @@ public:
     int addMaxMP(int _maxmp, bool percent = false);
     int addLV(int _lv = 1);
     void addAttributes(Attributes& _att);
-    LifeAttributes* showHP(bool a_LV = true, bool show = true, bool LF = true);
-    LifeAttributes* showMP(bool a_LV = true, bool show = true, bool LF = true);
+    LifeAttributes* showHP(bool a_LV = true, int _max = 0, bool show = true, bool LF = true);
+    LifeAttributes* showMP(bool a_LV = true, int _max = 0, bool show = true, bool LF = true);
 };
 
 #endif

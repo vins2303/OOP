@@ -17,7 +17,8 @@
 //#include "../Roles.h"
 using namespace std;
 
-#define Read_Equipment_Attributes_int_ini( lpAppName,lpKeyName) GetPrivateProfileInt((lpAppName).c_str(), lpKeyName, INT_MAX, "Data/Attributes/Equipment.ini")
+#define Read_Back_Pack_PATH "Data/Attributes/Back_Pack.ini"
+#define Read_Equipment_Attributes_int_ini( lpAppName,lpKeyName) GetPrivateProfileInt((lpAppName).c_str(), lpKeyName, INT_MAX, Read_Back_Pack_PATH)
 
 class Goods : public Attributes {
 private:
@@ -29,8 +30,10 @@ private:
     vector<RaceType> Restricted_Race;//總族限定
     Back_Pack_Type type;
 public:
-    Goods(string _name, int _lv, Back_Pack_Type _type, int _Quantity = 1);
+    Goods(string _name, int _lv, int _Quantity = 1);
     virtual ~Goods();
+
+    bool operator== (const Goods& _god) const;
 
     /*                  種族 or 職業限定              */
     bool Usable(const RoleType& _role, const RaceType& _race);
@@ -39,6 +42,7 @@ public:
 
     int getQuantity();
     void setQuantity(int _num = 1);
+    void addQuantity(int _num = 1);
     int getLV();
     int getMoney();
     string getName();
