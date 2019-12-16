@@ -1,10 +1,9 @@
-#include "../Roles/Roles.h"
-#include "../Monster/Monster.h"
 #ifndef _FIGHTING_H_
 #define _FIGHTING_H_
 
+#include "../Monster/Monster.h"
+#include "../Roles/Roles.h"
 #include <conio.h>
-
 class Fighting {
 private:
     Roles* roles;

@@ -36,10 +36,16 @@ int LifeAttributes::addMaxMP(int _maxmp, bool percent) {
 }
 
 int LifeAttributes::addLV(int _add) { return setLV(getLV() + _add); }
+//
+//void LifeAttributes::addAttributes(Attributes& _att) {
+//    addHP(_att.getHP());
+//    addMP(_att.getMP());
+//}
 
-void LifeAttributes::addAttributes(Attributes& _att) {
+LifeAttributes& LifeAttributes::operator+=(Attributes& _att) {
     addHP(_att.getHP());
     addMP(_att.getMP());
+    return *this;
 }
 
 LifeAttributes* LifeAttributes::showHP(bool a_LV, int _max, bool show, bool LF) {

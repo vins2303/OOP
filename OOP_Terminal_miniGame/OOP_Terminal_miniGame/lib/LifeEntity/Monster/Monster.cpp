@@ -47,6 +47,15 @@ void Monster::show_info(int _x, int _y) {
     Draw::setXY(_x, _y++);
 }
 
+void Monster::show_info_Fighting() {
+    cout << right << setw(8) << "等級：" << this->getLV()<<endl;
+    cout << right << setw(8) << "生命："; this->showHP(false);
+    cout << right << setw(8) << "攻擊力：" << this->Attributes::getAttack() << endl;
+    cout << right << setw(8) << "速度：" << this->Attributes::getSP() << endl;
+    cout << right << setw(8) << "減傷：" << this->Attributes::getDef() << "%" << endl;
+    cout << right << setw(8) << "爆擊率：" << this->Attributes::getCRT() << "%" << endl;
+}
+
 int Monster::getExp() { return exp; }
 int Monster::getMoney() { return Money; }
 

@@ -49,7 +49,8 @@ public:
     int addMaxHP(int _maxhp, bool percent = false);
     int addMaxMP(int _maxmp, bool percent = false);
     int addLV(int _lv = 1);
-    void addAttributes(Attributes& _att);
+    //void addAttributes(Attributes& _att);
+    LifeAttributes& operator+=(Attributes& att);
     LifeAttributes* showHP(bool a_LV = true, int _max = 0, bool show = true, bool LF = true);
     LifeAttributes* showMP(bool a_LV = true, int _max = 0, bool show = true, bool LF = true);
 };

@@ -1,5 +1,6 @@
 #include "../../../../include/LifeEntity/Roles/Equipment/Equipment_Attributes.h"
 #include "../../../../include/Tool/Tool.h"
+#include <iomanip>
 
 Equipment_Attributes::Equipment_Attributes(string _name, int _lv) :
     Goods(_name, _lv)
@@ -9,14 +10,24 @@ Equipment_Attributes::Equipment_Attributes(string _name, int _lv) :
 Equipment_Attributes::~Equipment_Attributes() {}
 
 void Equipment_Attributes::show_info() {
-    cout << getType_S() << "\t" << getName() << " 等級：" << getLV() << "\t";
-    if (getHP() != 0) cout << "生命：" << getHP() << "\t";
-    if (getMP() != 0) cout << "魔力：" << getMP() << "\t";
-    if (getAttack() != 0) cout << "攻擊力：" << getAttack() << "\t";
-    if (getSP() != 0) cout << "速度：" << getSP() << "	";
-    if (getDef() != 0) cout << "減傷：" << getDef() << "%\t";
-    if (getCRT() != 0) cout << "暴擊：" << getCRT() << "%\t";
-    if (getDrop() != 0) cout << "調寶率：" << getDrop() << "\t";
+    cout << left << setw(8) << getType_S() << getName() << "\t等級：" << left << setw(4) << getLV() << "\t";
+    if (getHP() != 0) cout << "生命：" << left << setw(5) << getHP() << "\t";
+    if (getMP() != 0) cout << "魔力：" << left << setw(5) << getMP() << "\t";
+    if (getAttack() != 0) cout << "攻擊力：" << left << setw(5) << getAttack() << "\t";
+    if (getSP() != 0) cout << "速度：" << left << setw(5) << getSP() << "\t";
+    if (getDef() != 0) cout << "減傷：" << left << setw(5) << getDef() << "%\t";
+    if (getCRT() != 0) cout << "暴擊：" << left << setw(5) << getCRT() << "%\t";
+    if (getDrop() != 0) cout << "調寶率：" << left << setw(5) << getDrop() << "\t";
+    if (getRestricted_Role()[0] != RoleType::null) {
+        cout << "限定職業：";
+        for (vector<RoleType>::iterator it = getRestricted_Role().begin(); it != getRestricted_Role().end(); it++)
+            cout << toString(*it) << " ";
+    }
+    if (getRestricted_Race()[0] != RaceType::null) {
+        cout << "限定種族：";
+        for (vector<RaceType>::iterator it = getRestricted_Race().begin(); it != getRestricted_Race().end(); it++)
+            cout << toString(*it) << " ";
+    }
     cout << endl << endl;
 }
 

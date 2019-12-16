@@ -21,7 +21,7 @@ public:
     Monster(Map_object _object);
     virtual ~Monster();
     void show_info(int _x, int _y = 0);
-
+    void show_info_Fighting();
     int getExp();
     int getMoney();
     vector<Drop*>& getDrop();

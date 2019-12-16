@@ -107,7 +107,7 @@ bool RolesList::addRoles() {
 
     while (1) {
         system("cls");
-        Tool::getIpAppName("Data/Account/" + GetAccount() + "/Roles.ini", namelist);
+        Tool::ReadIpAppName("Data/Account/" + GetAccount() + "/Roles.ini", namelist);
         if (namelist.size() > 2) {
             isEnd = true;
             cout << "角色以到達上限!" << endl;
@@ -130,7 +130,7 @@ bool RolesList::addRoles() {
     if (!isEnd) {
         isEnd = false;
         vector<string> TypeList;
-        Tool::getIpAppName("Data/Attributes/Race.ini", TypeList);
+        Tool::ReadIpAppName("Data/Attributes/Race.ini", TypeList);
         show_Total_RaceInfo(TypeList, "Data/Attributes/Race.ini", 0);
 
         while (!isEnd) {
@@ -147,7 +147,7 @@ bool RolesList::addRoles() {
         if (isEnd) {
             isEnd = false;
             system("cls");
-            Tool::getIpAppName("Data/Attributes/Role.ini", TypeList);
+            Tool::ReadIpAppName("Data/Attributes/Role.ini", TypeList);
             show_Total_RaceInfo(TypeList, "Data/Attributes/Role.ini", 0);
             while (!isEnd) {
                 getKey = _getch();
@@ -185,6 +185,7 @@ bool RolesList::addRoles() {
                     WritePrivateProfileString(name.c_str(), "ObjectWidth", ROLES_OBJECT_WIDTH, outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "ObjectHeigh", ROLES_OBJECT_HEIGHT, outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "Money", "100", outfile.c_str());
+                    WritePrivateProfileString(name.c_str(), "Skill_Point", "1", outfile.c_str());
 
                     cout << "新增角色成功!" << endl;
                     system("pause");
@@ -200,7 +201,7 @@ void RolesList::FindRoles(vector<Roles*>& out) {
     Roles* roles;
     string inifile = "Data/Account/" + GetAccount() + "/Roles.ini";
     vector<string> roleslist;
-    Tool::getIpAppName(inifile, roleslist);
+    Tool::ReadIpAppName(inifile, roleslist);
     CString read_ini;
     RaceType race;
     RoleType role;

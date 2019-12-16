@@ -66,7 +66,7 @@ vector<string> Tool::SplitString(const string input_string, const string c) {
     return v;
 }
 
-void Tool::getIpAppName(string _path, vector<string>& _data) {
+void Tool::ReadIpAppName(string _path, vector<string>& _data) {
     TCHAR name[2048] = { 0 };
     string ss = "";
     GetPrivateProfileSectionNames(name, 2048, _path.c_str());
@@ -91,4 +91,16 @@ string Tool::ReadStringIni(string lpAppName, string lpKeyName, string lpDefaut, 
     GetPrivateProfileString(lpAppName.c_str(), lpKeyName.c_str(), lpDefaut.c_str(), read.GetBuffer(255), 255, lpFileName.c_str());
     read.ReleaseBuffer();
     return string(read);
+}
+
+void Tool::Delay(int sec) {
+    time_t _t;
+    _t = time(NULL);
+    static int n;
+    while (time(NULL) <= _t + sec) {
+        if (_kbhit()) {
+            n = _getch();
+            return;
+        }
+    }
 }

@@ -9,6 +9,7 @@
 #include <Windows.h>
 #include "../../Map/Map_object.h"
 //#include "../../Map/Game_Map.h"
+#include "Skill/Skill_LIst.h"
 #include "Equipment/Equipment.h"
 #include "Back_Pack/Back_Pack.h"
 #include "Race.h"
@@ -21,7 +22,7 @@ using std::string;
 #define ROLES_OBJECT_WIDTH "6"
 #define ROLES_OBJECT_HEIGHT "3"
 
-class Roles : public  LifeAttributes, public Equipment, public Race, public Role, public Map_object, public Back_Pack {
+class Roles : public  LifeAttributes, public Equipment, public Race, public Role, public Map_object, public Back_Pack, public Skill_List {
 private:
     string account;
     string name;
@@ -51,6 +52,7 @@ public:
     /*                                       */
     int getMaxHP();
     int getMaxMP();
+
     int getAttack();
     int getSP();
     int getDef();

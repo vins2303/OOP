@@ -32,8 +32,11 @@
     <ClInclude Include="include\LifeEntity\LifeAttributes.h" />
     <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment_Attributes.h" />
     <ClInclude Include="include\LifeEntity\Roles\Race.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Restricted.h" />
     <ClInclude Include="include\LifeEntity\Roles\Role.h" />
     <ClInclude Include="include\LifeEntity\Roles\Roles.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Skill\Skill.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Skill\Skill_LIst.h" />
     <ClInclude Include="include\Map\Draw.h" />
     <ClInclude Include="include\Map\Game_Map.h" />
     <ClInclude Include="include\Map\Map_object.h" />
@@ -45,9 +48,12 @@
   <ItemGroup>
     <ClCompile Include="lib\LifeEntity\Monster\Drop.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Consumables.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Restricted.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Role.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Goods.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Equipment\Equipment_Attributes.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Skill\Skill.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Skill\Skill_List.cpp" />
     <ClCompile Include="lib\Type.cpp" />
     <ClCompile Include="lib\Account\Account.cpp" />
     <ClCompile Include="lib\Account\RolesList.cpp" />

@@ -35,9 +35,18 @@ bool Consumables::isUse() {
 }
 
 void Consumables::Use(LifeAttributes& _life) {
-    _life.addAttributes(*this);
-    _life.showHP();
-    _life.showMP();
-    setQuantity(getQuantity() - 1);
+    static int n;
+    cout << "使用幾個：";
+    cin >> n;
+    if (n < 1) n = 1;
+    if (n > getQuantity()) {
+        cout << "數量不足" << endl;
+    }
+    else {
+        for (int i = 0; i < n; i++) _life += *this;
+        _life.showHP();
+        _life.showMP();
+        setQuantity(getQuantity() - 1);
+    }
     system("pause");
 }

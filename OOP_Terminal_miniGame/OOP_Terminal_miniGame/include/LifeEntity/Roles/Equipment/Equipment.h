@@ -54,7 +54,7 @@ public:
     int sumSP();
     int sumDef();
     int sumCrt();
-
+    int sumDrop();
     void show_Equipment();
     void Save_Equipment();
     Equipment_Attributes* Read_Equipment_Attributes(Back_Pack_Type _type);

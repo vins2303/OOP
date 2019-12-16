@@ -209,6 +209,18 @@ int Equipment::sumCrt() {
     return sum;
 }
 
+int Equipment::sumDrop(){
+    int sum = 0;
+    if (Weapon != NULL)      sum += Weapon->getDrop();
+    if (Deputy != NULL)      sum += Deputy->getDrop();
+    if (Helmet != NULL)      sum += Helmet->getDrop();
+    if (Breastplate != NULL) sum += Breastplate->getDrop();
+    if (Pants != NULL)       sum += Pants->getDrop();
+    if (Shoes != NULL)       sum += Shoes->getDrop();
+    if (sum > 100) sum = 100;
+    return sum;
+}
+
 void Equipment::show_Equipment()
 {
     cout << endl << "==================================== ¸Ë³Æ ====================================" << endl;

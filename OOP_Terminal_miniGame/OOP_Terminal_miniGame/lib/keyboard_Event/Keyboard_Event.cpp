@@ -67,6 +67,12 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
             isDraw = true;
             _isDrawMap = true;
             break;
+        case 'k':
+            roleslist->getRoles()->Skill_Menu();
+            isDraw = true;
+            _isDrawMap = true;
+            break;
+
         case 27:
             Esc_Table();
             isDraw = true;
@@ -174,7 +180,7 @@ void Keyboard_Event::Fighting_Fun(Monster* _obj) {
     fig.Fighting_Start();
     maplist->find(roleslist->getRoles()->getMap_Now())->second->Clear_0HP_Monster();
     if (roleslist->getRoles()->getHP() == 0) {
-        cout << "你已經死亡!" << endl;
+        //cout << "你已經死亡!" << endl;
 
         roleslist->getRoles()->setHP(roleslist->getRoles()->getMaxHP());
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find("市集")->second, _obj);

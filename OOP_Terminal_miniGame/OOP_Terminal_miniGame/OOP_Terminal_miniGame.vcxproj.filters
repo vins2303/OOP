@@ -129,6 +129,15 @@
     <ClInclude Include="include\LifeEntity\Monster\Drop.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Skill\Skill.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Skill\Skill_LIst.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Restricted.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map_object.cpp">
@@ -199,6 +208,15 @@
     </ClCompile>
     <ClCompile Include="lib\Map\Map_Pos.cpp">
       <Filter>來源檔案\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Restricted.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Skill\Skill.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Skill\Skill_List.cpp">
+      <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

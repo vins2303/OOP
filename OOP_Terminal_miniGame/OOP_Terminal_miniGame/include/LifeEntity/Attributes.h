@@ -4,7 +4,7 @@
 #include "Attributes.h"
 using namespace std;
 
-#define LV_Magnification( num )  (int)((double)(num) + (double)(num)  * (double)((double)getLV() - 1.0) * 0.5  )
+#define LV_Magnification( num )  (int)((double)(num) + (double)(num)  * (double)((double)getLV() - 1.0) * 0.2  )
 #define AttributesMaxLV 100
 
 class Attributes {

@@ -7,21 +7,43 @@ Fighting::Fighting(Roles* _roles, Monster* _moster) :
 }
 
 bool Fighting::Fighting_Start() {
-    system("cls");
+    static int key;
     while (roles->getHP() > 0 && monster->getHP() > 0) {
+        system("cls");
+        while (1) {
+            cout << "=================== 角色狀態 ===================" << endl;
+            roles->show_State();
+            cout << "=================== 怪物狀態 ===================" << endl;
+            monster->show_info_Fighting();
+            cout << "\n(1)普通攻擊 (2)使用技能 (3)打開背包" << endl;
+
+            key = _getch();
+            if (key == '1') {
+                break;
+            }
+            else if (key == '2') {
+                if (roles->Us_Skill(*roles)) {
+                    break;
+                }
+            }
+            else if (key == '3') {
+                roles->Open_BackPack();
+            }
+        }
+        //===============================================================================
         if (roles->getSP() > monster->getSP()) {
             Roles_Attack();
             if (monster->getHP() > 0) Moster_Attack();
         }
         else {
             Moster_Attack();
-            if (roles->getHP() > 0)Roles_Attack();
+            if (roles->getHP() > 0) Roles_Attack();
         }
-        cout << "怪物:"; monster->showHP(false);
-        cout << "勇者:"; roles->showHP()->showMP();
-        cout << endl;
-    }
 
+        roles->Round_End();
+        Tool::Delay(2);
+    }
+    system("cls");
     if (roles->getHP() > 0) {
         roles->addExp(monster->getExp());
         roles->AddMoney(monster->getMoney());
@@ -78,7 +100,7 @@ void Fighting::Rand_Drop() {
 
                     break;
                 }
-                if (key != 0 || (key == 'a' || key == 'A')) break;
+                if ((key == 'a' || key == 'A') || (key == 'Y' || key == 'y') || (key == 'N' || key == 'N')) break;
             }
         }
     }

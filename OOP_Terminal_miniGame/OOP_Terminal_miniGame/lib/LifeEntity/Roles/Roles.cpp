@@ -33,6 +33,13 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
         sum_Attributes(_race, _role, "Drop"),
         sum_Attributes(_race, _role, "HP"),
         sum_Attributes(_race, _role, "MP")
+    ),
+    /*Skill*/
+    Skill_List(
+        _account,
+        _name,
+        _race,
+        _role
     )
 {}
 
@@ -65,6 +72,7 @@ bool Roles::UP_LV() {
         setHP(getMaxHP());
         setMP(getMaxMP());
         setExp(0);
+        addSkill_Point();
         return true;
     }
     return false;
@@ -169,8 +177,8 @@ void Roles::Back_Pack_User_Item(Goods*& _gds) {
             }
         }
         else {
-            if (_gds->Usable_Role(get_RoleType()) == false) cout << "你的職業無法使用!" << endl;
-            if (!_gds->Usable_Race(getRaceType()) == false) cout << "你的種族無法使用!" << endl;
+            if (!_gds->Usable_Role(get_RoleType())) cout << "你的職業無法使用!" << endl;
+            if (!_gds->Usable_Race(getRaceType())) cout << "你的種族無法使用!" << endl;
             cout << endl;
             system("pause");
         }
@@ -186,19 +194,27 @@ int Roles::sum_Attributes(RaceType _race, RoleType _role, string _att) {
 
 string Roles::getMap_Now() { return Map_Now; }
 
-int Roles::getMaxHP() { return LifeAttributes::getMaxHP() + Equipment::sumHP(); }
+int Roles::getMaxHP() {
+    if (getHP() > LifeAttributes::getMaxHP() + Equipment::sumHP() + Skill_List::Sum_Skill_HP())
+        setHP(LifeAttributes::getMaxHP() + Equipment::sumHP() + Skill_List::Sum_Skill_HP());
+    return LifeAttributes::getMaxHP() + Equipment::sumHP() + Skill_List::Sum_Skill_HP();
+}
 
-int Roles::getMaxMP() { return LifeAttributes::getMaxMP() + Equipment::sumMP(); }
+int Roles::getMaxMP() {
+    if (getMP() > LifeAttributes::getMaxMP() + Equipment::sumMP() + Skill_List::Sum_Skill_MP())
+        setMP(LifeAttributes::getMaxMP() + Equipment::sumMP() + Skill_List::Sum_Skill_MP());
+    return LifeAttributes::getMaxMP() + Equipment::sumMP() + Skill_List::Sum_Skill_MP();
+}
 
-int Roles::getAttack() { return LifeAttributes::getAttack() + Equipment::sumAttack(); }
+int Roles::getAttack() { return LifeAttributes::getAttack() + Equipment::sumAttack() + Skill_List::Sum_Skill_Attack(); }
 
-int Roles::getSP() { return LifeAttributes::getSP() + Equipment::sumSP(); }
+int Roles::getSP() { return LifeAttributes::getSP() + Equipment::sumSP() + Skill_List::Sum_Skill_SP(); }
 
-int Roles::getDef() { return LifeAttributes::getDef() + Equipment::sumHP(); }
+int Roles::getDef() { return LifeAttributes::getDef() + Equipment::sumDef() + Skill_List::Sum_Skill_Def(); }
 
-int Roles::getCRT() { return LifeAttributes::getCRT() + Equipment::sumHP(); }
+int Roles::getCRT() { return LifeAttributes::getCRT() + Equipment::sumCrt() + Skill_List::Sum_Skill_CRT(); }
 
-int Roles::getDrop() { return LifeAttributes::getDrop() + Equipment::sumHP(); }
+int Roles::getDrop() { return LifeAttributes::getDrop() + Equipment::sumDrop() + Skill_List::Sum_Skill_Drop(); }
 
 void Roles::Save_Roles_info() {
     string outfile = "Data/Account/" + account + "/Roles.ini";
@@ -258,6 +274,7 @@ void Roles::Save_Roles() {
     Save_Roles_info();
     Save_BackPack();
     Save_Equipment();
+    Save_Skill();
 }
 
 void Roles::show_State() {
