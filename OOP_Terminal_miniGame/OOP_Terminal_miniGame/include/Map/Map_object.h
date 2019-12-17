@@ -33,9 +33,9 @@ public:
 
     Map_object setObject(objectType _M);
 
-    int get_seat_X();
-    int get_seat_Y();
-    int get_Map_Width();
+    int get_Point_X();
+    int get_Point_Y();
+    int get_Width();
     int getHeigh();
     string getImage();
     string getName();

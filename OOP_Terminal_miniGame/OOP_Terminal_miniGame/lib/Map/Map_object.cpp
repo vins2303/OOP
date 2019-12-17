@@ -14,10 +14,10 @@ Map_object::~Map_object() {}
 //判斷兩個物件重疊
 bool Map_object::operator == (const Map_object& object) {
     //if (&object == NULL) return false;
-    if (this->get_seat_X() + this->get_Map_Width() > object.X&&
-        object.X + object.width > this->get_seat_X() &&
-        this->get_seat_Y() + this->getHeigh() > object.Y&&
-        object.Y + object.heigh > this->get_seat_Y()
+    if (this->get_Point_X() + this->get_Width() > object.X&&
+        object.X + object.width > this->get_Point_X() &&
+        this->get_Point_Y() + this->getHeigh() > object.Y&&
+        object.Y + object.heigh > this->get_Point_Y()
         )
         return true;
     else
@@ -31,9 +31,9 @@ Map_object Map_object::setObject(objectType _M) {
     return *this;
 }
 
-int Map_object::get_seat_X() { return X; }
-int Map_object::get_seat_Y() { return Y; }
-int Map_object::get_Map_Width() { return width; }
+int Map_object::get_Point_X() { return X; }
+int Map_object::get_Point_Y() { return Y; }
+int Map_object::get_Width() { return width; }
 int Map_object::getHeigh() { return heigh; }
 string Map_object::getImage() { return image; }
 
@@ -75,7 +75,7 @@ void Map_object::clear_Draw_Object() {
 
 Map_object* Map_object::Object_Overlapping(vector<Map_object*>& _object) {
     for (vector<Map_object*>::iterator it = _object.begin(); it != _object.end(); it++) {
-        if ((*this == **it)) {
+        if ((*this == **it) && (*it) != this) {
             return *it;
         }
     }

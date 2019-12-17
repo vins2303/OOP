@@ -16,6 +16,7 @@ void Keyboard_Event::Run() {
             maplist->find(roleslist->getRoles()->getMap_Now())->second->setRoles(roleslist->getRoles());
             maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
         }
+        //SetTimer(;
         while (roleslist->getRoles() != NULL) {
             Read_Key(isDrawMap);
         }
@@ -27,6 +28,8 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
     static Map_object* overlapping_object;
     static int get_Key;
     overlapping_object = NULL;
+
+    maplist->find(roleslist->getRoles()->getMap_Now())->second->Monster_Move_Time();
     if (_kbhit() || Buff_Key != 0) {
         isDraw = true;
         get_Key = Buff_Key != 0 ? Buff_Key : _getch();
@@ -34,21 +37,22 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
         {
         case 72:// Move Up
             isDraw = true;
-            overlapping_object = roleslist->getRoles()->set_Roles_Move_Y(roleslist->getRoles()->get_seat_Y() - 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
+
+            overlapping_object = roleslist->getRoles()->set_Roles_Move_Y(roleslist->getRoles()->get_Point_Y() - 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
             break;
         case 75:// Move Left
             isDraw = true;
-            overlapping_object = roleslist->getRoles()->set_Roles_Move_X(roleslist->getRoles()->get_seat_X() - 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
+            overlapping_object = roleslist->getRoles()->set_Roles_Move_X(roleslist->getRoles()->get_Point_X() - 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
             break;
 
         case 80:// Move Down
             isDraw = true;
-            overlapping_object = roleslist->getRoles()->set_Roles_Move_Y(roleslist->getRoles()->get_seat_Y() + 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
+            overlapping_object = roleslist->getRoles()->set_Roles_Move_Y(roleslist->getRoles()->get_Point_Y() + 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
             break;
 
         case 77:// Move Right
             isDraw = true;
-            overlapping_object = roleslist->getRoles()->set_Roles_Move_X(roleslist->getRoles()->get_seat_X() + 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
+            overlapping_object = roleslist->getRoles()->set_Roles_Move_X(roleslist->getRoles()->get_Point_X() + 1, maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Object_List());
             break;
         case 'i':
             roleslist->getRoles()->show_State();
@@ -103,17 +107,18 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
         //break;
 /*====================================================================================================================================*/
     case objectType::Monster:
-        ((Monster*)_obj)->show_info(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 2);
+        ((Monster*)_obj)->show_info(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 2);
         Buff_Key = _getch();
         if (Buff_Key == 'q' || Buff_Key == 'Q') {
             Fighting_Fun((Monster*)_obj);
             roleslist->getRoles()->Save_Roles();
             return true;
         }
-        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Map_Width() + 1, 0, 20, 30);
+        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 1, 0, 20, 30);
         return false;
         /*====================================================================================================================================*/
         //break;
+        //case objectType::
     default:
         break;
     }

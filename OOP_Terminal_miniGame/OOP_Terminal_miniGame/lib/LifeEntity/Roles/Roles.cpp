@@ -225,9 +225,9 @@ void Roles::Save_Roles_info() {
     WritePrivateProfileString(name.c_str(), "MP", to_string(getMP()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "EXP", to_string(getExp()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "MapNow", getMap_Now().c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "ObjectX", to_string(get_seat_X()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "ObjectY", to_string(get_seat_Y()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Map_Width()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectX", to_string(get_Point_X()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectY", to_string(get_Point_Y()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Width()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Money", to_string(getMoney()).c_str(), outfile.c_str());
 }
@@ -238,9 +238,9 @@ Map_object* Roles::set_Roles_Move_X(int _x, vector<Map_object*>& _object) {
     static Map_object* over;
     static int posX;
     over = NULL;
-    posX = get_seat_X();
+    posX = get_Point_X();
     Map_object::set_Point_X(_x);
-    if ((over = Object_Overlapping(_object)) != NULL || get_seat_X() < 1 || get_seat_X() > MAP_WIDTH_DEF - get_Map_Width()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_Point_X() < 1 || get_Point_X() > MAP_WIDTH_DEF - get_Width()) {
         Map_object::set_Point_X(posX);
     }
     else {
@@ -256,9 +256,9 @@ Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
     static Map_object* over;
     static int posY;
     over = NULL;
-    posY = get_seat_Y();
+    posY = get_Point_Y();
     Map_object::set_Point_Y(_y);
-    if ((over = Object_Overlapping(_object)) != NULL || get_seat_Y() < 1 || get_seat_Y() > MAP_HIGH_DEF - getHeigh()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_Point_Y() < 1 || get_Point_Y() > MAP_HIGH_DEF - getHeigh()) {
         Map_object::set_Point_Y(posY);
         //Y = posY;
     }

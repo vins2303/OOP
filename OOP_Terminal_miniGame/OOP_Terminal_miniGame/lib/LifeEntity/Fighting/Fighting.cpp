@@ -111,7 +111,8 @@ void Fighting::Moster_Attack() {
     static bool _CRT;
     //static bool
     _CRT = (rand() % 100) < monster->getCRT();
-    _attack = (((rand() % monster->Attributes::getAttack() + 1) * (_CRT ? 2 : 1)));
+    _attack = rand() % 20 - 10;
+    _attack = (((monster->Attributes::getAttack() + (int)((double)_attack * 0.01 * (double)monster->Attributes::getAttack())) * (_CRT ? 2 : 1)));
     _attack = (int)(_attack - (double)_attack * (double)roles->getDef() * 0.01);
     if (_attack < 1) _attack = 1;
     roles->addHP(_attack * -1);

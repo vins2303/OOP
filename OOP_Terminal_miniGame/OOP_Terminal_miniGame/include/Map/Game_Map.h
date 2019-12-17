@@ -23,7 +23,7 @@ public:
     ~Game_Map();
 
     //Map_object::objectType getMap(int _x, int _y);
-    int get_Map_Width();
+    int get_Width();
     int get_Map_High();
     Roles* getRoles();
     string get_Map_Name();
@@ -42,7 +42,7 @@ public:
 
     /*                    Monster                    */
     void Rand_Monster(string _Map_Path = "");
-
+    void Monster_Move_Time();
     /*                    Ã¸»s¦a¹Ï                     */
     void Main_Draw(bool& _isDraw, bool& _isDrawMap);
     void show_Map_And_Roles(const bool is_Draw_Map_Object, const bool is_Draw_Roles_Object = true);
