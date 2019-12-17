@@ -16,6 +16,8 @@ Goods::Goods(string _name, int _lv, int _Quantity) :
         Read_Equipment_Attributes_int_ini(_name, "Drop")
 
     ),
+    Weight(Read_Equipment_Attributes_int_ini(_name, "Weight"))
+    ,
     //Restricted_Role(toRoleType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Role", "NULL", Read_Back_Pack_PATH), " "))),
     Restricted(
         toRoleType_List(Tool::SplitString(Tool::ReadStringIni(_name, "Role", "NULL", Read_Back_Pack_PATH), " ")),
@@ -46,6 +48,9 @@ bool Goods::operator==(const Goods& _god) const
 //}
 
 int Goods::getMoney() { return Money; }
+
+int Goods::getWight() { return Quantity * Weight; }
+int Goods::getWight_one() { return Weight; }
 
 int Goods::getQuantity() { return Quantity; }
 

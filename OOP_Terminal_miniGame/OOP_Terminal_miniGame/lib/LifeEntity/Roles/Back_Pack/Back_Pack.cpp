@@ -16,7 +16,11 @@ Back_Pack::Back_Pack(string _account, string _user_name, int _Money) :
     Read_BackPack();
 }
 
-Back_Pack::~Back_Pack() { }
+Back_Pack::~Back_Pack() {
+    for (vector<Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
+        delete* it;
+    }
+}
 
 int Back_Pack::getMoney() { return Money; }
 

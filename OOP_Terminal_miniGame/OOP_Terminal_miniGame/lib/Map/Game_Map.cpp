@@ -135,12 +135,12 @@ bool Game_Map::Map_Transmission(Game_Map* _map, Map_object* _obj) {
     _map->setRoles(roles);
     roles->setMap_Now(_map->get_Map_Name());
     if (roles->get_Point_X() > width / 3 * 2)
-        roles->set_Point_X(1 + _obj->get_Width());
+        roles->set_Point_X(2 + _obj->get_Width());
     else if (roles->get_Point_X() < width / 3)
         roles->set_Point_X(width - roles->get_Width() - _obj->get_Width());
 
     if (roles->get_Point_Y() > high / 3 * 2)
-        roles->set_Point_Y(1 + _obj->getHeigh());
+        roles->set_Point_Y(2 + _obj->getHeigh());
     else if (roles->get_Point_Y() < high / 3)
         roles->set_Point_Y(high - roles->getHeigh() - _obj->getHeigh() - 1);
 
@@ -207,22 +207,23 @@ void Game_Map::Monster_Move_Time() {
 
                     switch (rand() % 4) {
                     case 0:
-                        (*it)->set_Point_X(back_x - 2);
+                        (*it)->set_Point_X(back_x - (rand() % 4 + 1));
                         break;
                     case 1:
-                        (*it)->set_Point_X(back_x + 2);
+                        (*it)->set_Point_X(back_x + (rand() % 4 + 1));
                         break;
 
                     case 2:
-                        (*it)->set_Point_Y(back_y - 1);
+                        (*it)->set_Point_Y(back_y - (rand() % 2 + 1));
 
                         break;
                     case 3:
-                        (*it)->set_Point_Y(back_y + 1);
+                        (*it)->set_Point_Y(back_y + (rand() % 2 + 1));
 
                         break;
                     }
-                    if ((*it)->Object_Overlapping(object) != NULL || ((**it) == *roles) || (*it)->get_Point_X() <= 1 || (*it)->get_Point_Y() <= 1 || (*it)->get_Point_X() + (*it)->get_Width() >= width || (*it)->get_Point_Y() + (*it)->getHeigh() >= high) {
+
+                    if ((*it)->Object_Overlapping(object) != NULL || ((**it) == *roles) || (*it)->get_Point_X() <= 2 || (*it)->get_Point_Y() <= 2 || (*it)->get_Point_X() + (*it)->get_Width() >= width - 1 || (*it)->get_Point_Y() + (*it)->getHeigh() >= high - 1) {
                         (*it)->set_Point_X(back_x);
                         (*it)->set_Point_Y(back_y);
                     }

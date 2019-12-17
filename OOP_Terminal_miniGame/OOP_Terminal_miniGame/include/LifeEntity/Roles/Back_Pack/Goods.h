@@ -17,6 +17,7 @@
 using namespace std;
 
 #define Read_Back_Pack_PATH "Data/Attributes/Back_Pack.ini"
+#define Read_Back_Pack_Type_ini_PATH (_acc, _name) ("Data/Attributes/Account/"+ (_acc) +"/"+(_name)+"/Total_Back_Pack.ini")
 #define Read_Equipment_Attributes_int_ini( lpAppName,lpKeyName) GetPrivateProfileInt((lpAppName).c_str(), lpKeyName, INT_MAX, Read_Back_Pack_PATH)
 
 class Goods : public Attributes, public Restricted {
@@ -25,8 +26,7 @@ private:
     int Money;
     int Quantity;
     string name;
-    //vector<RoleType> Restricted_Role;//職業限定
-    //vector<RaceType> Restricted_Race;//總族限定
+    int Weight;
     Back_Pack_Type type;
 public:
     Goods(string _name, int _lv, int _Quantity = 1);
@@ -34,11 +34,8 @@ public:
 
     bool operator== (const Goods& _god) const;
 
-    ///*                  種族 or 職業限定              */
-    //bool Usable(const RoleType& _role, const RaceType& _race);
-    //bool Usable_Role(const RoleType& _role);
-    //bool Usable_Race(const RaceType& _race);
-
+    int getWight();
+    int getWight_one();
     int getQuantity();
     void setQuantity(int _num = 1);
     void addQuantity(int _num = 1);

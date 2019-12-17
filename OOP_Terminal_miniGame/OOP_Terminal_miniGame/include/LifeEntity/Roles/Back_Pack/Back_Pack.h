@@ -19,6 +19,8 @@ private:
     string user_Name;
     int Money;
     vector<Goods*> goods;
+    int MaxWeigh;
+
 public:
     Back_Pack(string _account, string _user_name, int _Money);
     ~Back_Pack();

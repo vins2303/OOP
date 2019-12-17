@@ -1,2 +1,2 @@
 Data/Image/Boor.txt   市集 Boor  135 20 15 9
-Data/Image/Boor.txt   海底世界 Boor  70 1 15 9
+Data/Image/Boor.txt   海底世界 Boor  70 2 15 9

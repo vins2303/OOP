@@ -80,6 +80,7 @@ void Account::Registered() {
 
 string Account::isAccount(string _accout) {
     CString str;
+
     GetPrivateProfileString(_accout.c_str(), "Password", "NULL", str.GetBuffer(200), 200, AccountPath);
     str.ReleaseBuffer();
     return string(str);

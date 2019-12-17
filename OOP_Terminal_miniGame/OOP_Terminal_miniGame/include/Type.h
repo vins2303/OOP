@@ -41,6 +41,21 @@ const Back_Pack_Type_Category toBack_Pack_Type_Category(Back_Pack_Type value);
 //const Back_Pack_Type_
 
 /*
+                            背包大小
+*/
+#define VALUE_BACK_PACK_SIZE\
+	   etype(Back_Pack_Min, "小型背包") \
+	   etype(Back_Pack_Mid, "中型背包") \
+	   etype(Back_Pack_Max, "大型背包") \
+
+#define etype(a,b) a,
+enum class Back_Pack_Szie : int { VALUE_BACK_PACK_SIZE };
+#undef etype
+
+const Back_Pack_Szie toBack_Pack_Size(string _back_pack_size);
+const string toString(Back_Pack_Szie _size);
+
+/*
                                種族
 */
 #define VALUE_Race_Type \

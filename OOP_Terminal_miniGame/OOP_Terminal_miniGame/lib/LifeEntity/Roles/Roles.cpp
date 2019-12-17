@@ -87,6 +87,7 @@ void Roles::Open_BackPack() {
         show_State();
         cout << "==================================== 背包 ====================================" << endl;
         cout << "金幣：" << getMoney() << endl << endl;
+
         for (i = _row * 10; i < goods.size() && i < (_row + 1) * 10; i++) {
             cout << left << setw(3) << to_string(i % 10) + "." << " ";
             goods[i]->show_info();
@@ -230,6 +231,7 @@ void Roles::Save_Roles_info() {
     WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Width()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Money", to_string(getMoney()).c_str(), outfile.c_str());
+    WritePrivateProfileString("Main", "TYPE", to_string(getMoney()).c_str(), outfile.c_str());
 }
 
 //*********************************** 角色移動 ***********************************
@@ -240,7 +242,7 @@ Map_object* Roles::set_Roles_Move_X(int _x, vector<Map_object*>& _object) {
     over = NULL;
     posX = get_Point_X();
     Map_object::set_Point_X(_x);
-    if ((over = Object_Overlapping(_object)) != NULL || get_Point_X() < 1 || get_Point_X() > MAP_WIDTH_DEF - get_Width()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_Point_X() < 2 || get_Point_X() > MAP_WIDTH_DEF - get_Width()) {
         Map_object::set_Point_X(posX);
     }
     else {

@@ -37,6 +37,28 @@ const Back_Pack_Type toBack_Pack_Type(string value) {
     return table[value];
 }
 
+const Back_Pack_Szie toBack_Pack_Size(string _back_pack_size) {
+    static map<string, Back_Pack_Szie> table;
+    static bool isInit = false;
+    if (isInit) return table[_back_pack_size];
+#define etype(a,b) table[ b ] = Back_Pack_Szie::a;
+    VALUE_BACK_PACK_SIZE
+#undef etype
+        isInit = true;
+    return table[_back_pack_size];
+}
+
+const string toString(Back_Pack_Szie _size) {
+    static map<Back_Pack_Szie, string> table;
+    static bool isInit = false;
+    if (isInit) return table[_size];
+#define etype(a,b) table[ Back_Pack_Szie::a ] = b;
+    VALUE_BACK_PACK_SIZE
+#undef etype
+        isInit = true;
+    return table[_size];
+}
+
 /*
                 ºØ±Ú
 */
