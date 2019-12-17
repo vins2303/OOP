@@ -30,7 +30,7 @@ public:
 
     Equipment_Attributes* Put_on(Equipment_Attributes* _E);
 
-    void Remove_Equipment(vector<Goods*>& goods);
+    void Remove_Equipment(vector<Sub_Goods*>& goods);
 
     Equipment_Attributes* getWeapon();
     Equipment_Attributes* getDeputy();

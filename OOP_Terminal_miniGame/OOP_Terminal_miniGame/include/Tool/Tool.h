@@ -22,9 +22,13 @@ public:
     static void SplitString(const string input_string, vector<string>& v, const string c);
     static vector<string> SplitString(const string input_string, const string c);
     static void ReadIpAppName(string _path, vector<string>& _data);
+    static vector<string> ReadIpAppName(string _path);
+    static vector<int> String_To_Int(vector<string> _str);
+    static int FindMax(vector<int> _num);
     static bool CheckFolderExist(const string& strPath);
     static string ReadStringIni(string lpAppName, string lpKeyName, string lpDefaut, string lpFileName);
-    static void Delay(int sec);
+    static int Delay(int sec);
+
     //static bool RmDir(const string& strPath);
 };
 

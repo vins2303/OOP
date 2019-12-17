@@ -1,4 +1,5 @@
 #include "../../include/LifeEntity/LifeAttributes.h"
+#include <iomanip>
 
 LifeAttributes::LifeAttributes(int _LV, int _HP, int _MP, int _attack, int _sp, int _def, int _CRT, int _drop, int _maxHP, int _maxMP) :
     Attributes(_HP, _MP, _attack, _sp, _def, _CRT, _drop),
@@ -58,7 +59,7 @@ LifeAttributes* LifeAttributes::showHP(bool a_LV, int _max, bool show, bool LF) 
         cout << SHOW_HP_FIGURE(i < (hp * (SHOW_MAX_HP / (double)(maxhp))));
     cout << SHOW_HP_FRAME_END;
     Draw::SetColor();
-    if (show) cout << " " << hp << "/" << maxhp;
+    if (show) cout << " " << left << setw(4) << hp << "/" << left << setw(4) << maxhp;
     if (LF) cout << endl;
     return this;
 }
@@ -73,7 +74,7 @@ LifeAttributes* LifeAttributes::showMP(bool a_LV, int _max, bool show, bool LF) 
         cout << SHOW_MP_FIGURE(i < (mp * (SHOW_MAX_MP / (double)(maxmp))));
     cout << SHOW_MP_FRAME_END;
     Draw::SetColor();
-    if (show) cout << " " << mp << "/" << maxmp;
+    if (show) cout << " " << left << setw(4) << mp << "/" << left << setw(4) << maxmp;
     if (LF) cout << endl;
     return this;
 }

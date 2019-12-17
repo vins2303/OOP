@@ -28,6 +28,8 @@
     <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Back_Pack.h" />
     <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Consumables.h" />
     <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Goods.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Sub_Back_Pack.h" />
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Sub_Goods.h" />
     <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment.h" />
     <ClInclude Include="include\LifeEntity\LifeAttributes.h" />
     <ClInclude Include="include\LifeEntity\Roles\Equipment\Equipment_Attributes.h" />
@@ -46,8 +48,10 @@
     <ClInclude Include="include\Type.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Sub_Back_Pack.cpp" />
     <ClCompile Include="lib\LifeEntity\Monster\Drop.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Consumables.cpp" />
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Sub_Goods.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Restricted.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Role.cpp" />
     <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Goods.cpp" />

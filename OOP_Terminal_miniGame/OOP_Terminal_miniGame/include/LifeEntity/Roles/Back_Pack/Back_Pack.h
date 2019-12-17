@@ -9,17 +9,18 @@
 #include "../Equipment/Equipment.h"
 #include "../Role.h"
 #include "../Race.h"
+#include "Sub_Back_Pack.h"
 #include <conio.h>
 
 using namespace std;
 
-class Back_Pack {
+class Back_Pack : public Sub_Back_Pack {
 private:
     string user_Account;
     string user_Name;
     int Money;
-    vector<Goods*> goods;
-    int MaxWeigh;
+    /*vector<Sub_Goods*> goods;
+    int MaxWeigh;*/
 
 public:
     Back_Pack(string _account, string _user_name, int _Money);
@@ -30,9 +31,9 @@ public:
     int AddMoney(int _money);
     void Read_BackPack();
     void Save_BackPack();
-    void addGoods(Goods* _g);
-    Goods* findGoods(string _name);
-    vector<Goods*>& getBackPack_Goods();
+    /*void addGoods(Sub_Goods* _g);
+    Sub_Goods* findGoods(string _name);
+    vector<Sub_Goods*>& getBackPack_Goods();*/
 private:
     /*void Read_BackPack_Equipment();
     void Read_BackPack_Consumables();

@@ -82,6 +82,27 @@ void Tool::ReadIpAppName(string _path, vector<string>& _data) {
     }
 }
 
+vector<string> Tool::ReadIpAppName(string _path) {
+    vector<string> out;
+    ReadIpAppName(_path, out);
+    return out;
+}
+
+vector<int> Tool::String_To_Int(vector<string> _str) {
+    vector<int >out;
+    for (vector<string>::iterator it = _str.begin(); it != _str.end(); it++)
+        out.push_back(stoi(*it));
+    return out;
+}
+
+int Tool::FindMax(vector<int> _num) {
+    int out = INT_MIN;
+    for (vector<int>::iterator it = _num.begin(); it != _num.end(); it++)
+        if (*it > out)
+            out = *it;
+    return out;
+}
+
 bool Tool::CheckFolderExist(const string& strPath) {
     return _access(strPath.c_str(), 0) == 0 ? true : false;
 }
@@ -93,14 +114,13 @@ string Tool::ReadStringIni(string lpAppName, string lpKeyName, string lpDefaut, 
     return string(read);
 }
 
-void Tool::Delay(int sec) {
+int Tool::Delay(int sec) {
     time_t _t;
     _t = time(NULL);
     static int n;
     while (time(NULL) <= _t + sec) {
         if (_kbhit()) {
-            n = _getch();
-            return;
+            return _getch();
         }
     }
 }

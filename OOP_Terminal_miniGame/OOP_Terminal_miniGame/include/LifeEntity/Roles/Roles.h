@@ -14,6 +14,7 @@
 #include "Back_Pack/Back_Pack.h"
 #include "Race.h"
 #include "Role.h"
+#include<cstdio>
 
 using std::string;
 
@@ -59,6 +60,8 @@ public:
     int getCRT();
     int getDrop();
 
+    string getAccount();
+
     Map_object* set_Roles_Move_X(int _x, vector<Map_object*>& _object);
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);
     void Save_Roles();
@@ -66,10 +69,10 @@ public:
     void show_EXP(bool show = true, bool LF = true);
 
     void Open_BackPack();
-    void Back_Pack_User_Item(Goods*& _gds);
-
     static int sum_Attributes(RaceType _race, RoleType _role, string _att);
 private:
+
+    void Back_Pack_User_Item(Sub_Goods*& _gds);
     void Save_Roles_info();
 };
 

@@ -18,7 +18,8 @@ using namespace std;
         etype(Pants, "褲子", Equipment)\
         etype(Shoes, "鞋子", Equipment)\
         etype(Consumables, "消耗品", Consumables)\
-        etype(Sundries, "雜物", Sundries)
+        etype(Sundries, "雜物", Sundries)\
+        etype(SubBackPack, "子背包", SubBackPack)
 
 #define etype(a, b, c) a,
 enum class Back_Pack_Type : int { VALUE_Back_Pack_Type };
@@ -30,7 +31,8 @@ const Back_Pack_Type toBack_Pack_Type(string value);
 #define VALUE_Back_Pack_Type_Category \
         etypeX(Equipment)\
         etypeX(Consumables)\
-        etypeX(Sundries)
+        etypeX(Sundries)\
+        etypeX(SubBackPack)
 
 #define etypeX(a) a,
 enum class Back_Pack_Type_Category :int { VALUE_Back_Pack_Type_Category };

@@ -114,7 +114,7 @@ bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
             roleslist->getRoles()->Save_Roles();
             return true;
         }
-        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 1, 0, 20, 30);
+        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 1, 0, 25, 30);
         return false;
         /*====================================================================================================================================*/
         //break;

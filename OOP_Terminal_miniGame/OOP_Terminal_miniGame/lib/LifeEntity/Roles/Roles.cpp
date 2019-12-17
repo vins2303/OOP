@@ -46,6 +46,8 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
 Roles::~Roles() {
 }
 
+string Roles::getAccount() { return account; }
+
 string Roles::getName() { return name; }
 int Roles::getExp() { return exp; }
 int Roles::getUpExp() { return (int)(pow(getLV() - 1, 3) + 60); }
@@ -79,14 +81,15 @@ bool Roles::UP_LV() {
 }
 
 void Roles::Open_BackPack() {
-    vector<Goods*>& goods = getBackPack_Goods();
+    vector<Sub_Goods*>& goods = getBackPack_Goods();
     static int key, _row, i;
     _row = 0;
     while (true) {
         system("cls");
         show_State();
         cout << "==================================== 背包 ====================================" << endl;
-        cout << "金幣：" << getMoney() << endl << endl;
+        cout << "\t背包負重："; ShowWeith();
+        Draw::SetColor(6); cout << "\t\t\t金幣：" << getMoney() << endl << endl; Draw::SetColor();
 
         for (i = _row * 10; i < goods.size() && i < (_row + 1) * 10; i++) {
             cout << left << setw(3) << to_string(i % 10) + "." << " ";
@@ -99,33 +102,26 @@ void Roles::Open_BackPack() {
         cout << "(E) 卸下裝備 " << endl;
 
         key = _getch();
-        if (key == 27 || key == 'b' || key == 'B')
-            break;
 
         switch (key)
         {
-        case 27:
-        case 'b':
-        case 'B':
+        case 27: case 'b': case 'B':
             return;
-        case 'Q':
-        case 'q':
+        case 'Q': case 'q':
             if (_row != 0) _row--;
             break;
 
-        case 'w':
-        case 'W':
+        case 'w': case 'W':
             if (i < goods.size()) _row++;
             break;
-        case 'e':
-        case 'E':
+        case 'e': case 'E':
             Remove_Equipment(getBackPack_Goods());
             break;
         default:
             if ((key = key - '0') >= 0 && key < 10 && key + _row * 10 < (int)goods.size()) {
                 int sel = 0;
                 system("cls");
-                cout << "1. 使用物品\n2. 丟棄物品";
+                cout << "1. 使用物品\n2. 丟到子背包\n3. 丟棄物品";
                 while (sel == 0) {
                     switch ((sel = _getch()))
                     {
@@ -133,6 +129,17 @@ void Roles::Open_BackPack() {
                         Back_Pack_User_Item(goods[(__int64)key + (__int64)_row * 10]);
                         break;
                     case '2':
+                        if (Put_To_Sub_Back_Pack(goods[(__int64)key + (__int64)_row * 10])) {
+                            RmGoods((__int64)key + (__int64)_row * 10);
+                        }
+                        break;
+                    case '3':
+                        static Sub_Goods * _good; _good = goods[(__int64)key + (__int64)_row * 10];
+                        if (typeid(*_good) == typeid(Sub_Back_Pack)) {
+                            WritePrivateProfileString(to_string((((Sub_Back_Pack*)_good)->getID())).c_str(), NULL, NULL, BACK_PACK_INI_PAHT(account, name).c_str());
+                            remove(BACK_PACK_INFO_PAHT(account, name, to_string(((Sub_Back_Pack*)_good)->getID())).c_str());
+                        }
+
                         delete goods[(__int64)key + (__int64)_row * 10];
                         goods[(__int64)key + (__int64)_row * 10] = NULL;
                         break;
@@ -142,7 +149,7 @@ void Roles::Open_BackPack() {
                     }
                 }
 
-                for (vector<Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
+                for (vector<Sub_Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
                     if (*it == NULL) {
                         goods.erase(it);
                         if (goods.size() > 0)
@@ -157,32 +164,50 @@ void Roles::Open_BackPack() {
     Save_Roles();
 }
 
-void Roles::Back_Pack_User_Item(Goods*& _gds) {
+void Roles::Back_Pack_User_Item(Sub_Goods*& _gds) {
     if (_gds->isUse()) {
-        if (_gds->Usable(get_RoleType(), getRaceType())) {
-            if (getLV() >= _gds->getLV()) {
-                if (typeid(*_gds) == typeid(Equipment_Attributes)) {
-                    _gds = Put_on((Equipment_Attributes*)_gds);
+        if (typeid(*_gds) == typeid(Sub_Back_Pack)) {
+            static Sub_Back_Pack* _bk; _bk = (Sub_Back_Pack*)_gds;
+            if (_bk->getNowWeith() != 0) {
+                _bk->Open_Sub_Back_Pack(*this);
+            }
+            else
+                if (getNowWeith() > _bk->getMaxWeith()) {
+                    cout << "背包過重無法更換!" << endl;
+                    system("pause");
                 }
-                else if (typeid(*_gds) == typeid(Consumables)) {
-                    ((Consumables*)_gds)->Use(*this);
-                    if (_gds->getQuantity() == 0) {
-                        delete _gds;
-                        _gds = NULL;
+                else {
+                    static Back_Pack_Szie swap;
+                    swap = getBack_Pack_Szie_Type();
+                    setBack_Pack_Szie_Type(_bk->getBack_Pack_Szie_Type());
+                    _bk->setBack_Pack_Szie_Type(swap);
+                }
+        }
+        else
+            if (((Goods*)_gds)->Usable(get_RoleType(), getRaceType())) {
+                if (getLV() >= ((Goods*)_gds)->getLV()) {
+                    if (typeid(*_gds) == typeid(Equipment_Attributes)) {
+                        _gds = Put_on((Equipment_Attributes*)_gds);
                     }
+                    else if (typeid(*_gds) == typeid(Consumables)) {
+                        ((Consumables*)_gds)->Use(*this);
+                        if (_gds->getQuantity() == 0) {
+                            delete _gds;
+                            _gds = NULL;
+                        }
+                    }
+                }
+                else {
+                    cout << "你的等級未到達 無法使用!" << endl;
+                    system("pause");
                 }
             }
             else {
-                cout << "你的等級未到達 無法使用!" << endl;
+                if (!((Goods*)_gds)->Usable_Role(get_RoleType())) cout << "你的職業無法使用!" << endl;
+                if (!((Goods*)_gds)->Usable_Race(getRaceType())) cout << "你的種族無法使用!" << endl;
+                cout << endl;
                 system("pause");
             }
-        }
-        else {
-            if (!_gds->Usable_Role(get_RoleType())) cout << "你的職業無法使用!" << endl;
-            if (!_gds->Usable_Race(getRaceType())) cout << "你的種族無法使用!" << endl;
-            cout << endl;
-            system("pause");
-        }
     }
 }
 
@@ -231,7 +256,6 @@ void Roles::Save_Roles_info() {
     WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Width()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Money", to_string(getMoney()).c_str(), outfile.c_str());
-    WritePrivateProfileString("Main", "TYPE", to_string(getMoney()).c_str(), outfile.c_str());
 }
 
 //*********************************** 角色移動 ***********************************
@@ -304,7 +328,7 @@ void Roles::show_EXP(bool show, bool LF) {
         cout << SHOW_EXP_FIGURE(i < (getExp() * (SHOW_MAX_EXP / (double)(getUpExp()))));
     cout << SHOW_MP_FRAME_END;
     Draw::SetColor();
-    if (show) cout << " " << getExp() << "/" << getUpExp();
+    if (show) cout << " " << left << setw(4) << getExp() << "/" << left << setw(4) << getUpExp();
     if (LF) cout << endl;
     //return this;
 }

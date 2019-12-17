@@ -46,7 +46,7 @@ void Consumables::Use(LifeAttributes& _life) {
         for (int i = 0; i < n; i++) _life += *this;
         _life.showHP();
         _life.showMP();
-        setQuantity(getQuantity() - 1);
+        setQuantity(getQuantity() - n);
     }
     system("pause");
 }

@@ -138,6 +138,12 @@
     <ClInclude Include="include\LifeEntity\Roles\Restricted.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Sub_Goods.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LifeEntity\Roles\Back_Pack\Sub_Back_Pack.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\Map\Map_object.cpp">
@@ -216,6 +222,12 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="lib\LifeEntity\Roles\Skill\Skill_List.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Sub_Goods.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\LifeEntity\Roles\Back_Pack\Sub_Back_Pack.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

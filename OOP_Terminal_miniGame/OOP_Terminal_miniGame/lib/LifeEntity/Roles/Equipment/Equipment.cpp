@@ -72,9 +72,9 @@ Equipment_Attributes* Equipment::Put_on(Equipment_Attributes* _E) {
     return retE;
 }
 
-void Equipment::Remove_Equipment(vector<Goods*>& goods) {
+void Equipment::Remove_Equipment(vector<Sub_Goods*>& goods) {
     static int key;
-    while (1){
+    while (1) {
         system("cls");
         show_Equipment();
         cout << "Esc ªð¦^" << endl;
@@ -209,7 +209,7 @@ int Equipment::sumCrt() {
     return sum;
 }
 
-int Equipment::sumDrop(){
+int Equipment::sumDrop() {
     int sum = 0;
     if (Weapon != NULL)      sum += Weapon->getDrop();
     if (Deputy != NULL)      sum += Deputy->getDrop();

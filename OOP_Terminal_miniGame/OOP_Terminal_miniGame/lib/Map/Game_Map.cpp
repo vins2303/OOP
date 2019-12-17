@@ -196,7 +196,7 @@ void Game_Map::Rand_Monster(string _Map_Name) {
 
 void Game_Map::Monster_Move_Time() {
     static int back_x, back_y;
-    static int save_time = time(NULL);
+    static time_t save_time = time(NULL);
     if (time(NULL) - save_time >= 1) {
         save_time = time(NULL);
         for (vector<Map_object*>::iterator it = object.begin(); it != object.end(); it++) {

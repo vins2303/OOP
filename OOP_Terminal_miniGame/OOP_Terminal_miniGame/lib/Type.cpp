@@ -37,6 +37,10 @@ const Back_Pack_Type toBack_Pack_Type(string value) {
     return table[value];
 }
 
+/*
+                    ­I¥]¤j¤p
+*/
+
 const Back_Pack_Szie toBack_Pack_Size(string _back_pack_size) {
     static map<string, Back_Pack_Szie> table;
     static bool isInit = false;

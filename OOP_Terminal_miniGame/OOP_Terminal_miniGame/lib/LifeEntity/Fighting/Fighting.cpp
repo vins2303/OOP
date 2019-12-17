@@ -84,7 +84,7 @@ void Fighting::Rand_Drop() {
                         roles->addGoods(new Equipment_Attributes((*it)->getName(), 1));
                         break;
                     case Back_Pack_Type_Category::Consumables:
-                        static Goods* god;
+                        static Sub_Goods* god;
                         god = roles->findGoods((*it)->getName());
                         if (god == NULL) {
                             roles->addGoods(new Consumables((*it)->getName(), number));
@@ -93,14 +93,19 @@ void Fighting::Rand_Drop() {
                             god->addQuantity(number);
                         }
                         break;
+                    case Back_Pack_Type_Category::SubBackPack:
+                        roles->addGoods(new Sub_Back_Pack(roles->getAccount(), roles->getName(), Tool::FindMax(Tool::String_To_Int(Tool::ReadIpAppName(BACK_PACK_INI_PAHT(roles->getAccount(), roles->getName())))) + 1, toBack_Pack_Size((*it)->getName())));
+
+                        break;
                     }
+                    roles->Save_BackPack();
                     break;
                 case 'n':
                 case 'N':
 
                     break;
                 }
-                if ((key == 'a' || key == 'A') || (key == 'Y' || key == 'y') || (key == 'N' || key == 'N')) break;
+                if ((key == 'a' || key == 'A') || (key == 'Y' || key == 'y') || (key == 'n' || key == 'N')) break;
             }
         }
     }
