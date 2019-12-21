@@ -1,9 +1,8 @@
 #include "../../../../include/LifeEntity/Roles/Skill/Skill_LIst.h"
 
-Skill_List::Skill_List(string _account, string _name, RaceType _race, RoleType _role) :
-    account(_account),
-    name(_name),
-    Skill_Point(GetPrivateProfileInt((_name).c_str(), "Skill_Point", INT_MAX, Roles_PATH__(_account).c_str())),
+Skill_List::Skill_List(Account& _user_account, RaceType _race, RoleType _role) :
+    user_account(_user_account),
+    Skill_Point(GetPrivateProfileInt((_user_account.getRolesName()).c_str(), "Skill_Point", INT_MAX, Roles_PATH__(_user_account.getAccount()).c_str())),
     skill_using(),
     skill(Read_skill()),
     racet(_race),
@@ -50,9 +49,8 @@ void Skill_List::Skill_Menu() {
 }
 
 void Skill_List::Save_Skill() {
-    string ss = SKILL_PAHT__(account, name);
-    ofstream wire(SKILL_PAHT__(account, name));
-    WritePrivateProfileString(name.c_str(), "Skill_Point", to_string(Skill_Point).c_str(), Roles_PATH__(account).c_str());
+    ofstream wire(SKILL_PAHT__(user_account.getAccount(), user_account.getRolesName()));
+    WritePrivateProfileString(user_account.getRolesName().c_str(), "Skill_Point", to_string(Skill_Point).c_str(), Roles_PATH__(user_account.getAccount()).c_str());
     for (vector<Skill*>::iterator it = skill.begin(); it != skill.end(); it++) {
         wire << (*it)->getName() << " " << (*it)->getLV() << endl;
     }
@@ -81,7 +79,6 @@ bool Skill_List::Us_Skill(LifeAttributes& att) {
             cout << i << ". "; skill[i]->show_info(true);
         }
         while (1) {
-            
             key = _getch();
             if (key == 27) return false;
             key -= '0';
@@ -202,7 +199,7 @@ void Skill_List::UP_Skill() {
 }
 
 vector<Skill*> Skill_List::Read_skill() {
-    ifstream Read(SKILL_PAHT__(account, name));
+    ifstream Read(SKILL_PAHT__(user_account.getAccount(), user_account.getRolesName()));
     string kill_name;
     int lv;
     vector<Skill*> out;
@@ -223,56 +220,49 @@ Skill* Skill_List::findSkill(const Skill* _skill) {
 
 /*                                  get                                                  */
 int Skill_List::Sum_Skill_HP() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getHP();
     return out;
 }
 
 int Skill_List::Sum_Skill_MP() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getMP();
     return out;
 }
 
 int Skill_List::Sum_Skill_Attack() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getAttack();
     return out;
 }
 
 int Skill_List::Sum_Skill_SP() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getSP();
     return out;
 }
 
 int Skill_List::Sum_Skill_Def() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getDef();
     return out;
 }
 
 int Skill_List::Sum_Skill_CRT() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getCRT();
     return out;
 }
 
 int Skill_List::Sum_Skill_Drop() {
-    static int out;
-    out = 0;
+    static int out; out = 0;
     for (vector<Skill*>::iterator it = skill_using.begin(); it != skill_using.end(); it++)
         out += (*it)->getDrop();
     return out;

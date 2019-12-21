@@ -8,7 +8,8 @@ class Consumables :public Goods {
 private:
     int Duration;
 public:
-    Consumables(string _name, int _Quantity = 1, int _Duration = 0);
+    Account& user_account;
+    Consumables(Account& user_account, string _name, int _Quantity = 1, int _Duration = 0);
     virtual ~Consumables();
     virtual void show_info();
     virtual bool isUse();

@@ -1,6 +1,8 @@
 #include "../../../../include/LifeEntity/Roles/Back_Pack/Sub_Goods.h"
+#include "../../../../include/LifeEntity/Roles/Back_Pack/Sub_Back_Pack.h"
 
-Sub_Goods::Sub_Goods(string _name, int _Quantity) :
+Sub_Goods::Sub_Goods(Account& _user_account, string _name, int _Quantity) :
+    user_account(_user_account),
     Weight(Read_Equipment_Attributes_int_ini(_name, "Weight")),
     name(_name),
     type(toBack_Pack_Type(Tool::ReadStringIni(_name, "TYPE", "NULL", Read_Back_Pack_PATH))),
@@ -10,8 +12,7 @@ Sub_Goods::Sub_Goods(string _name, int _Quantity) :
 {
 }
 
-Sub_Goods::~Sub_Goods()
-{
+Sub_Goods::~Sub_Goods() {
 }
 
 bool Sub_Goods::operator==(const Sub_Goods& _god) const
@@ -31,6 +32,8 @@ string Sub_Goods::getType_S() { return toString(type); }
 Back_Pack_Type& Sub_Goods::getType() { return type; }
 
 string Sub_Goods::getName() { return name; }
+
+void Sub_Goods::setName(string _name) { name = _name; }
 
 int Sub_Goods::getMoney() { return Money; }
 

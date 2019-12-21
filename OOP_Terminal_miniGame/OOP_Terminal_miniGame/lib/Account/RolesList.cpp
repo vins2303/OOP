@@ -1,12 +1,12 @@
 #include "../../include/Account/RolesList.h"
 
-RolesList::RolesList() :Account(), roles(NULL) {}
+RolesList::RolesList() :user_account(), roles(NULL) {}
 
 RolesList::~RolesList() { if (roles != NULL) delete roles; }
 
 void RolesList::RolesListMenu() {
     bool isEnd = false;
-    if (Account::IsSignIn() == false) Account::AccountMenu();
+    if (user_account.IsSignIn() == false) user_account.AccountMenu();
     while (!isEnd) {
         system("cls");
         cout << "1. 選擇角色" << endl;
@@ -30,18 +30,18 @@ void RolesList::RolesListMenu() {
                 delete roles;
                 roles = NULL;
             }
-            Account::Sign_out();
+            user_account.Sign_out();
 
             isEnd = true;
             break;
         case '5':
-            isEnd = rmAccount();
+            isEnd = user_account.rmAccount();
             if (isEnd) {
                 if (roles != NULL) {
                     delete roles;
                     roles = NULL;
                 }
-                Account::Sign_out();
+                user_account.Sign_out();
             }
             break;
         default:
@@ -74,9 +74,9 @@ void RolesList::DeleteRoles() {
             if (getKey == 27)
                 isExit = true;
             else if ((unsigned int)(getKey = getKey - 1 - '0') < roleslist.size()) {
-                WritePrivateProfileString(roleslist[getKey]->getName().c_str(), NULL, NULL, ("Data/Account/" + GetAccount() + "/Roles.ini").c_str());
+                WritePrivateProfileString(roleslist[getKey]->user_account->getRolesName().c_str(), NULL, NULL, ("Data/Account/" + user_account.account + "/Roles.ini").c_str());
                 static string dir;
-                dir = "Data\\Account\\" + GetAccount() + "\\" + roleslist[getKey]->getName();
+                dir = "Data\\Account\\" + user_account.account + "\\" + roleslist[getKey]->user_account->getRolesName();
                 if (Tool::CheckFolderExist(dir)) {
                     system(("rmdir /s /q " + dir).c_str());
                     system("cls");
@@ -107,7 +107,7 @@ bool RolesList::addRoles() {
 
     while (1) {
         system("cls");
-        Tool::ReadIpAppName("Data/Account/" + GetAccount() + "/Roles.ini", namelist);
+        Tool::ReadIpAppName("Data/Account/" + user_account.account + "/Roles.ini", namelist);
         if (namelist.size() > 2) {
             isEnd = true;
             cout << "角色以到達上限!" << endl;
@@ -171,8 +171,8 @@ bool RolesList::addRoles() {
                         break;
                 }
                 if (getKey == 'y' || getKey == 'Y') {
-                    Tool::mkdir("Data/Account/" + GetAccount());
-                    string outfile = "Data/Account/" + GetAccount() + "/Roles.ini";
+                    Tool::mkdir("Data/Account/" + user_account.account);
+                    string outfile = "Data/Account/" + user_account.account + "/Roles.ini";
                     WritePrivateProfileString(name.c_str(), "LV", "1", outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "Race", toString(race_type).c_str(), outfile.c_str());
                     WritePrivateProfileString(name.c_str(), "Role", toString(role_type).c_str(), outfile.c_str());
@@ -199,7 +199,7 @@ bool RolesList::addRoles() {
 
 void RolesList::FindRoles(vector<Roles*>& out) {
     Roles* roles;
-    string inifile = "Data/Account/" + GetAccount() + "/Roles.ini";
+    string inifile = "Data/Account/" + user_account.account + "/Roles.ini";
     vector<string> roleslist;
     Tool::ReadIpAppName(inifile, roleslist);
     CString read_ini;
@@ -212,15 +212,15 @@ void RolesList::FindRoles(vector<Roles*>& out) {
         GetPrivateProfileString(it->c_str(), "Role", "NULL", read_ini.GetBuffer(255), 255, inifile.c_str());
         read_ini.ReleaseBuffer();
         role = toRole_Type(string(read_ini));
-
+        user_account.Roles_Name = *it;
         roles = new Roles(
+            new Account(user_account),
             *it,
             GetPrivateProfileInt((*it).c_str(), "LV", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "HP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "MP", INT_MAX, inifile.c_str()),
             GetPrivateProfileInt((*it).c_str(), "EXP", INT_MAX, inifile.c_str()),
             Tool::ReadStringIni(*it, "MapNow", "NULL", inifile),
-            this->GetAccount(),
             race,
             role,
             Map_object("data/Image/object.txt",
@@ -260,6 +260,8 @@ bool RolesList::Selete_Roles() {
                 isExit = true;
             else if ((getKey = getKey - '0' - 1) < roleslist.size()) {
                 roles = roleslist[getKey];
+
+                //user_account.user_account.getRolesName());
                 isExit = true;
             }
         }
@@ -278,6 +280,11 @@ void RolesList::clearRolesList(vector<Roles*>& _list) {
 
 Roles* RolesList::getRoles() { return roles; }
 
+Account* RolesList::getAccount()
+{
+    return &user_account;
+}
+
 void RolesList::show_Total_RolesList(vector<Roles*>& roleslist, unsigned int _row) {
     static unsigned int row;
     for (unsigned int i = 0; i < roleslist.size(); i++) {
@@ -285,7 +292,7 @@ void RolesList::show_Total_RolesList(vector<Roles*>& roleslist, unsigned int _ro
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << "￣￣￣￣￣￣￣";
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << (i + 1);
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << "～～～～～～～";
-        Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << roleslist[i]->getName();
+        Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << roleslist[i]->user_account->getRolesName();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "等級：" << roleslist[i]->getLV();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "種族：" << roleslist[i]->getRaceType_S();
         Draw::setXY(SELROLESP_COL(i), row++); cout << "｜" << setw(8) << "職業：" << roleslist[i]->getRoleType_S();

@@ -15,7 +15,8 @@ class Equipment_Attributes : public Goods {
 private:
 
 public:
-    Equipment_Attributes(string _name, int _lv);
+
+    Equipment_Attributes(Account& user_account, string _name, int _lv = 1);
     virtual ~Equipment_Attributes();
 
     virtual void show_info();

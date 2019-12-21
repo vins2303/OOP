@@ -1,6 +1,7 @@
 #include "../../../include/LifeEntity/Fighting/Fighting.h"
 
-Fighting::Fighting(Roles* _roles, Monster* _moster) :
+Fighting::Fighting(Account& _user_account, Roles* _roles, Monster* _moster) :
+    user_account(_user_account),
     roles(_roles),
     monster(_moster)
 {
@@ -9,12 +10,8 @@ Fighting::Fighting(Roles* _roles, Monster* _moster) :
 bool Fighting::Fighting_Start() {
     static int key;
     while (roles->getHP() > 0 && monster->getHP() > 0) {
-        system("cls");
         while (1) {
-            cout << "=================== 角色狀態 ===================" << endl;
-            roles->show_State();
-            cout << "=================== 怪物狀態 ===================" << endl;
-            monster->show_info_Fighting();
+            Fighting_Start_Show();
             cout << "\n(1)普通攻擊 (2)使用技能 (3)打開背包" << endl;
 
             key = _getch();
@@ -30,7 +27,9 @@ bool Fighting::Fighting_Start() {
                 roles->Open_BackPack();
             }
         }
+        Fighting_Start_Show();
         //===============================================================================
+        cout << endl;
         if (roles->getSP() > monster->getSP()) {
             Roles_Attack();
             if (monster->getHP() > 0) Moster_Attack();
@@ -48,17 +47,25 @@ bool Fighting::Fighting_Start() {
         roles->addExp(monster->getExp());
         roles->AddMoney(monster->getMoney());
 
-        cout << roles->getName() << "勝利! \n獲得經驗:" << monster->getExp() << endl << "獲得金幣：" << monster->getMoney() << endl;
+        cout << user_account.getRolesName() << "勝利! \n獲得經驗:" << monster->getExp() << endl << "獲得金幣：" << monster->getMoney() << endl;
         if (roles->UP_LV()) {
             cout << "恭喜升級! 等級：" << roles->getLV() << endl;
         }
         Rand_Drop();
     }
     else {
-        cout << roles->getName() << "已經死亡";
+        cout << user_account.getRolesName() << "已經死亡";
     }
     system("pause");
     return false;
+}
+
+void Fighting::Fighting_Start_Show() {
+    system("cls");
+    cout << "=================== 角色狀態 ===================" << endl;
+    roles->show_State();
+    cout << "=================== 怪物狀態 ===================" << endl;
+    monster->show_info_Fighting();
 }
 
 void Fighting::Rand_Drop() {
@@ -69,6 +76,7 @@ void Fighting::Rand_Drop() {
     for (vector<Drop*>::iterator it = monster->getDrop().begin(); it != monster->getDrop().end(); it++) {
         if ((*it)->isDrop(roles->getDrop())) {
             cout << "已掉落：" << (*it)->getName() << "數量：" << (number = (*it)->Drop_Number()) << endl;
+
             if (key != 'a' && key != 'A') { cout << "是否撿起 (y)是 (n)否 (a)撿起所有物品" << endl; key = 0; }
             while (1) {
                 if (key != 'a' && key != 'A')
@@ -81,21 +89,25 @@ void Fighting::Rand_Drop() {
                 case 'a':
                     switch (toBack_Pack_Type_Category(toBack_Pack_Type(Tool::ReadStringIni((*it)->getName(), "TYPE", "NULL", Read_Back_Pack_PATH)))) {
                     case Back_Pack_Type_Category::Equipment:
-                        roles->addGoods(new Equipment_Attributes((*it)->getName(), 1));
+                        roles->addGoods(new Equipment_Attributes(user_account, (*it)->getName(), 1));
                         break;
                     case Back_Pack_Type_Category::Consumables:
-                        static Sub_Goods* god;
-                        god = roles->findGoods((*it)->getName());
+                        //static Sub_Goods* god;
+                        roles->addGoods(new Consumables(user_account, (*it)->getName(), number));
+                        /*god = roles->findGoods((*it)->getName());
                         if (god == NULL) {
-                            roles->addGoods(new Consumables((*it)->getName(), number));
                         }
                         else {
                             god->addQuantity(number);
-                        }
+                        }*/
                         break;
                     case Back_Pack_Type_Category::SubBackPack:
-                        roles->addGoods(new Sub_Back_Pack(roles->getAccount(), roles->getName(), Tool::FindMax(Tool::String_To_Int(Tool::ReadIpAppName(BACK_PACK_INI_PAHT(roles->getAccount(), roles->getName())))) + 1, toBack_Pack_Size((*it)->getName())));
 
+                        roles->addGoods(new Sub_Back_Pack(
+                            *roles->user_account,
+                            Tool::FindMax(Tool::String_To_Int(Tool::ReadIpAppName(BACK_PACK_INI_PAHT(user_account.getAccount(), user_account.getRolesName())))) + 1,
+                            toBack_Pack_Size((*it)->getName())
+                        ));
                         break;
                     }
                     roles->Save_BackPack();
@@ -121,7 +133,7 @@ void Fighting::Moster_Attack() {
     _attack = (int)(_attack - (double)_attack * (double)roles->getDef() * 0.01);
     if (_attack < 1) _attack = 1;
     roles->addHP(_attack * -1);
-    cout << roles->getName() << " 受到了" << (_CRT ? "暴擊傷害" : "") << "損失了" << _attack << "生命" << endl;
+    cout << user_account.getRolesName() << " 受到了" << (_CRT ? "暴擊傷害" : "") << "損失了" << _attack << "生命" << endl;
 }
 
 void Fighting::Roles_Attack() {
@@ -129,9 +141,8 @@ void Fighting::Roles_Attack() {
     static bool _CRT;
     //static bool
     _CRT = (rand() % 100) < roles->getCRT();
-    int nn = roles->getAttack();
-    int kk = monster->Attributes::getDef();
-    _attack = (((rand() % roles->getAttack() + 1) * (_CRT ? 2 : 1)));
+    _attack = rand() % 20 - 10;
+    _attack = (((roles->getAttack() + (int)((double)roles->getAttack() * (double)_attack * 0.01)) * (_CRT ? 2 : 1)));
     _attack = (int)(_attack - (double)_attack * (double)monster->Attributes::getDef() * 0.01);
 
     if (_attack < 1) _attack = 1;

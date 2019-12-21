@@ -16,20 +16,18 @@ using namespace std;
 
 class Back_Pack : public Sub_Back_Pack {
 private:
-    string user_Account;
-    string user_Name;
     int Money;
-    /*vector<Sub_Goods*> goods;
-    int MaxWeigh;*/
 
 public:
-    Back_Pack(string _account, string _user_name, int _Money);
+    Account& user_account;
+
+    Back_Pack(Account& _account, int _Money);
     ~Back_Pack();
 
     int getMoney();
     void setMoney(int _money);
     int AddMoney(int _money);
-    void Read_BackPack();
+    //void Read_BackPack();
     void Save_BackPack();
     /*void addGoods(Sub_Goods* _g);
     Sub_Goods* findGoods(string _name);

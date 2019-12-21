@@ -1,19 +1,20 @@
 #ifndef _EQUIPMENT_H_
 #define _EQUIPMENT_H_
 
-#define Equipment_INI_PATH  ("Data/Account/" + account + "/" + name + "/Equipment.ini")
-#define Equipment_DIR_PATH  ("Data/Account/" + account + "/" + name )
+#define Equipment_INI_PATH(account, name)  ("Data/Account/" + account + "/" + name + "/Equipment.ini")
+#define Equipment_DIR_PATH(account, name)  ("Data/Account/" + account + "/" + name )
 
 #include "../../Attributes.h"
 //#include "../Back_Pack/Back_Pack.h"
 #include <string>
 #include<map>
 #include "Equipment_Attributes.h"
+#include "../../../Account/Account.h"
 using namespace std;
 
 class Equipment {
 private:
-    string account;
+    Account& user_account;
     string name;
     Equipment_Attributes* Weapon;//ชZพน
     Equipment_Attributes* Deputy;//ฐฦคโ
@@ -24,7 +25,7 @@ private:
 
 public:
 
-    Equipment(string _acc, string _name);
+    Equipment(Account& _acc, string _name);
 
     ~Equipment();
 

@@ -24,20 +24,18 @@ using std::string;
 #define ROLES_OBJECT_HEIGHT "3"
 
 class Roles : public  LifeAttributes, public Equipment, public Race, public Role, public Map_object, public Back_Pack, public Skill_List {
+public:
+    Account* user_account;
 private:
-    string account;
+    //string account;
     string name;
     int exp; // (LV-1)^3 + 60
-    //int drop; //½ÕÄ_²v
-    //RoleType role;
     string Map_Now;
-    //Race::RaceType race;
 public:
-    Roles(string _name, int _LV, int _nowHP, int _nowMP, int _Exp, string Map_Now, string account, RaceType _race, RoleType _role, Map_object _object);
+    Roles(Account* _user_account, string _name, int _LV, int _nowHP, int _nowMP, int _Exp, string Map_Now, RaceType _race, RoleType _role, Map_object _object);
 
     ~Roles();
 
-    string getName();
     int getExp();
     int getUpExp();
     string setName(string _name);
@@ -59,8 +57,6 @@ public:
     int getDef();
     int getCRT();
     int getDrop();
-
-    string getAccount();
 
     Map_object* set_Roles_Move_X(int _x, vector<Map_object*>& _object);
     Map_object* set_Roles_Move_Y(int _y, vector<Map_object*>& _object);

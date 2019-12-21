@@ -16,7 +16,7 @@ bool Map_object::operator == (const Map_object& object) {
     //if (&object == NULL) return false;
     if (this->get_Point_X() + this->get_Width() > object.X&&
         object.X + object.width > this->get_Point_X() &&
-        this->get_Point_Y() + this->getHeigh() > object.Y&&
+        this->get_Point_Y() + this->get_Heigh() > object.Y&&
         object.Y + object.heigh > this->get_Point_Y()
         )
         return true;
@@ -34,7 +34,7 @@ Map_object Map_object::setObject(objectType _M) {
 int Map_object::get_Point_X() { return X; }
 int Map_object::get_Point_Y() { return Y; }
 int Map_object::get_Width() { return width; }
-int Map_object::getHeigh() { return heigh; }
+int Map_object::get_Heigh() { return heigh; }
 string Map_object::getImage() { return image; }
 
 void Map_object::set_Point_X(int _x) { X = _x; }
@@ -51,8 +51,8 @@ objectType StringToObjectType(string _str) {
         return objectType::null;
     if (_str == "warrior")
         return objectType::Warrior;
-    if (_str == "houst")
-        return objectType::Houst;
+    if (_str == "store")
+        return objectType::Store;
     if (_str == "wall")
         return objectType::Wall;
     if (_str == "boor")

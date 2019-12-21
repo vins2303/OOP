@@ -1,1 +1,2 @@
 Data/Image/Boor.txt 水世界 Boor  70 40 15 9
+Data/Image/Boor.txt 機械庫 Boor  135 20 15 9

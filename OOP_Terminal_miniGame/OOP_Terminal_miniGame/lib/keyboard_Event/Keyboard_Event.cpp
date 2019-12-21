@@ -1,14 +1,16 @@
 #include "../../include/keyboard_Event/Keyboard_Event.h"
 #include "../../include/LifeEntity/Fighting/Fighting.h"
+#include "../../include/Map/Store.h"
 
 Keyboard_Event::Keyboard_Event(map<string, Game_Map*>* _map, RolesList* _roleslist) :
-    maplist(_map), roleslist(_roleslist), Buff_Key(0)
+    maplist(_map),
+    roleslist(_roleslist), Buff_Key(0)
 {}
 
 void Keyboard_Event::Run() {
     bool isDrawMap = true;
     while (true) {
-        roleslist->AccountMenu();
+        roleslist->getAccount()->AccountMenu();
         roleslist->RolesListMenu();
         //system("cls");
 
@@ -97,28 +99,29 @@ void Keyboard_Event::Read_Key(bool& _isDrawMap) {
 
 //碰撞到物件
 bool Keyboard_Event::Overlapping_Object(Map_object* _obj) {
+    static Store* store;
     switch (_obj->get_Object_Type()) {
-        /*====================================================================================================================================*/
     case objectType::Boor:
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find(_obj->getName())->second, _obj);
         roleslist->getRoles()->Save_Roles();
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Rand_Monster();
         return true;
         //break;
-/*====================================================================================================================================*/
     case objectType::Monster:
-        ((Monster*)_obj)->show_info(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 2);
+        ((Monster*)_obj)->show_info(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 3);
         Buff_Key = _getch();
         if (Buff_Key == 'q' || Buff_Key == 'Q') {
             Fighting_Fun((Monster*)_obj);
             roleslist->getRoles()->Save_Roles();
             return true;
         }
-        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 1, 0, 25, 30);
+        else Draw::clearMap(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() + 2, 0, 25, 30);
         return false;
-        /*====================================================================================================================================*/
-        //break;
-        //case objectType::
+    case objectType::Store:
+        store = new Store(*roleslist->getRoles()->user_account, _obj->getName());
+        store->Store_Menu(*roleslist->getRoles());
+        delete store;
+        return true;
     default:
         break;
     }
@@ -132,9 +135,6 @@ void Keyboard_Event::Show_Map_Pos() {
         it->second->Show_Map_Pos(it->first == roleslist->getRoles()->getMap_Now() ? 3 : 7);
     _getch();
 }
-
-//void Keyboard_Event::Clear_Roles() {
-//}
 
 void Keyboard_Event::Esc_Table() {
     int getKey;
@@ -177,11 +177,11 @@ void Keyboard_Event::Back_To_Selete_Roles() {
 
 void Keyboard_Event::Back_To_Selete_Account() {
     Back_To_Selete_Roles();
-    roleslist->Sign_out();
+    roleslist->getAccount()->Sign_out();
 }
 
 void Keyboard_Event::Fighting_Fun(Monster* _obj) {
-    Fighting fig(roleslist->getRoles(), _obj);
+    Fighting fig(*roleslist->getRoles()->user_account, roleslist->getRoles(), _obj);
     fig.Fighting_Start();
     maplist->find(roleslist->getRoles()->getMap_Now())->second->Clear_0HP_Monster();
     if (roleslist->getRoles()->getHP() == 0) {
@@ -189,7 +189,9 @@ void Keyboard_Event::Fighting_Fun(Monster* _obj) {
 
         roleslist->getRoles()->setHP(roleslist->getRoles()->getMaxHP());
         maplist->find(roleslist->getRoles()->getMap_Now())->second->Map_Transmission(maplist->find("市集")->second, _obj);
-        system("pause");
+        roleslist->getRoles()->set_Point_X(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_Width() / 2 - roleslist->getRoles()->get_Width() / 2);
+        roleslist->getRoles()->set_Point_Y(maplist->find(roleslist->getRoles()->getMap_Now())->second->get_High() / 2 - roleslist->getRoles()->get_Heigh() / 2);
+        //system("pause");
     }
     else {
         if (maplist->find(roleslist->getRoles()->getMap_Now())->second->getNumber_of_Monster() < 3)

@@ -13,10 +13,12 @@ using namespace std;
 #define AccountPath "Data/Account.ini"
 
 class Account {
+    friend class RolesList;
 private:
     bool isSignIn;
     string account;
     string password;
+    string Roles_Name;
 public:
     Account();
     ~Account();
@@ -24,8 +26,9 @@ public:
     void Sign_out();
     bool IsSignIn();
     bool rmAccount();
-    string GetAccount();
+    _declspec(dllexport) inline string getAccount();
 
+    _declspec(dllexport) inline string getRolesName();
 private:
     bool SignIn();
     void Registered();

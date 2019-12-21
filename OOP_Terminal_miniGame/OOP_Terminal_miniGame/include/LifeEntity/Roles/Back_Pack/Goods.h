@@ -21,7 +21,9 @@ class Goods : public Attributes, public Restricted, public Sub_Goods {
 private:
     int LV;
 public:
-    Goods(string _name, int _lv, int _Quantity = 1);
+    Account& user_account;
+
+    Goods(Account& user_account, string _name, int _lv, int _Quantity = 1);
     virtual ~Goods();
 
     int getLV();

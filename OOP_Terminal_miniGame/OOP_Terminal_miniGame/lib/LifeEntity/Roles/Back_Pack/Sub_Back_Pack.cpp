@@ -1,12 +1,12 @@
 #include "../../../../include/LifeEntity/Roles/Back_Pack/Sub_Back_Pack.h"
 #include <iomanip>
 
-Sub_Back_Pack::Sub_Back_Pack(string _account, string _user_name, int ID, Back_Pack_Szie _size_type) :
+Sub_Back_Pack::Sub_Back_Pack(Account& _account, int ID, Back_Pack_Szie _size_type) :
     Back_ID(ID),
-    user_Account(_account),
-    user_Name(_user_name),
-    type(_size_type == Back_Pack_Szie::Back_Pack_Min ? toBack_Pack_Size(Tool::ReadStringIni(to_string(ID), "BackPackSize", "小型背包", BACK_PACK_INI_PAHT(_account, _user_name))) : _size_type),
-    Sub_Goods(toString(_size_type == Back_Pack_Szie::Back_Pack_Min ? toBack_Pack_Size(Tool::ReadStringIni(to_string(ID), "BackPackSize", "小型背包", BACK_PACK_INI_PAHT(_account, _user_name))) : _size_type))
+    user_account(_account),
+
+    type(_size_type == Back_Pack_Szie::Back_Pack_Min ? toBack_Pack_Size(Tool::ReadStringIni(to_string(ID), "BackPackSize", "小型背包", BACK_PACK_INI_PAHT((_account.getAccount()), (_account.getRolesName())))) : _size_type),
+    Sub_Goods(_account, toString(_size_type == Back_Pack_Szie::Back_Pack_Min ? toBack_Pack_Size(Tool::ReadStringIni(to_string(ID), "BackPackSize", "小型背包", BACK_PACK_INI_PAHT((_account.getAccount()), _account.getRolesName()))) : _size_type))
 
 {
     Read_BackPack();
@@ -21,20 +21,19 @@ Sub_Back_Pack::~Sub_Back_Pack() {
 void Sub_Back_Pack::Read_BackPack() {
     static string name, type;
     static int lv;
-
-    ifstream Read_back(BACK_PACK_INFO_PAHT(user_Account, user_Name, to_string(Back_ID)));
+    ifstream Read_back(BACK_PACK_INFO_PAHT(user_account.getAccount(), user_account.getRolesName(), to_string(Back_ID)));
     while (Read_back >> name >> lv) {
         switch (toBack_Pack_Type_Category(toBack_Pack_Type(Tool::ReadStringIni(name, "TYPE", "NULL", Read_Back_Pack_PATH))))
         {
         case  Back_Pack_Type_Category::Equipment:
-            goods.push_back(new Equipment_Attributes(name, lv));
+            goods.push_back(new Equipment_Attributes(user_account, name, lv));
             break;
 
         case Back_Pack_Type_Category::Consumables:
-            goods.push_back(new Consumables(name, lv));
+            goods.push_back(new Consumables(user_account, name, lv));
             break;
         case Back_Pack_Type_Category::SubBackPack:
-            goods.push_back(new Sub_Back_Pack(user_Account, user_Name, lv)); // lv = back_pack id
+            goods.push_back(new Sub_Back_Pack(user_account, lv)); // lv = back_pack id
             break;
         default:
             break;
@@ -46,10 +45,10 @@ void Sub_Back_Pack::Read_BackPack() {
 void Sub_Back_Pack::Save_BackPack() {
     static string name;
     static int lv;
-    Tool::mkdir(BACK_PACK_PAHT(user_Account, user_Name));
-    WritePrivateProfileString(to_string(Back_ID).c_str(), "BackPackSize", toString(type).c_str(), BACK_PACK_INI_PAHT(user_Account, user_Name).c_str());
+    Tool::mkdir(BACK_PACK_PAHT(user_account.getAccount(), user_account.getRolesName()));
+    WritePrivateProfileString(to_string(Back_ID).c_str(), "BackPackSize", toString(type).c_str(), BACK_PACK_INI_PAHT(user_account.getAccount(), user_account.getRolesName()).c_str());
 
-    ofstream wire_back(BACK_PACK_INFO_PAHT(user_Account, user_Name, to_string(Back_ID)));
+    ofstream wire_back(BACK_PACK_INFO_PAHT(user_account.getAccount(), user_account.getRolesName(), to_string(Back_ID)));
     for (vector<Sub_Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
         if (typeid(**it) == typeid(Equipment_Attributes)) {
             static Equipment_Attributes* _equ;
@@ -109,7 +108,7 @@ void Sub_Back_Pack::Open_Sub_Back_Pack(Sub_Back_Pack& Previous_Back) {
                 if (typeid(*goods[(__int64)key + (__int64)_row * 10]) == typeid(Sub_Back_Pack))
                     cout << "1. 進入子背包 or 丟回上一個背包" << endl;
                 else cout << "1. 丟回上一個背包" << endl;
-                cout << "2. 丟到子背包\n3. 丟棄物品";
+                cout << "2. 丟到子背包\n3. 丟棄物品\n";
                 while (sel == 0) {
                     switch ((sel = _getch()))
                     {
@@ -153,9 +152,9 @@ void Sub_Back_Pack::Open_Sub_Back_Pack(Sub_Back_Pack& Previous_Back) {
                         break;
                     case '3':
                         static Sub_Goods * _good; _good = goods[(__int64)key + (__int64)_row * 10];
+
                         if (typeid(*_good) == typeid(Sub_Back_Pack)) {
-                            WritePrivateProfileString(to_string((((Sub_Back_Pack*)_good)->getID())).c_str(), NULL, NULL, BACK_PACK_INI_PAHT(user_Account, user_Name).c_str());
-                            remove(BACK_PACK_INFO_PAHT(user_Account, user_Name, to_string(((Sub_Back_Pack*)_good)->getID())).c_str());
+                            ((Sub_Back_Pack*)_good)->Away_Sub_Back_Pack();
                         }
                         delete goods[(__int64)key + (__int64)_row * 10];
                         goods[(__int64)key + (__int64)_row * 10] = NULL;
@@ -181,9 +180,33 @@ void Sub_Back_Pack::Open_Sub_Back_Pack(Sub_Back_Pack& Previous_Back) {
     Save_BackPack();
 }
 
+void Sub_Back_Pack::Away_Sub_Back_Pack() {
+    for (vector<Sub_Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
+        if (typeid(**it) == typeid(Sub_Back_Pack)) {
+            ((Sub_Back_Pack*)(*it))->Away_Sub_Back_Pack();
+        }
+    }
+    WritePrivateProfileString(to_string((this->getID())).c_str(), NULL, NULL, BACK_PACK_INI_PAHT(user_account.getAccount(), user_account.getRolesName()).c_str());
+    remove(BACK_PACK_INFO_PAHT(user_account.getAccount(), user_account.getRolesName(), to_string(this->getID())).c_str());
+}
+
 int Sub_Back_Pack::getID() { return Back_ID; }
 
-void Sub_Back_Pack::addGoods(Sub_Goods* _g) { goods.push_back(_g); }
+void Sub_Back_Pack::addGoods(Sub_Goods* _g) {
+    if (typeid(*_g) == typeid(Equipment_Attributes)) {
+        goods.push_back(_g);
+    }
+    else {
+        Sub_Goods* goods_find = findGoods(_g->getName());
+        if (goods_find == NULL) {
+            goods.push_back(_g);
+        }
+        else {
+            goods_find->addQuantity(_g->getQuantity());
+            delete _g;
+        }
+    }
+}
 
 void Sub_Back_Pack::RmGoods(int n) {
     goods.erase(goods.begin() + n);
@@ -202,7 +225,7 @@ void Sub_Back_Pack::ShowWeith(int _max, bool show, bool LF) {
 
 Back_Pack_Szie Sub_Back_Pack::getBack_Pack_Szie_Type() { return type; }
 
-void Sub_Back_Pack::setBack_Pack_Szie_Type(Back_Pack_Szie _type) { type = _type; }
+void Sub_Back_Pack::setBack_Pack_Szie_Type(Back_Pack_Szie _type) { type = _type; setName(toString(_type)); }
 
 Sub_Goods* Sub_Back_Pack::findGoods(string _name) {
     for (vector<Sub_Goods*>::iterator it = goods.begin(); it != goods.end(); it++)
@@ -218,7 +241,7 @@ bool Sub_Back_Pack::Put_To_Sub_Back_Pack(Sub_Goods*& _gds)
     vector<Sub_Back_Pack*> goods_copy;
 
     for (vector<Sub_Goods*>::iterator it = goods.begin(); it != goods.end(); it++) {
-        if (typeid(**it) == typeid(Sub_Back_Pack))
+        if (typeid(**it) == typeid(Sub_Back_Pack) && *it != _gds)
             goods_copy.push_back((Sub_Back_Pack*)*it);
     }
     if (goods_copy.size() == 0) {

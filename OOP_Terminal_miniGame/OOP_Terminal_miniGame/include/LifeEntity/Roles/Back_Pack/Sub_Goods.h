@@ -7,6 +7,7 @@
 #include <cassert>
 #include <conio.h>
 #include "../../../../include/Tool/Tool.h"
+#include "../../../Account/Account.h"
 
 #define Read_Back_Pack_PATH "Data/Attributes/Back_Pack.ini"
 
@@ -25,7 +26,8 @@ private:
     string name;
 
 public:
-    Sub_Goods(string _name, int _Quantity = 1);
+    Account& user_account;
+    Sub_Goods(Account& _user_account, string _name, int _Quantity = 1);
     virtual ~Sub_Goods();
 
     bool operator== (const Sub_Goods& _god) const;
@@ -36,6 +38,7 @@ public:
     string getType_S();
     Back_Pack_Type& getType();
     string getName();
+    void setName(string _name);
     int getMoney();
     int getQuantity();
     void setQuantity(int _num = 1);

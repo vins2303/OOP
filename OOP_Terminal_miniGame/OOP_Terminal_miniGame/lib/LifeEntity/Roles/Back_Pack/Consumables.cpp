@@ -1,7 +1,8 @@
 #include "../../../../include/LifeEntity/Roles/Back_Pack/Consumables.h"
 
-Consumables::Consumables(string _name, int _Quantity, int _Duration) :
-    Goods(_name, Read_Equipment_Attributes_int_ini(_name, "LV"), _Quantity),
+Consumables::Consumables(Account& _user_account, string _name, int _Quantity, int _Duration) :
+    user_account(_user_account),
+    Goods(user_account, _name, Read_Equipment_Attributes_int_ini(_name, "LV"), _Quantity),
     Duration(_Duration)
 {}
 

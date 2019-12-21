@@ -24,7 +24,7 @@ public:
 
     //Map_object::objectType getMap(int _x, int _y);
     int get_Width();
-    int get_Map_High();
+    int get_High();
     Roles* getRoles();
     string get_Map_Name();
     int getNumber_of_Monster();

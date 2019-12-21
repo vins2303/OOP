@@ -25,7 +25,7 @@ Monster::~Monster() {}
 
 void Monster::show_info(int _x, int _y) {
     showObject(_x, _y);
-    _y = getHeigh() + _y;
+    _y = get_Heigh() + _y;
     int n = this->getAttack();
     Draw::setXY(_x, (++_y)++); cout << right << setw(8) << "等級：" << this->getLV();
     Draw::setXY(_x, _y++);     cout << right << setw(8) << "生命：" << this->Attributes::getHP();
@@ -48,7 +48,7 @@ void Monster::show_info(int _x, int _y) {
 }
 
 void Monster::show_info_Fighting() {
-    cout << right << setw(8) << "等級：" << this->getLV()<<endl;
+    cout << right << setw(8) << "等級：" << this->getLV() << endl;
     cout << right << setw(8) << "生命："; this->showHP(false);
     cout << right << setw(8) << "攻擊力：" << this->Attributes::getAttack() << endl;
     cout << right << setw(8) << "速度：" << this->Attributes::getSP() << endl;

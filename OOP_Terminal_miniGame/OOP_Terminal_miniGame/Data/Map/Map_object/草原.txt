@@ -1,1 +1,1 @@
-Data/Image/Boor.txt   市集 Boor  2 20 15 9
+Data/Image/Boor.txt 市集 Boor  3 20 15 9

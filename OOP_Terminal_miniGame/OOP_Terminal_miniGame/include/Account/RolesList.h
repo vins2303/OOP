@@ -17,13 +17,16 @@ using std::string;
 #define SHOWRACEINFO_COUNT 8
 #define SHOWRACEINFO_COL(num) (int)((num) * SHOWRACEINFO_COUNT * 2)
 
-class RolesList : public Account {
+class RolesList {
+    friend class Account;
 private:
+    Account user_account;
     Roles* roles;
 public:
     RolesList();
     ~RolesList();
     Roles* getRoles();
+    Account* getAccount();
     void FindRoles(vector<Roles*>&);
     void RolesListMenu();
     bool Selete_Roles();
@@ -31,6 +34,7 @@ public:
     void DeleteRoles();
     void Clear_Now_Roles();
     void Save_Roles();
+
 private:
     void clearRolesList(vector<Roles*>&);
     void show_Total_RolesList(vector<Roles*>&, unsigned int row);

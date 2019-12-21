@@ -1,9 +1,8 @@
-Data/Image/Shop.txt Weapon_shop  Houst 135 2  15 7
-Data/Image/Shop.txt Armor_shop   Houst 110 2  15 7
-Data/Image/Shop.txt Potion_shop  Houst 85 2  15 7
-Data/Image/Shop.txt Grocery_shop Houst 56 2  15 7
-Data/Image/Shop.txt Skill_shop   Houst 30 2  15 7
-Data/Image/Shop.txt Capsule_shop Houst 2  2  15 7
+Data/Image/Shop.txt Weapon  Store 135 2  15 7
+Data/Image/Shop.txt Armor   Store 100 2  15 7
+Data/Image/Shop.txt Potion  Store 65 2  15 7
+Data/Image/Shop.txt Grocery Store 30 2  15 7
+Data/Image/Shop.txt Capsule Store 3  2  15 7
 Data/Image/Boor.txt   草原         Boor  135 20 15 9
-Data/Image/Boor.txt   水世界       Boor  2  20 15 9
+Data/Image/Boor.txt   水世界       Boor  3  20 15 9
 Data/Image/Boor.txt   地獄         Boor  70 40 15 9

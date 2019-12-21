@@ -50,16 +50,16 @@ int Skill::get_Duration() { return Duration; }
 void Skill::setDuration(int num) { Duration = num; }
 
 void Skill::show_info(int _now) {
-    cout << "技能：" << Name << " 等級" << LV << (_now ? "" : " 冷卻時間：" + (_now ? Now_Cooling_Time : Duration)) << " ";
-    if (Duration != 1) cout << "持續時間：" << Cooling_Time << " ";
-    if (getHP() != 0) cout << "增加生命：" << getHP() << " ";
-    if (getMP() != 0) cout << "增加魔力：" << getMP() << " ";
-    if (getAttack() != 0) cout << "增加攻擊力：" << getAttack() << " ";
+    cout << "技能：" << Name << "\t等級" << LV << (_now ? "" : "\t冷卻時間：" + (_now ? Now_Cooling_Time : Duration)) << " ";
+    if (Duration != 1) cout << "\t持續時間：" << Cooling_Time << " ";
+    if (getHP() != 0) cout << "\t增加生命：" << getHP() << " ";
+    if (getMP() != 0) cout << "\t增加魔力：" << getMP() << " ";
+    if (getAttack() != 0) cout << "\t增加攻擊力：" << getAttack() << " ";
 
-    if (getSP() != 0) cout << "增加速度：" << getSP() << " ";
-    if (getDef() != 0) cout << "增加減商：" << getDef() << "% ";
-    if (getCRT() != 0) cout << "增加暴擊：" << getCRT() << "% ";
-    cout << "技能說明：" << Help;
+    if (getSP() != 0) cout << "\t增加速度：" << getSP() << " ";
+    if (getDef() != 0) cout << "\t增加減商：" << getDef() << "% ";
+    if (getCRT() != 0) cout << "\t增加暴擊：" << getCRT() << "% ";
+    cout << "\t技能說明：" << Help;
     cout << endl;
 }
 

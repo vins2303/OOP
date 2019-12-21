@@ -2,8 +2,8 @@
 #include "../../../../include/Tool/Tool.h"
 #include <iomanip>
 
-Equipment_Attributes::Equipment_Attributes(string _name, int _lv) :
-    Goods(_name, _lv)
+Equipment_Attributes::Equipment_Attributes(Account& user_account, string _name, int _lv) :
+    Goods(user_account, _name, _lv)
 
 {}
 

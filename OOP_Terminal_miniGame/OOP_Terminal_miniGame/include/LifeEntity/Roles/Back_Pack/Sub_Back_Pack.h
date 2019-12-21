@@ -15,13 +15,14 @@
 
 class Sub_Back_Pack :public Sub_Goods {
 private:
-    string user_Account;
-    string user_Name;
+
     int Back_ID;
     vector<Sub_Goods*> goods;
     Back_Pack_Szie type;
 public:
-    Sub_Back_Pack(string _account, string _user_name, int ID, Back_Pack_Szie _size_type = Back_Pack_Szie::Back_Pack_Min);
+    Account& user_account;
+
+    Sub_Back_Pack(Account& _account, int ID, Back_Pack_Szie _size_type = Back_Pack_Szie::Back_Pack_Min);
     virtual ~Sub_Back_Pack();
     virtual void show_info();
     virtual bool isUse();
@@ -30,6 +31,7 @@ public:
     void Read_BackPack();
     void Save_BackPack();
     void Open_Sub_Back_Pack(Sub_Back_Pack& _bgds);
+    void Away_Sub_Back_Pack();
     int getID();
     void addGoods(Sub_Goods* _g);
     void RmGoods(int n);

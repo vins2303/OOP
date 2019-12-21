@@ -8,20 +8,20 @@
 #define Roles_PATH__(_acc) ("Data/Account/" + (_acc) + "/Roles.ini")
 
 class Skill_List {
+public:
+    Account& user_account;
 private:
-    string account;
-    string name;
     int Skill_Point;
     vector<Skill*> skill_using;
     vector<Skill*> skill;
     RaceType racet;
     RoleType rolet;
-
 public:
-    Skill_List(string _account, string _name, RaceType _race, RoleType _role);
+    Skill_List(Account& user_account, RaceType _race, RoleType _role);
     ~Skill_List();
 
     void Skill_Menu();
+
     void Save_Skill();
     bool Us_Skill(LifeAttributes& att);
     int Sum_Skill_HP();

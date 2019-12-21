@@ -86,7 +86,9 @@ string Account::isAccount(string _accout) {
     return string(str);
 }
 
-string Account::GetAccount() { return account; }
+_declspec(dllexport) inline string Account::getAccount() { return account; }
+
+_declspec(dllexport) inline string Account::getRolesName() { return Roles_Name; }
 
 void Account::Sign_out() {
     isSignIn = false;

@@ -1,8 +1,9 @@
 #include "../../../../include/LifeEntity/Roles/Back_Pack/Goods.h"
 
-Goods::Goods(string _name, int _lv, int _Quantity) :
+Goods::Goods(Account& _user_account, string _name, int _lv, int _Quantity) :
+    user_account(_user_account),
     LV(_lv),
-    Sub_Goods(_name, _Quantity),
+    Sub_Goods(_user_account, _name, _Quantity),
     Attributes(
         Read_Equipment_Attributes_int_ini(_name, "HP"),
         Read_Equipment_Attributes_int_ini(_name, "MP"),

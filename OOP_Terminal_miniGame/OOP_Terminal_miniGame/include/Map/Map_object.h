@@ -9,7 +9,7 @@ using std::string;
 enum class objectType : int {
     null = 0,    //無
     Warrior = 1, //人
-    Houst = 2,   //房子
+    Store = 2,   //房子
     Wall = 3,    //牆壁
     Boor = 4,  //傳送門
     Monster = 5,  //怪物
@@ -36,7 +36,7 @@ public:
     int get_Point_X();
     int get_Point_Y();
     int get_Width();
-    int getHeigh();
+    int get_Heigh();
     string getImage();
     string getName();
 

@@ -1,7 +1,8 @@
 #include "../../../include/LifeEntity/Roles/Roles.h"
 
-Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, string _account, RaceType _race, RoleType _role, Map_object _object) :
-    account(_account),
+Roles::Roles(Account* _user_account, string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_Now, RaceType _race, RoleType _role, Map_object _object) :
+    user_account(_user_account),
+    /*account(_account),*/
     name(_name),
     exp(Exp),
     Map_Now(_Map_Now),
@@ -10,14 +11,13 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
     Race(_race),
     /*裝備*/
     Equipment(
-        _account,
+        *_user_account,
         _name
     ),
     /*背包*/
     Back_Pack(
-        _account,
-        _name,
-        GetPrivateProfileInt(_name.c_str(), "Money", INT_MAX, ("Data/Account/" + _account + "/Roles.ini").c_str())
+        *_user_account,
+        GetPrivateProfileInt(_name.c_str(), "Money", INT_MAX, ("Data/Account/" + (_user_account->getAccount()) + "/Roles.ini").c_str())
 
     ),
 
@@ -36,19 +36,19 @@ Roles::Roles(string _name, int _LV, int nowHP, int nowMP, int Exp, string _Map_N
     ),
     /*Skill*/
     Skill_List(
-        _account,
-        _name,
+        *_user_account,
         _race,
         _role
     )
 {}
 
 Roles::~Roles() {
+    delete user_account;
 }
 
-string Roles::getAccount() { return account; }
+//string Roles::getAccount() { return user_account.getAccount(); }
 
-string Roles::getName() { return name; }
+//string Roles::getName() { return name; }
 int Roles::getExp() { return exp; }
 int Roles::getUpExp() { return (int)(pow(getLV() - 1, 3) + 60); }
 //int Roles::getDrop() { return drop; }
@@ -121,7 +121,7 @@ void Roles::Open_BackPack() {
             if ((key = key - '0') >= 0 && key < 10 && key + _row * 10 < (int)goods.size()) {
                 int sel = 0;
                 system("cls");
-                cout << "1. 使用物品\n2. 丟到子背包\n3. 丟棄物品";
+                cout << "1. 使用物品\n2. 丟到子背包\n3. 丟棄物品\n";
                 while (sel == 0) {
                     switch ((sel = _getch()))
                     {
@@ -135,13 +135,13 @@ void Roles::Open_BackPack() {
                         break;
                     case '3':
                         static Sub_Goods * _good; _good = goods[(__int64)key + (__int64)_row * 10];
-                        if (typeid(*_good) == typeid(Sub_Back_Pack)) {
-                            WritePrivateProfileString(to_string((((Sub_Back_Pack*)_good)->getID())).c_str(), NULL, NULL, BACK_PACK_INI_PAHT(account, name).c_str());
-                            remove(BACK_PACK_INFO_PAHT(account, name, to_string(((Sub_Back_Pack*)_good)->getID())).c_str());
-                        }
 
+                        if (typeid(*_good) == typeid(Sub_Back_Pack)) {
+                            ((Sub_Back_Pack*)_good)->Away_Sub_Back_Pack();
+                        }
                         delete goods[(__int64)key + (__int64)_row * 10];
                         goods[(__int64)key + (__int64)_row * 10] = NULL;
+
                         break;
                     default:
                         sel = 0;
@@ -243,7 +243,7 @@ int Roles::getCRT() { return LifeAttributes::getCRT() + Equipment::sumCrt() + Sk
 int Roles::getDrop() { return LifeAttributes::getDrop() + Equipment::sumDrop() + Skill_List::Sum_Skill_Drop(); }
 
 void Roles::Save_Roles_info() {
-    string outfile = "Data/Account/" + account + "/Roles.ini";
+    string outfile = "Data/Account/" + (user_account->getAccount()) + "/Roles.ini";
     WritePrivateProfileString(name.c_str(), "LV", to_string(getLV()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Race", (getRaceType_S()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Role", getRoleType_S().c_str(), outfile.c_str());
@@ -254,7 +254,7 @@ void Roles::Save_Roles_info() {
     WritePrivateProfileString(name.c_str(), "ObjectX", to_string(get_Point_X()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectY", to_string(get_Point_Y()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "ObjectWidth", to_string(get_Width()).c_str(), outfile.c_str());
-    WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(getHeigh()).c_str(), outfile.c_str());
+    WritePrivateProfileString(name.c_str(), "ObjectHeigh", to_string(get_Heigh()).c_str(), outfile.c_str());
     WritePrivateProfileString(name.c_str(), "Money", to_string(getMoney()).c_str(), outfile.c_str());
 }
 
@@ -284,7 +284,7 @@ Map_object* Roles::set_Roles_Move_Y(int _y, vector<Map_object*>& _object) {
     over = NULL;
     posY = get_Point_Y();
     Map_object::set_Point_Y(_y);
-    if ((over = Object_Overlapping(_object)) != NULL || get_Point_Y() < 1 || get_Point_Y() > MAP_HIGH_DEF - getHeigh()) {
+    if ((over = Object_Overlapping(_object)) != NULL || get_Point_Y() < 1 || get_Point_Y() > MAP_HIGH_DEF - get_Heigh()) {
         Map_object::set_Point_Y(posY);
         //Y = posY;
     }
@@ -306,7 +306,7 @@ void Roles::Save_Roles() {
 void Roles::show_State() {
     system("cls");
     cout << "\n\t\t\t角色狀態" << endl << endl;
-    cout << setw(10) << "" << right << setw(10) << "角色名稱：" << " " << getName() << endl;
+    cout << setw(10) << "" << right << setw(10) << "角色名稱：" << " " << user_account->getRolesName() << endl;
     cout << setw(10) << "" << right << setw(10) << "種族：" << " " << getRaceType_S() << endl;
     cout << setw(10) << "" << right << setw(10) << "職業：" << " " << getRoleType_S() << endl;
     cout << setw(10) << "" << right << setw(10) << "等級：" << " " << getLV() << endl;
@@ -333,7 +333,6 @@ void Roles::show_EXP(bool show, bool LF) {
     //return this;
 }
 
-////判斷是否重疊
 //Map_object* Roles::Object_overlapping(Map_object& obj, vector<Map_object*>& _object) {
 //    for (vector<Map_object*>::iterator it = _object.begin(); it != _object.end(); it++)
 //        if (obj == (**it))
